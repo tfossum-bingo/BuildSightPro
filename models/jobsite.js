@@ -7,6 +7,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'company_id',
         onDelete: 'cascade',
         onUpdate: 'cascade'
+      }),
+      Jobsite.hasMany(models.Specification, {
+        foreignKey: 'company_id',
+        as: 'specifications',
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       })
     }
   };
