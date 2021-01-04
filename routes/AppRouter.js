@@ -1,13 +1,13 @@
 const Router = require('express').Router()
 
 const CompanyRouter = require('./CompanyRouter')
-// const TodoRouter = require('./TodoRouter')
-// const WeblinkRouter = require('./WeblinkRouter')
+const UserRouter = require('./UserRouter')
+const JobsiteRouter = require('./JobsiteRouter')
 
 Router.get('/', (req, res) => res.send('This is root!*'))
 
 Router.use('/companies', CompanyRouter)
-// Router.use('/todos', TodoRouter)
-// Router.use('/weblinks', WeblinkRouter)
+Router.use('/jobsites', JobsiteRouter)
+Router.use('/users', UserRouter)
 
 module.exports = Router
