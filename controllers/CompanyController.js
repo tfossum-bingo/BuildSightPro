@@ -1,5 +1,5 @@
-const {Company} = require('../models')
-const {ValidationError} = require('sequelize');
+const { Company } = require('../models')
+const { ValidationError } = require('sequelize');
 
 const getAll = async (req, res) => {
     try {
@@ -50,7 +50,7 @@ const updateOne = async (req, res) => {
     try {
         let entity = parseInt(req.params.id)
         let updatedEntity = await Company.update(req.body, {
-            where: {id: entity},
+            where: { id: entity },
             returning: true
         })
         res.send(updatedEntity)
@@ -64,7 +64,7 @@ const deleteOne = async (req, res) => {
     try {
         let entityId = parseInt(req.params.id)
         await Company.destroy({
-            where: {id: entityId}
+            where: { id: entityId }
         })
         res.send({
             message: `Deleted account with id of ${entityId}`,

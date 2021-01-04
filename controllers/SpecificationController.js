@@ -1,9 +1,9 @@
-const { Jobsite } = require('../models')
+const { Specification } = require('../models')
 const { ValidationError } = require('sequelize');
 
 const getAll = async (req, res) => {
     try {
-        const entities = await Jobsite.findAll()
+        const entities = await Specification.findAll()
         res.send(entities)
     } catch (error) {
         throw error
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
 const getOne = async (req, res) => {
     const entityId = req.params.id
     try {
-        const entity = await Jobsite.findByPk(entityId, {
+        const entity = await Specification.findByPk(entityId, {
             include: [
                 {
                     all: true,
@@ -32,7 +32,7 @@ const createOne = async (req, res) => {
         let entityBody = {
             ...req.body
         }
-        const newAccount = Jobsite.build(entityBody)
+        const newAccount = Specification.build(entityBody)
         await newAccount.validate()
         await newAccount.save()
         // let entity = await Account.create(entityBody)
@@ -49,7 +49,7 @@ const updateOne = async (req, res) => {
     console.log(`HIT account UpdateOne:`, req.body)
     try {
         let entity = parseInt(req.params.id)
-        let updatedEntity = await Jobsite.update(req.body, {
+        let updatedEntity = await Specification.update(req.body, {
             where: { id: entity },
             returning: true
         })
@@ -63,7 +63,7 @@ const updateOne = async (req, res) => {
 const deleteOne = async (req, res) => {
     try {
         let entityId = parseInt(req.params.id)
-        await Jobsite.destroy({
+        await Specification.destroy({
             where: { id: entityId }
         })
         res.send({

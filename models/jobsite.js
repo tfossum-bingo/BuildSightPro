@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: 'cascade'
       }),
       Jobsite.hasMany(models.Specification, {
-        foreignKey: 'company_id',
+        foreignKey: 'jobsite_id',
         as: 'specifications',
         onDelete: 'cascade',
         onUpdate: 'cascade'

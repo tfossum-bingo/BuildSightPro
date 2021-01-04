@@ -11,10 +11,16 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       }),
-          Specification.belongsTo(models.User, {
-          foreignKey: 'user_id',
-          onDelete: 'cascade',
-          onUpdate: 'cascade'
+      Specification.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+      }),
+      Specification.hasMany(models.SpecificationUser, {
+        foreignKey: 'specification_id',
+        as: 'specification_users',
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       })
     }
   };

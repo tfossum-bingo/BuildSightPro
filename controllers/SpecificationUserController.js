@@ -1,9 +1,9 @@
-const { User } = require('../models')
+const { SpecificationUser } = require('../models')
 const { ValidationError } = require('sequelize');
 
 const getAll = async (req, res) => {
     try {
-        const entities = await User.findAll()
+        const entities = await SpecificationUser.findAll()
         res.send(entities)
     } catch (error) {
         throw error
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
 const getOne = async (req, res) => {
     const entityId = req.params.id
     try {
-        const entity = await User.findByPk(entityId, {
+        const entity = await SpecificationUser.findByPk(entityId, {
             include: [
                 {
                     all: true,
@@ -32,7 +32,7 @@ const createOne = async (req, res) => {
         let entityBody = {
             ...req.body
         }
-        const newAccount = User.build(entityBody)
+        const newAccount = SpecificationUser.build(entityBody)
         await newAccount.validate()
         await newAccount.save()
         // let entity = await Account.create(entityBody)
@@ -49,7 +49,7 @@ const updateOne = async (req, res) => {
     console.log(`HIT account UpdateOne:`, req.body)
     try {
         let entity = parseInt(req.params.id)
-        let updatedEntity = await User.update(req.body, {
+        let updatedEntity = await SpecificationUser.update(req.body, {
             where: { id: entity },
             returning: true
         })
@@ -63,7 +63,7 @@ const updateOne = async (req, res) => {
 const deleteOne = async (req, res) => {
     try {
         let entityId = parseInt(req.params.id)
-        await User.destroy({
+        await SpecificationUser.destroy({
             where: { id: entityId }
         })
         res.send({
