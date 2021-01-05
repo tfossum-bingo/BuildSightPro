@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { __GetJobsite } from '../services/JobsiteService'
+import SpecificationsList from '../components/specifications/SpecificationsList'
 
 // import JobsiteList from '../components/jobsites/JobsitesList'
 import SignOut from '../components/SignOut';
@@ -36,6 +37,9 @@ const JobsitePage = (props) => {
                 <div className={'home-grid-bottom-left'}>
                     <div className={'home-flex-col-bottom'}>
                         <SignOut onClick={onClickSignOut} />
+                    </div>
+                    <div>
+                        <SpecificationsList jobsite={jobsite} />
                     </div>
                 </div>
             </div>

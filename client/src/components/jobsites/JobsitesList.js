@@ -1,5 +1,5 @@
 import React from 'react';
-import JobsiteTile from './JobsiteTile';
+import JobsiteTile from './JobsiteCard';
 
 export default (props) => {
   const { setNeedsRefresh } = props
