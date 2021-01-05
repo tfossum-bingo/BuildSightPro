@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import { __GetJobsite } from '../services/JobsiteService'
 import SpecificationsList from '../components/specifications/SpecificationsList'
 
@@ -40,6 +41,11 @@ const JobsitePage = (props) => {
                     </div>
                     <div>
                         <SpecificationsList jobsite={jobsite} />
+                    </div>
+                    <div>
+                        <NavLink to='/home' activeclassName='nav-active'>
+                            <p>All Jobsites</p>
+                        </NavLink>
                     </div>
                 </div>
             </div>

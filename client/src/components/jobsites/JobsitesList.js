@@ -1,5 +1,5 @@
 import React from 'react';
-import JobsiteTile from './JobsiteCard';
+import JobsiteCard from './JobsiteCard';
 
 export default (props) => {
   const { setNeedsRefresh } = props
@@ -10,7 +10,7 @@ export default (props) => {
       <div>
         {jobsites.map((jobsite, index) => {
           return (
-            <JobsiteTile
+            <JobsiteCard
               jobsite={jobsite}
               key={index}
               history={props.history}

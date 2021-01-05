@@ -802,7 +802,7 @@ false Zulu
     <database id="5" parent="1" name="buildsightpro_development">
       <ObjectId>25580</ObjectId>
       <Owner>Bingo</Owner>
-      <IntrospectionStateNumber>8667</IntrospectionStateNumber>
+      <IntrospectionStateNumber>8678</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|25586|25588|1
 sequence|table|25674|25676|1
@@ -956,7 +956,7 @@ UC/10
 </Acl>
       <StateNumber>286</StateNumber>
       <Owner>Bingo</Owner>
-      <IntrospectionStateNumber>8668</IntrospectionStateNumber>
+      <IntrospectionStateNumber>8679</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="39" parent="5" name="plpgsql">
@@ -1099,7 +1099,7 @@ UC/10
     <table id="58" parent="38" name="jobsites">
       <ObjectId>25626</ObjectId>
       <Owner>Bingo</Owner>
-      <StateNumber>8642</StateNumber>
+      <StateNumber>8676</StateNumber>
     </table>
     <table id="59" parent="38" name="specification_users">
       <ObjectId>25697</ObjectId>
@@ -1262,7 +1262,19 @@ UC/10
       <StateNumber>8642</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <index id="83" parent="58" name="jobsites_pkey">
+    <column id="83" parent="58" name="latitude">
+      <Position>12</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>8675</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="84" parent="58" name="longitude">
+      <Position>13</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>8676</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <index id="85" parent="58" name="jobsites_pkey">
       <ObjectId>25633</ObjectId>
       <StateNumber>8642</StateNumber>
       <ColNames>id</ColNames>
@@ -1272,14 +1284,14 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="84" parent="58" name="jobsites_pkey">
+    <key id="86" parent="58" name="jobsites_pkey">
       <ObjectId>25634</ObjectId>
       <StateNumber>8642</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>jobsites_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="85" parent="58" name="jobsites_company_id_fkey">
+    <foreign-key id="87" parent="58" name="jobsites_company_id_fkey">
       <ObjectId>25635</ObjectId>
       <StateNumber>8642</StateNumber>
       <ColNames>company_id</ColNames>
@@ -1289,7 +1301,7 @@ UC/10
       <RefKeyName>companies_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="86" parent="59" name="id">
+    <column id="88" parent="59" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1297,41 +1309,41 @@ UC/10
       <DefaultExpression>nextval(&apos;specification_users_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="87" parent="59" name="user_id">
+    <column id="89" parent="59" name="user_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>8661</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="88" parent="59" name="specification_id">
+    <column id="90" parent="59" name="specification_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>8661</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="89" parent="59" name="status">
+    <column id="91" parent="59" name="status">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <StateNumber>8661</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="90" parent="59" name="createdAt">
+    <column id="92" parent="59" name="createdAt">
       <Position>5</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>8661</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="91" parent="59" name="updatedAt">
+    <column id="93" parent="59" name="updatedAt">
       <Position>6</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>8661</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <index id="92" parent="59" name="specification_users_pkey">
+    <index id="94" parent="59" name="specification_users_pkey">
       <ObjectId>25701</ObjectId>
       <StateNumber>8661</StateNumber>
       <ColNames>id</ColNames>
@@ -1341,14 +1353,14 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="93" parent="59" name="specification_users_pkey">
+    <key id="95" parent="59" name="specification_users_pkey">
       <ObjectId>25702</ObjectId>
       <StateNumber>8661</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>specification_users_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="94" parent="59" name="specification_users_user_id_fkey">
+    <foreign-key id="96" parent="59" name="specification_users_user_id_fkey">
       <ObjectId>25703</ObjectId>
       <StateNumber>8661</StateNumber>
       <ColNames>user_id</ColNames>
@@ -1358,7 +1370,7 @@ UC/10
       <RefKeyName>users_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="95" parent="59" name="specification_users_specification_id_fkey">
+    <foreign-key id="97" parent="59" name="specification_users_specification_id_fkey">
       <ObjectId>25708</ObjectId>
       <StateNumber>8661</StateNumber>
       <ColNames>specification_id</ColNames>
@@ -1368,7 +1380,7 @@ UC/10
       <RefKeyName>specifications_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="96" parent="60" name="id">
+    <column id="98" parent="60" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1376,51 +1388,51 @@ UC/10
       <DefaultExpression>nextval(&apos;specifications_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="97" parent="60" name="title">
+    <column id="99" parent="60" name="title">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <StateNumber>8659</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="98" parent="60" name="description">
+    <column id="100" parent="60" name="description">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <StateNumber>8659</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="99" parent="60" name="attachmentUrl">
+    <column id="101" parent="60" name="attachmentUrl">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <StateNumber>8659</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="100" parent="60" name="jobsite_id">
+    <column id="102" parent="60" name="jobsite_id">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>8659</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="101" parent="60" name="user_id">
+    <column id="103" parent="60" name="user_id">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>8659</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="102" parent="60" name="createdAt">
+    <column id="104" parent="60" name="createdAt">
       <Position>7</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>8659</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="103" parent="60" name="updatedAt">
+    <column id="105" parent="60" name="updatedAt">
       <Position>8</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>8659</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <index id="104" parent="60" name="specifications_pkey">
+    <index id="106" parent="60" name="specifications_pkey">
       <ObjectId>25683</ObjectId>
       <StateNumber>8659</StateNumber>
       <ColNames>id</ColNames>
@@ -1430,14 +1442,14 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="105" parent="60" name="specifications_pkey">
+    <key id="107" parent="60" name="specifications_pkey">
       <ObjectId>25684</ObjectId>
       <StateNumber>8659</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>specifications_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="106" parent="60" name="specifications_jobsite_id_fkey">
+    <foreign-key id="108" parent="60" name="specifications_jobsite_id_fkey">
       <ObjectId>25685</ObjectId>
       <StateNumber>8659</StateNumber>
       <ColNames>jobsite_id</ColNames>
@@ -1447,7 +1459,7 @@ UC/10
       <RefKeyName>jobsites_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="107" parent="60" name="specifications_user_id_fkey">
+    <foreign-key id="109" parent="60" name="specifications_user_id_fkey">
       <ObjectId>25690</ObjectId>
       <StateNumber>8659</StateNumber>
       <ColNames>user_id</ColNames>
@@ -1457,7 +1469,7 @@ UC/10
       <RefKeyName>users_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="108" parent="61" name="id">
+    <column id="110" parent="61" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1465,46 +1477,46 @@ UC/10
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="109" parent="61" name="firstName">
+    <column id="111" parent="61" name="firstName">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <StateNumber>8635</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="110" parent="61" name="lastName">
+    <column id="112" parent="61" name="lastName">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <StateNumber>8635</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="111" parent="61" name="email">
+    <column id="113" parent="61" name="email">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>8635</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="112" parent="61" name="company_id">
+    <column id="114" parent="61" name="company_id">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>8635</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="113" parent="61" name="createdAt">
+    <column id="115" parent="61" name="createdAt">
       <Position>6</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>8635</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="114" parent="61" name="updatedAt">
+    <column id="116" parent="61" name="updatedAt">
       <Position>7</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>8635</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <index id="115" parent="61" name="users_pkey">
+    <index id="117" parent="61" name="users_pkey">
       <ObjectId>25617</ObjectId>
       <StateNumber>8635</StateNumber>
       <ColNames>id</ColNames>
@@ -1514,14 +1526,14 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="116" parent="61" name="users_pkey">
+    <key id="118" parent="61" name="users_pkey">
       <ObjectId>25618</ObjectId>
       <StateNumber>8635</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="117" parent="61" name="users_company_id_fkey">
+    <foreign-key id="119" parent="61" name="users_company_id_fkey">
       <ObjectId>25619</ObjectId>
       <StateNumber>8635</StateNumber>
       <ColNames>company_id</ColNames>

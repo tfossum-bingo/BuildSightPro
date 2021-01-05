@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     postalCode: DataTypes.STRING,
     clientName: DataTypes.STRING,
     mapUrl: DataTypes.STRING,
+    latitude: DataTypes.FLOAT,
+    longitude: DataTypes.FLOAT,
     companyId: {
       type: DataTypes.INTEGER,
       field: 'company_id',

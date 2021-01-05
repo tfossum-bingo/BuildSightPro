@@ -1,5 +1,6 @@
 const { Jobsite } = require('../models')
 const { ValidationError } = require('sequelize');
+const { getGeoLocation } = require('../services/GeoApiClient')
 
 const getAll = async (req, res) => {
     try {
@@ -21,6 +22,7 @@ const getOne = async (req, res) => {
                 }
             ]
         })
+        getGeoLocation(entity)
         res.send(entity)
     } catch (error) {
         throw error
@@ -32,11 +34,12 @@ const createOne = async (req, res) => {
         let entityBody = {
             ...req.body
         }
-        const newAccount = Jobsite.build(entityBody)
-        await newAccount.validate()
-        await newAccount.save()
+        const newJobsite = Jobsite.build(entityBody)
+        await newJobsite.validate()
+        await newJobsite.save()
+        await addLocationData(newJobsite)
         // let entity = await Account.create(entityBody)
-        res.send(newAccount)
+        res.send(newJobsite)
     } catch (error) {
         if (error instanceof ValidationError) {
             return console.error('Captured validation error: ', error.errors[0].message);
@@ -76,6 +79,19 @@ const deleteOne = async (req, res) => {
 
     } catch (error) {
         throw error
+    }
+}
+
+const addLocationData = async (jobsite) => {
+    const locationData = await getGeoLocation(jobsite)
+    try {
+        if (locationData.results.length > 0) {
+            jobsite.latitude = locationData.results[0].geometry.location.lat
+            jobsite.longitude = locationData.results[0].geometry.location.lng
+            await jobsite.save()
+        }
+    } catch(error) {
+        console.log('*** addLocationError: ', error)
     }
 }
 
