@@ -13,6 +13,7 @@ export default (props) => {
             <JobsiteTile
               jobsite={jobsite}
               key={index}
+              history={props.history}
               setNeedsRefresh={setNeedsRefresh} />
           )
         })

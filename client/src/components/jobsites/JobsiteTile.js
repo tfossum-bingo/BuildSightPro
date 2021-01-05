@@ -1,5 +1,6 @@
 import React from 'react'
-import Button from '../Button'
+// import Button from '../Button'
+import { useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
@@ -7,8 +8,10 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 // Import Todo Delete Service
 
 export default (props) => {
-    const { jobsite, setNeedsRefresh } = props
-    console.log("Jobsite props: ", props)
+    // const { jobsite, setNeedsRefresh } = props
+    const { jobsite } = props
+    let history = useHistory()
+    console.log("Jobsite props: ", history)
 
     // const deleteTodo = async (e) => {
     //     console.log("HIT deleteTodo: ", todo)
@@ -24,10 +27,11 @@ export default (props) => {
         return (
             <div>
                 {jobsite.address_1}
-                <FontAwesomeIcon 
-                className="fas fa-white"
-                icon={faTimesCircle}
+                <FontAwesomeIcon
+                    className="fas fa-white"
+                    icon={faTimesCircle}
                 />
+                <button onClick={() => history.push(`/jobsites/${jobsite.id}`)}>Read More</button>
             </div>
         )
     } else {

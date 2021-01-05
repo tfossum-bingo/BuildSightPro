@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import Button from '../components/Button';
+// import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import { __RegisterUser } from '../services/UserService';
 // import '../styles/SignUp.css'

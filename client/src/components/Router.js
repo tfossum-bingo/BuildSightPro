@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import HomePage from '../pages/HomePage';
+import JobsitePage from '../pages/JobsitePage'
 import LandingPage from '../pages/LandingPage';
 import ProtectedRoute from './ProtectedRoute'
 import SignInPage from '../pages/SignInPage';
@@ -58,6 +59,17 @@ export default function Router() {
                     path='/home'
                     component={(props) => (
                         <HomePage
+                            {...props}
+                            user={user}
+                            onClickSignOut={clearUser}
+                            setNeedsRefresh={setNeedsRefresh} />
+                    )}
+                />
+                <ProtectedRoute
+                    authenticated={user !== null}
+                    exact path='/jobsites/:jobsite_id'
+                    component={(props) => (
+                        <JobsitePage
                             {...props}
                             user={user}
                             onClickSignOut={clearUser}
