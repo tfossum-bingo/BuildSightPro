@@ -2,48 +2,48 @@ import React, {useState, useEffect} from 'react';
 import {Switch, Route} from 'react-router-dom';
 
 import LandingPage from '../pages/LandingPage';
-// import SignUpPage from '../Pages/SignUpPage';
-// import SignInPage from '../Pages/SignInPage';
+import SignUpPage from '../pages/SignUpPage';
+import SignInPage from '../pages/SignInPage';
 // import ProtectedRoute from './ProtectedRoute'
 
-import {__GetProfiles} from '../services/UserService';
+import {__GetUser} from '../services/UserService';
 
 import '../styles/App.css';
 
 export default function Router() {
-    const [accounts, setAccounts] = useState(null);
+    const [user, setUser] = useState(null);
     const [needsRefresh, setNeedsRefresh] = useState(false)
 
-    const retrieveAccounts = async () => {
+    const retrieveUser = async (user_id) => {
         try {
-            const x = await __GetProfiles();
-            setAccounts(x);
+            const x = await __GetUser();
+            setUser(x);
             return x;
         } catch (error) {
         }
     }
 
-    if ((accounts === null) || needsRefresh) {
+    if ((user === null) || needsRefresh) {
         setNeedsRefresh(false)
-        const retrievedAccounts = retrieveAccounts();
-        setAccounts(retrievedAccounts);
+        const retrievedAccounts = retrieveUser();
+        setUser(retrievedAccounts);
     }
 
     return (
         <main>
             <Switch>
-                <Route exact path='/' component={(props) => <LandingPage {...props} profiles={accounts}/>}/>
-                {/* <Route
+                <Route exact path='/' component={(props) => <LandingPage {...props} profiles={user}/>}/>
+                <Route
                     exact
                     path='/register'
-                    component={(props) => <SignUpPage {...props} setAccount={setAccount}/>}
+                    component={(props) => <SignUpPage {...props} setUser={setUser}/>}
                 />
                 <Route
                     exact
                     path='/signin'
-                    component={(props) => <SignInPage {...props} setAccount={setAccount}/>}
+                    component={(props) => <SignInPage {...props} setUser={setUser}/>}
                 />
-                <ProtectedRoute
+                {/* <ProtectedRoute
                     authenticated={account !== null}
                     path='/home'
                     component={(props) => (.
