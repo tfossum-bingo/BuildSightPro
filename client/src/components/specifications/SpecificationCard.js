@@ -1,26 +1,34 @@
 import React from 'react'
 // import Button from '../Button'
+import { __AcknowledgeSpecification } from '../../services/SpecificationService'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+
 
 // Import ToDo Update Service
 // Import Todo Delete Service
 
 export default (props) => {
     // const { jobsite, setNeedsRefresh } = props
-    const { specification, user } = props
+    const { setNeedsRefresh, specification, user } = props
 
-    // const deleteTodo = async (e) => {
-    //     console.log("HIT deleteTodo: ", todo)
-    //     try{
-    //         await __DeleteTodo(todo.id)
-    //         setNeedsRefresh(true)
-    //     } catch(error) {
-    //         console.log(error)
-    //     }
-    // }
 
-    
+    const acknowledgeSpecification = async () => {
+        console.log('HIT AckSpec User: ', user)
+        const data = {
+            userId: user.id,
+            specificationId: specification.id
+        }
+        console.log('HIT AckSpec: ', data)
+        try {
+            const ackResponse = await __AcknowledgeSpecification(data)
+            setNeedsRefresh(true)
+            return true
+        } catch (error) {
+            console.log('AckSpec error: ', error)
+        }
+    }
+
     const isAcknowledged = () => {
         const specUser = specification.specification_users.find(spec => spec.user_id == user.id)
         console.log('isAck: ', specUser, specification.specification_users)
@@ -28,13 +36,13 @@ export default (props) => {
         if (specUser !== undefined) {
             return (
                 <FontAwesomeIcon
-                className="fas fa-white"
-                icon={faCheckCircle}
-            />
+                    className="fas fa-white"
+                    icon={faCheckCircle}
+                />
             )
         }
         return (
-            <button>Acknowledge</button>
+            <button onClick={(e) => acknowledgeSpecification()}>Acknowledge</button>
         )
     }
 

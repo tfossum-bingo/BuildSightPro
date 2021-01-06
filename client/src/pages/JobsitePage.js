@@ -8,14 +8,15 @@ import SpecificationsList from '../components/specifications/SpecificationsList'
 import SignOut from '../components/SignOut';
 
 const JobsitePage = (props) => {
-    // const { user, onClickSignOut, setNeedsRefresh } = props;
-    const { onClickSignOut, user } = props;
+    const { user, onClickSignOut, setNeedsRefresh } = props;
+    // const { onClickSignOut, user } = props;
     const jobsite_id = parseInt(props.match.params.jobsite_id)
     const [jobsite, setJobsite] = useState(null)
     console.log("HIT JobsitePage", jobsite)
 
     useEffect(() => {
         if (jobsite == null) {
+            console.log('HIT JobsitePage useEffect')
             findJobsite(jobsite_id)
         }
     }, [])
@@ -43,6 +44,7 @@ const JobsitePage = (props) => {
                     <div>
                         <SpecificationsList
                             jobsite={jobsite}
+                            setNeedsRefresh={setNeedsRefresh}
                             user={user} />
                     </div>
                     <div>
