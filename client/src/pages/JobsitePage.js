@@ -9,7 +9,7 @@ import SignOut from '../components/SignOut';
 
 const JobsitePage = (props) => {
     // const { user, onClickSignOut, setNeedsRefresh } = props;
-    const { onClickSignOut } = props;
+    const { onClickSignOut, user } = props;
     const jobsite_id = parseInt(props.match.params.jobsite_id)
     const [jobsite, setJobsite] = useState(null)
     console.log("HIT JobsitePage", jobsite)
@@ -41,7 +41,9 @@ const JobsitePage = (props) => {
                         <SimpleMap center={{lat: jobsite.latitude, lng: jobsite.longitude}} zoom={10}  />
                     </div>
                     <div>
-                        <SpecificationsList jobsite={jobsite} />
+                        <SpecificationsList
+                            jobsite={jobsite}
+                            user={user} />
                     </div>
                     <div>
                         <NavLink to='/home' activeclassName='nav-active'>

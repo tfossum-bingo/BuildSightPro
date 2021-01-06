@@ -2,7 +2,7 @@ import React from 'react';
 import JobsiteCard from './JobsiteCard';
 
 export default (props) => {
-  const { setNeedsRefresh } = props
+  const { setNeedsRefresh, user } = props
   const { jobsites } = props.user.Company
 
   if (jobsites !== null && jobsites !== undefined && jobsites.length > 0) {
@@ -14,7 +14,8 @@ export default (props) => {
               jobsite={jobsite}
               key={index}
               history={props.history}
-              setNeedsRefresh={setNeedsRefresh} />
+              setNeedsRefresh={setNeedsRefresh}
+              user={user} />
           )
         })
         }

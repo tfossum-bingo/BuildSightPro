@@ -1,7 +1,7 @@
 import React from 'react'
 // import Button from '../Button'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 // Import ToDo Update Service
 // Import Todo Delete Service
@@ -20,15 +20,30 @@ export default (props) => {
     //     }
     // }
 
+    
+    const isAcknowledged = () => {
+        const specUser = specification.specification_users.find(spec => spec.user_id == user.id)
+        console.log('isAck: ', specUser, specification.specification_users)
+        console.log('isAck2: ', specUser)
+        if (specUser !== undefined) {
+            return (
+                <FontAwesomeIcon
+                className="fas fa-white"
+                icon={faCheckCircle}
+            />
+            )
+        }
+        return (
+            <button>Acknowledge</button>
+        )
+    }
+
     if (specification !== null && specification !== undefined) {
         return (
             <div>
                 <h3>{specification.title}</h3>
                 <p>{specification.description}</p>
-                <FontAwesomeIcon
-                    className="fas fa-white"
-                    icon={faTimesCircle}
-                />
+                <h2>{isAcknowledged()}</h2>
             </div>
         )
     } else {

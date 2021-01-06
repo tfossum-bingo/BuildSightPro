@@ -9,7 +9,7 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default (props) => {
     // const { jobsite, setNeedsRefresh } = props
-    const { jobsite } = props
+    const { jobsite, user } = props
     let history = useHistory()
     console.log("Jobsite props: ", history)
 
@@ -23,6 +23,7 @@ export default (props) => {
     //     }
     // }
 
+    
     if (jobsite !== null && jobsite !== undefined) {
         return (
             <div>
