@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle, faWrench } from "@fortawesome/free-solid-svg-icons";
  
-const AnyReactComponent = ({ text }) => <div style={{color: 'red', fontWeight: "bold"}}>{text}</div>;
+const AnyReactComponent = ({ text }) => <div style={{color: 'red', fontWeight: "bold"}}>
+                  <FontAwesomeIcon
+                className="fas fa-white"
+                icon={faWrench}
+            />
+</div>;
  
 class SimpleMap extends Component {
   static defaultProps = {
@@ -24,7 +31,7 @@ class SimpleMap extends Component {
           <AnyReactComponent
             lat={this.props.center.lat}
             lng={this.props.center.lng}
-            text="Jobsite"
+            // text="Jobsite"
           />
         </GoogleMapReact>
       </div>
