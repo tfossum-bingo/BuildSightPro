@@ -3,8 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { __GetJobsite } from '../services/JobsiteService'
 
 import Header from '../components/Header'
+import Modal from '../components/modals/Modal'
 import SimpleMap from '../components/jobsites/SimpleMap'
 import SpecificationsList from '../components/specifications/SpecificationsList'
+import SpecificationForm from '../components/specifications/SpecificationForm'
 
 // import JobsiteList from '../components/jobsites/JobsitesList'
 import SignOut from '../components/SignOut';
@@ -13,6 +15,7 @@ const JobsitePage = (props) => {
     const { user, onClickSignOut, setNeedsRefresh } = props;
     // const { onClickSignOut, user } = props;
     const jobsite_id = parseInt(props.match.params.jobsite_id)
+    const [displaySpecForm, setDisplaySpecForm] = useState(false)
     const [jobsite, setJobsite] = useState(null)
     console.log("HIT JobsitePage", jobsite)
 
@@ -33,6 +36,9 @@ const JobsitePage = (props) => {
         }
     }
 
+    const toggleSpecForm = () => {
+        setDisplaySpecForm(!displaySpecForm)
+    }
 
     if (jobsite !== null && jobsite !== undefined) {
         return (
@@ -48,6 +54,21 @@ const JobsitePage = (props) => {
                     <div>
                         <SimpleMap center={{lat: jobsite.latitude, lng: jobsite.longitude}} zoom={10}  />
                     </div>
+                    <div className="create-task-button">
+                    <button
+                        onClick={e => toggleSpecForm()} >
+                        Add Specification Doc
+                            </button>
+                    <Modal show={displaySpecForm}
+                        onClick={toggleSpecForm}>
+                        <SpecificationForm
+                            jobsiteId={jobsite.id}
+                            userId={user.id}
+                            toggleModal={toggleSpecForm}
+                            setNeedsRefresh={setNeedsRefresh}
+                            {...props} />
+                    </Modal>
+                </div>
                     <div>
                         <SpecificationsList
                             jobsite={jobsite}

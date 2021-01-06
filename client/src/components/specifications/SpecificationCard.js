@@ -37,6 +37,7 @@ export default (props) => {
             return (
                 <FontAwesomeIcon
                     className="fas fa-white"
+                    style={{color: "green"}}
                     icon={faCheckCircle}
                 />
             )
@@ -48,7 +49,7 @@ export default (props) => {
 
     if (specification !== null && specification !== undefined) {
         return (
-            <div>
+            <div className="spec-container">
                 <h3>{specification.title}</h3>
                 <p>{specification.description}</p>
                 <h2>{isAcknowledged()}</h2>
