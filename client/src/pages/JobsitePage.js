@@ -40,9 +40,6 @@ const JobsitePage = (props) => {
                     <div>
                         <SimpleMap center={{lat: jobsite.latitude, lng: jobsite.longitude}} zoom={10}  />
                     </div>
-                    <div className={'home-flex-col-bottom'}>
-                        <SignOut onClick={onClickSignOut} />
-                    </div>
                     <div>
                         <SpecificationsList jobsite={jobsite} />
                     </div>
@@ -50,6 +47,9 @@ const JobsitePage = (props) => {
                         <NavLink to='/home' activeclassName='nav-active'>
                             <p>All Jobsites</p>
                         </NavLink>
+                    </div>
+                    <div className={'home-flex-col-bottom'}>
+                        <SignOut onClick={onClickSignOut} />
                     </div>
                 </div>
             </div>

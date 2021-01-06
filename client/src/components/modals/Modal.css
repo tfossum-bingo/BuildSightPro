@@ -1,0 +1,45 @@
+.modal-layer {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+    margin: 0 auto;
+    align-items: center;
+    margin: 15% auto;
+    padding: 20px;
+    width: 400px;
+}
+
+.modal-styles {
+    background-color:rgba(63, 59, 59, 0.95);
+    border-radius: 7px;
+    border: white solid 3px;
+}
+
+.modal-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.modal-footer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.modal-close-button {
+    font-size: .8em;
+    background-color: darkred;
+}
+
+.modal-close-button:hover {
+    background-color: red;
+}
