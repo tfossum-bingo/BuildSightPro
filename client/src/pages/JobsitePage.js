@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { __GetJobsite } from '../services/JobsiteService'
+
+import Header from '../components/Header'
 import SimpleMap from '../components/jobsites/SimpleMap'
 import SpecificationsList from '../components/specifications/SpecificationsList'
 
@@ -36,7 +38,12 @@ const JobsitePage = (props) => {
         return (
             <div className={'home-container-grid'}>
                 {console.log('Jobsite: ', jobsite)}
+                <Header onClickSignOut={onClickSignOut} user={user} />
                 <h2>{jobsite.address_1}</h2>
+                <h3>{jobsite.address_2}</h3>
+                <h3>{jobsite.city}</h3>
+                <h3>{jobsite.state}</h3>
+                <h3>{jobsite.postalCode}</h3>
                 <div className={'home-grid-bottom-left'}>
                     <div>
                         <SimpleMap center={{lat: jobsite.latitude, lng: jobsite.longitude}} zoom={10}  />
@@ -51,9 +58,6 @@ const JobsitePage = (props) => {
                         <NavLink to='/home' activeclassName='nav-active'>
                             <p>All Jobsites</p>
                         </NavLink>
-                    </div>
-                    <div className={'home-flex-col-bottom'}>
-                        <SignOut onClick={onClickSignOut} />
                     </div>
                 </div>
             </div>
