@@ -6,10 +6,12 @@ export default (props) => {
 
     if (user !== null && user !== undefined) {
         return (
-            <div>
-                <h1>JobSitePro</h1>
-                <div>
-                    <SignOut onClick={onClickSignOut} />
+            <div className='header'>
+                <div className="flex-row header-row">
+                    <h1>JobSitePro</h1>
+                    <div>
+                        <SignOut onClick={onClickSignOut} />
+                    </div>
                 </div>
             </div>
         )

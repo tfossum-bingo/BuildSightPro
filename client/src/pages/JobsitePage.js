@@ -42,33 +42,36 @@ const JobsitePage = (props) => {
 
     if (jobsite !== null && jobsite !== undefined) {
         return (
-            <div className={'home-container-grid'}>
+            <div className={'flex-column'}>
                 {console.log('Jobsite: ', jobsite)}
                 <Header onClickSignOut={onClickSignOut} user={user} />
-                <h2>{jobsite.address_1}</h2>
-                <h3>{jobsite.address_2}</h3>
-                <h3>{jobsite.city}</h3>
-                <h3>{jobsite.state}</h3>
-                <h3>{jobsite.postalCode}</h3>
-                <div className={'home-grid-bottom-left'}>
-                    <div>
-                        <SimpleMap center={{lat: jobsite.latitude, lng: jobsite.longitude}} zoom={10}  />
-                    </div>
-                    <div className="create-task-button">
-                    <button
-                        onClick={e => toggleSpecForm()} >
-                        Add Specification Doc
+
+                <div className='jobsite-main'>
+                    <div className='jobsite-address-container'>
+                        <div className='map-container'>
+                            <SimpleMap center={{ lat: jobsite.latitude, lng: jobsite.longitude }} zoom={15} />
+                        </div>
+                        <div className='address-container'>
+                            <p>{jobsite.address_1}</p>
+                            <p>{jobsite.address_2}</p>
+                            <p>{`${jobsite.city}, ${jobsite.state} ${jobsite.postalCode}`} </p>
+                        </div>
+                        <div className="add-spec-container">
+                            <button
+                                onClick={e => toggleSpecForm()} >
+                                Add Specification Doc
                             </button>
-                    <Modal show={displaySpecForm}
-                        onClick={toggleSpecForm}>
-                        <SpecificationForm
-                            jobsiteId={jobsite.id}
-                            userId={user.id}
-                            toggleModal={toggleSpecForm}
-                            setNeedsRefresh={setNeedsRefresh}
-                            {...props} />
-                    </Modal>
-                </div>
+                            <Modal show={displaySpecForm}
+                                onClick={toggleSpecForm}>
+                                <SpecificationForm
+                                    jobsiteId={jobsite.id}
+                                    userId={user.id}
+                                    toggleModal={toggleSpecForm}
+                                    setNeedsRefresh={setNeedsRefresh}
+                                    {...props} />
+                            </Modal>
+                        </div>
+                    </div>
                     <div>
                         <SpecificationsList
                             jobsite={jobsite}
