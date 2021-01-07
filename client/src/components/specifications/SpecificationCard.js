@@ -29,6 +29,16 @@ export default (props) => {
         }
     }
 
+    const imageLink = () => {
+        console.log("HIT imageLink: ", specification.attachmentUrl)
+        if(specification.attachmentUrl !== null && specification.attachmentUrl !== ""){
+            return (
+                <a href={specification.attachmentUrl}>Link</a>
+            )
+        }
+        return null
+    }
+
     const isAcknowledged = () => {
         const specUser = specification.specification_users.find(spec => spec.user_id == user.id)
         console.log('isAck: ', specUser, specification.specification_users)
@@ -52,6 +62,7 @@ export default (props) => {
             <div className="spec-container">
                 <h3>{specification.title}</h3>
                 <p>{specification.description}</p>
+                {imageLink()}
                 <h2>{isAcknowledged()}</h2>
             </div>
         )

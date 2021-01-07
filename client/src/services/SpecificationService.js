@@ -13,6 +13,7 @@ export const __AcknowledgeSpecification = async (data) => {
 
 
 export const __CreateSpecification = async (formData) => {
+  console.log("SVC CreateSpec", formData)
   try {
     const res = await ApiClient.post('/specifications/', formData);
     return res.data;

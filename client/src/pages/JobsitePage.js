@@ -61,8 +61,7 @@ const JobsitePage = (props) => {
                                 onClick={e => toggleSpecForm()} >
                                 Add Specification Doc
                             </button>
-                            <Modal show={displaySpecForm}
-                                onClick={toggleSpecForm}>
+                            <Modal show={displaySpecForm}>
                                 <SpecificationForm
                                     jobsiteId={jobsite.id}
                                     userId={user.id}

@@ -1,5 +1,6 @@
 const { Specification } = require('../models')
 const { ValidationError } = require('sequelize');
+const upload = require('../middleware/awsUpload')
 
 const getAll = async (req, res) => {
     try {
@@ -28,11 +29,13 @@ const getOne = async (req, res) => {
 }
 
 const createOne = async (req, res) => {
+    console.log('CONT SpecCreateOne: ', req.file)
     try {
+        let attachmentUrl = await upload(req.file)
         let entityBody = {
             ...req.body
         }
-        const newAccount = Specification.build(entityBody)
+        const newAccount = Specification.build({...entityBody, attachmentUrl})
         await newAccount.validate()
         await newAccount.save()
         // let entity = await Account.create(entityBody)
