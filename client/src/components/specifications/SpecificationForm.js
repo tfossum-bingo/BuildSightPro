@@ -15,7 +15,8 @@ const JobsiteForm = (props) => {
         title: '',
         description: '',
         user_id: props.userId,
-        jobsite_id: props.jobsiteId
+        jobsite_id: props.jobsiteId,
+        specificationImage: null
     })
 
 
@@ -26,7 +27,7 @@ const JobsiteForm = (props) => {
     }
 
     const handleSubmit = async (event) => {
-        console.log("HIT Spec Form Submit")
+        
 
         event.preventDefault()
         let formData = new FormData()
@@ -34,13 +35,14 @@ const JobsiteForm = (props) => {
         formData.append('description', form.description)
         formData.append('user_id', form.user_id)
         formData.append('jobsite_id', form.jobsite_id)
-        formData.append('specificationImage', form.specficationImage)
+        formData.append('specificationImage', form.specificationImage)
         console.log("formData: ", form)
+        // for(let element of formData.entries()){ console.log(element) }
         // try {
-        const jobsiteResponse = await __CreateSpecification(form);
+        const jobsiteResponse = await __CreateSpecification(formData);
         props.toggleModal()
         props.setNeedsRefresh(true)
-        history.push(`/jobsites/${props.jobsiteId}`);
+        // history.push(`/jobsites/${props.jobsiteId}`);
         // } catch (error) {
         //     setFormError(true);
         // }

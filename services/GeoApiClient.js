@@ -1,5 +1,4 @@
 const axios = require( "axios")
-// const API_KEY='AIzaSyD85Z18nGa_s6LWTdVZCmozaVWFRqHM8KQ'
 const { GOOGLE_API_KEY } = process.env
 
 
