@@ -1,5 +1,6 @@
 const axios = require( "axios")
-const API_KEY='AIzaSyD85Z18nGa_s6LWTdVZCmozaVWFRqHM8KQ'
+// const API_KEY='AIzaSyD85Z18nGa_s6LWTdVZCmozaVWFRqHM8KQ'
+const { GOOGLE_API_KEY } = process.env
 
 
 const ApiClient = axios.create({
@@ -9,7 +10,7 @@ const ApiClient = axios.create({
 
 const getGeoLocation = async (jobsite) => {
     console.log('******Jobsite: ', jobsite)
-    let addressURL = `/json?address=${jobsite.address_1},${jobsite.city},${jobsite.state}&key=${API_KEY}`
+    let addressURL = `/json?address=${jobsite.address_1},${jobsite.city},${jobsite.state}&key=${GOOGLE_API_KEY}`
     addressURL = encodeURI(addressURL)
 
     console.log("GeoLocate Address: ", addressURL)
