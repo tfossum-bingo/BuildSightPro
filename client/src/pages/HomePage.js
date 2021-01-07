@@ -9,10 +9,10 @@ import Modal from '../components/modals/Modal'
 export default (props) => {
     const { user, onClickSignOut, setNeedsRefresh } = props;
     console.log("HIT Homepage: ", user)
-    const [displayModal, setDisplayModal] = useState(false)
+    const [displayJobsiteModal, setDisplayModal] = useState(false)
 
-    const toggleModal = () => {
-        setDisplayModal(!displayModal)
+    const toggleJobsiteModal = () => {
+        setDisplayModal(!displayJobsiteModal)
     }
 
 
@@ -23,16 +23,15 @@ export default (props) => {
                 <Header user={user} onClickSignOut={onClickSignOut}/>
                 <div className="create-task-button">
                     <button
-                        onClick={e => toggleModal()} >
+                        onClick={e => toggleJobsiteModal()} >
                         New Jobsite
                             </button>
-                    <Modal show={displayModal}
-                        onClick={toggleModal}>
+                    <Modal show={displayJobsiteModal}>
                         <JobsiteForm
-                            onClick={toggleModal}
+                            onClick={toggleJobsiteModal}
                             companyId={user.company_id}
                             userId={user.id}
-                            toggleModal={toggleModal}
+                            toggleJobsiteModal={toggleJobsiteModal}
                             setNeedsRefresh={setNeedsRefresh}
                             {...props} />
                     </Modal>

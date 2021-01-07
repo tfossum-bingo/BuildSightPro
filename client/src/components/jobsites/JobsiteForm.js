@@ -10,6 +10,7 @@ import { __CreateJobsite } from '../../services/JobsiteService';
 
 const JobsiteForm = (props) => {
     let history = useHistory()
+    const { toggleJobsiteModal } = props
     const [form, setForm] = useState({
         address_1: '',
         address_2: '',
@@ -21,14 +22,14 @@ const JobsiteForm = (props) => {
         company_id: props.companyId
     })
 
-    
+
 
     const [formError, setFormError] = useState(false);
 
     const formFieldChange = (e) => {
         const fieldName = e.target.name;
         const fieldValue = e.target.value;
-        
+
         setForm({ ...form, [fieldName]: fieldValue })
     }
 
@@ -116,7 +117,7 @@ const JobsiteForm = (props) => {
                 </div>
 
             </form>
-
+            <button onClick={toggleJobsiteModal}>Close</button>
         </div>
     );
 };
