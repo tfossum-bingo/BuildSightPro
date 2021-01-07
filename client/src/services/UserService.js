@@ -43,7 +43,7 @@ export const __LoginUser = async (userData) => {
   }
 };
 
-export const _SignOutUser = () => {
+export const _LogoutUser = () => {
   localStorage.clear('user_id');
 };
 

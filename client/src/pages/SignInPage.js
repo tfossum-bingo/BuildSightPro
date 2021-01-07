@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux'
 import TextInput from '../components/TextInput';
+import { loginUser } from '../store/actions/UserActions'
 import { __LoginUser } from '../services/UserService';
 // import '../styles/Button.css'
 // import '../styles/SignUp.css'
 
 const SignInPage = (props) => {
-    const {setUser} = props
+    const { setUser } = props
     const [loginValue, setLoginValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
     const [formError, setFormError] = useState(false);
@@ -24,7 +26,7 @@ const SignInPage = (props) => {
         console.log('HIT handleLogin Submit', loginValue, passwordValue);
         event.preventDefault();
         try {
-            const userData = {email: loginValue, password: passwordValue};
+            const userData = { email: loginValue, password: passwordValue };
             const loginResponse = await __LoginUser(userData);
             console.log('Login Response: ', loginResponse === undefined);
             if (loginResponse !== "") {
@@ -40,7 +42,7 @@ const SignInPage = (props) => {
     return (
         <div className='form-container'>
             <form className='form-content-right' onSubmit={(e) => handleSubmit(e)}>
-            <h1>Sign In</h1>
+                <h1>Sign In</h1>
                 <div className='form-inputs'>
                     <label htmlFor='email' className='form-label'>
                         Email

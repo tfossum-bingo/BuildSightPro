@@ -33,7 +33,7 @@ export default (props) => {
         console.log("HIT imageLink: ", specification.attachmentUrl)
         if(specification.attachmentUrl !== null && specification.attachmentUrl !== ""){
             return (
-                <a href={specification.attachmentUrl}>Link</a>
+                <a href={specification.attachmentUrl} target='_blank'>Link</a>
             )
         }
         return null
