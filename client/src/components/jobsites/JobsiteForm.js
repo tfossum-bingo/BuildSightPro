@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux'
+import { updateJobsiteForm} from '../../store/actions/JobsiteActions'
 
 // import Button from '../components/Button';
-import TextInput from '../TextInput';
+import TextInput from '../TextInput'
 import { __CreateJobsite } from '../../services/JobsiteService';
 // import '../styles/SignUp.css'
 // import '../styles/Button.css'
@@ -125,17 +126,12 @@ const JobsiteForm = (props) => {
 
 const mapActionsToProps = (dispatch) => {
     return {
+        updateJobsiteForm: (formFields) => dispatch(updateJobsiteForm(formFields)),
 
-        jobsiteForm: (formFields) => dispatch(FormEntry(formFields)),
-        // loginUser: () => dispatch(loginUser())
-        // completeTodo: (index) => dispatch(CompleteTodo(index)),
-        // createTodo: (formValue) => dispatch(CreateNewTodo(formValue)),
-        // removeTodo: (index) => dispatch(RemoveTodo(index))
     }
 }
 
 const mapStateToProps = (state) => {
-    // console.log('MapStateToProps: ', state)
     return {
         userState: state.userState
     }

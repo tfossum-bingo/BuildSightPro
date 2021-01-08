@@ -1,27 +1,15 @@
 const {
-  ACKNOWLEDGE_SPECIFICATION,
-  CREATE_ENTITY,
-  GET_ENTITIES,
-  GET_ENTITY,
-  UPDATE_ENTITY
+  ACKNOWLEDGE_SPECIFICATION
 } = require('../types')
 
 const iState = {
-  jobsites: [],
-  jobsitesLoading: '', // Should be type enum('Loading', 'Loaded', 'Inactive'),
-  jobsite: null
+  // jobsitesLoading: '', // Should be type enum('Loading', 'Loaded', 'Inactive'),
 }
 
 const JobsiteReducer = (state = iState, action) => {
   switch (action.type) {
-    case GET_ENTITIES:
-      return { ...state, jobsites: action.payload }
-    case GET_ENTITY:
-      return { ...state, jobsite: action.payload }
-    case CREATE_ENTITY:
-      return { ...state, jobsite: action.payload }
-    case UPDATE_ENTITY:
-      return { ...state, jobsite: action.payload }
+    // case GET_ENTITIES:
+    //   return { ...state, jobsites: action.payload }
     default:
       return { ...state }
   }

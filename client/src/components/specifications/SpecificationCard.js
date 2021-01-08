@@ -1,37 +1,20 @@
 import React from 'react'
-// import Button from '../Button'
-import { __AcknowledgeSpecification } from '../../services/SpecificationService'
+import { connect } from 'react-redux'
+import { acknowledgeSpecification } from '../../store/actions/SpecificationActions'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
-
-// Import ToDo Update Service
-// Import Todo Delete Service
-
-export default (props) => {
-    // const { jobsite, setNeedsRefresh } = props
-    const { setNeedsRefresh, specification, user } = props
-
-
-    const acknowledgeSpecification = async () => {
-        console.log('HIT AckSpec User: ', user)
-        const data = {
-            userId: user.id,
-            specificationId: specification.id
-        }
-        console.log('HIT AckSpec: ', data)
-        try {
-            const ackResponse = await __AcknowledgeSpecification(data)
-            setNeedsRefresh(true)
-            return true
-        } catch (error) {
-            console.log('AckSpec error: ', error)
-        }
+const SpecificationCard = (props) => {
+    const { specification } = props
+    const ackData = {
+        userId: props.userState.user.id,
+        specificationId: specification.id
     }
 
     const imageLink = () => {
         console.log("HIT imageLink: ", specification.attachmentUrl)
-        if(specification.attachmentUrl !== null && specification.attachmentUrl !== ""){
+        if (specification.attachmentUrl !== null && specification.attachmentUrl !== "") {
             return (
                 <a href={specification.attachmentUrl} target='_blank'>Link</a>
             )
@@ -40,21 +23,23 @@ export default (props) => {
     }
 
     const isAcknowledged = () => {
-        const specUser = specification.specification_users.find(spec => spec.user_id == user.id)
-        console.log('isAck: ', specUser, specification.specification_users)
-        console.log('isAck2: ', specUser)
-        if (specUser !== undefined) {
+        if (specification.specification_users !== undefined) {
+            const specUser = specification.specification_users.find(spec => spec.user_id == props.userState.user.id)
+            console.log('isAck2: ', specUser)
+            if (specUser !== undefined) {
+                return (
+                    <FontAwesomeIcon
+                        className="fas fa-white"
+                        style={{ color: "green" }}
+                        icon={faCheckCircle}
+                    />
+                )
+            }
             return (
-                <FontAwesomeIcon
-                    className="fas fa-white"
-                    style={{color: "green"}}
-                    icon={faCheckCircle}
-                />
+                <button onClick={(e) => acknowledgeSpecification(ackData)}>Acknowledge</button>
             )
         }
-        return (
-            <button onClick={(e) => acknowledgeSpecification()}>Acknowledge</button>
-        )
+        return null
     }
 
     if (specification !== null && specification !== undefined) {
@@ -70,3 +55,17 @@ export default (props) => {
         return null
     }
 }
+
+const mapActionsToProps = (dispatch) => {
+    return {
+        acknowledgeSpecification: (ackData) => dispatch(acknowledgeSpecification(ackData))
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        userState: state.userState
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(SpecificationCard)

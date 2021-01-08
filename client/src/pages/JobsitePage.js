@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
-import { getJobsite } from '../store/actions/JobsiteActions'
+import { getJobsite, hideSpecForm , showSpecForm } from '../store/actions/JobsiteActions'
 
 import Header from '../components/Header'
 import Modal from '../components/modals/Modal'
@@ -14,18 +14,14 @@ const JobsitePage = (props) => {
     const jobsite_id = parseInt(props.match.params.jobsite_id)
     console.log('JPage: jobsite_id: ', jobsite_id)
     let x = 0
-    const [displaySpecForm, setDisplaySpecForm] = useState(false)
 
     useEffect(() => {
         if (props.jobsiteState.refreshJobsite || (props.jobsiteState.jobsite !== null && props.jobsiteState.jobsite.id !== jobsite_id)) {
             props.getJobsite(jobsite_id)
         }
-    }, [props.jobsiteState.refreshJobsite])
+    }, [props.jobsiteState.refreshJobsite, props.specificationState.displaySpecForm])
 
-    const toggleSpecForm = () => {
-        setDisplaySpecForm(!displaySpecForm)
-    }
-
+    
     if (props.jobsiteState.jobsite !== null && props.jobsiteState.jobsite !== undefined) {
         return (
             <div className={'flex-column'}>
@@ -44,23 +40,19 @@ const JobsitePage = (props) => {
                         </div>
                         <div className="add-spec-container">
                             <button
-                                onClick={e => toggleSpecForm()} >
+                                onClick={e => props.showSpecForm()} >
                                 Add Specification Doc
                             </button>
-                            <Modal show={displaySpecForm}>
+                            <Modal show={props.jobsiteState.displaySpecForm}>
                                 <SpecificationForm
                                     jobsiteId={props.jobsiteState.jobsite.id}
                                     userId={props.userState.user.id}
-                                    toggleModal={toggleSpecForm}
                                 />
                             </Modal>
                         </div>
                     </div>
                     <div>
-                        <SpecificationsList
-                            jobsite={props.jobsiteState.jobsite}
-                            user={props.userState.user}
-                        />
+                        <SpecificationsList />
                     </div>
                     <div>
                         <NavLink to='/jobsites' activeclassName='nav-active'>
@@ -80,13 +72,16 @@ const JobsitePage = (props) => {
 
 const mapActionsToProps = (dispatch) => {
     return {
-        getJobsite: (jobsiteId) => dispatch(getJobsite(jobsiteId))
+        getJobsite: (jobsiteId) => dispatch(getJobsite(jobsiteId)),
+        hideSpecForm: () => dispatch(hideSpecForm()),
+        showSpecForm: () => dispatch(showSpecForm())
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         jobsiteState: state.jobsiteState,
+        specificationState: state.specificationState,
         userState: state.userState,
         user: state.userState.user
     }

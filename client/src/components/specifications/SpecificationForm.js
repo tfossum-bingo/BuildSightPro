@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux'
 import { NavLink, useHistory } from 'react-router-dom';
 
-// import Button from '../components/Button';
+import { createSpecification, hideSpecForm } from '../../store/actions/JobsiteActions'
 import TextInput from '../TextInput';
-import { __CreateSpecification } from '../../services/SpecificationService';
-// import '../styles/SignUp.css'
-// import '../styles/Button.css'
 
-const JobsiteForm = (props) => {
+
+const SpecificationForm = (props) => {
     let history = useHistory()
     const { toggleModal } = props
     const [formError, setFormError] = useState(false);
@@ -37,15 +36,9 @@ const JobsiteForm = (props) => {
         formData.append('jobsite_id', form.jobsite_id)
         formData.append('specificationImage', form.specificationImage)
         console.log("formData: ", form)
-        // for(let element of formData.entries()){ console.log(element) }
-        // try {
-        const jobsiteResponse = await __CreateSpecification(formData);
-        props.toggleModal()
-        props.setNeedsRefresh(true)
-        // history.push(`/jobsites/${props.jobsiteId}`);
-        // } catch (error) {
-        //     setFormError(true);
-        // }
+
+        props.createSpecification(formData);
+
     }
 
     return (
@@ -93,8 +86,24 @@ const JobsiteForm = (props) => {
                 </div>
 
             </form>
-            <button onClick={toggleModal}>Close</button>
+            <button onClick={props.hideSpecForm}>Close</button>
         </div>
-    );
-};
-export default JobsiteForm;
+    )
+}
+
+
+const mapActionsToProps = (dispatch) => {
+    return {
+        createSpecification: (formData) => dispatch(createSpecification(formData)),
+        hideSpecForm: () => dispatch(hideSpecForm())
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        jobsiteState: state.jobsiteState,
+        userState: state.userState,
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(SpecificationForm)

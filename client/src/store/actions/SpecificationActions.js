@@ -2,11 +2,11 @@ import {
   __AcknowledgeSpecification,
   __CreateSpecification
 } from '../../services/SpecificationService'
+
 import { 
   // GET_ENTITIES, 
   // GET_ENTITY, 
-  ACKNOWLEDGE_SPECIFICATION,
-  CREATE_ENTITY
+  ACKNOWLEDGE_SPECIFICATION
 } from '../types'
 
 // export const getGetSpecifications = () => async (dispatch) => {
@@ -33,17 +33,6 @@ import {
 //   }
 // }
 
-export const createSpecification = () => async (dispatch) => {
-  try{
-    const entity = await __CreateSpecification()
-    dispatch({
-      type: CREATE_ENTITY,
-      payload: entity
-    })
-  }catch(error){
-    throw error
-  }
-}
 
 export const acknowledgeSpecification = () => async (dispatch) => {
   try{

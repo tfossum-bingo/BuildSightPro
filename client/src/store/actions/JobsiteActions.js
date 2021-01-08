@@ -7,14 +7,45 @@ import {
 } from '../../services/JobsiteService'
 
 import {
+  __CreateSpecification
+} from '../../services/SpecificationService'
+
+import {
+  CREATE_SPECIFICATION,
   GET_COMPANY_JOBSITES,
-  GET_ENTITIES, 
-  GET_JOBSITE, 
   CREATE_ENTITY, 
+  GET_ENTITIES, 
+  GET_JOBSITE,
+  HIDE_SPECIFICATION_FORM,
+  SHOW_SPECIFICATION_FORM,
   UPDATE_ENTITY,
   UPDATE_JOBSITE_FORM
 } from '../types'
 
+
+export const createJobsite = (formValues) => async (dispatch) => {
+  try{
+    const entity = await __CreateJobsite(formValues)
+    dispatch({
+      type: CREATE_ENTITY,
+      payload: entity
+    })
+  }catch(error){
+    throw error
+  }
+}
+
+export const createSpecification = (formData) => async (dispatch) => {
+  try{
+    const entity = await __CreateSpecification(formData)
+    dispatch({
+      type: CREATE_SPECIFICATION,
+      payload: entity
+    })
+  }catch(error){
+    throw error
+  }
+}
 
 export const getCompanyJobsites = (companyId) => async (dispatch) => {
   try{
@@ -48,22 +79,21 @@ export const getJobsite = (jobsiteId) => async (dispatch) => {
       type: GET_JOBSITE,
       payload: entity
     })
+    //perform second action
   }catch(error){
     throw error
   }
 }
 
-export const createJobsite = (formValues) => async (dispatch) => {
-  try{
-    const entity = await __CreateJobsite(formValues)
-    dispatch({
-      type: CREATE_ENTITY,
-      payload: entity
-    })
-  }catch(error){
-    throw error
-  }
-}
+export const hideSpecForm = (dispatch) => ({
+  type: HIDE_SPECIFICATION_FORM,
+  payload: null
+})
+
+export const showSpecForm = (dispatch) => ({
+  type: SHOW_SPECIFICATION_FORM,
+  payload: null
+})
 
 export const updateJobsite = () => async (dispatch) => {
   try{

@@ -1,27 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux'
 import SpecificationCard from './SpecificationCard';
 
-export default (props) => {
+const SpecificationList = (props) => {
   //   const { setNeedsRefresh } = props
-  const { setNeedsRefresh, user } = props
-  const { specifications } = props.jobsite
+  const specifications = props.specifications
 
-  if (specifications !== null && specifications !== undefined && specifications.length > 0) {
-    return (
-      <div>
-        {specifications.map((specification, index) => {
-          return (
-            <SpecificationCard
-              specification={specification}
-              setNeedsRefresh={setNeedsRefresh}
-              user={user}
-              key={index} />
-          )
-        })
-        }
-      </div>
-    )
-  } else {
-    return null
+  useEffect(() => {
+
+  }, [])
+
+  const isRender = (specifications !== null && specifications !== undefined && specifications.length > 0)
+
+
+  return (
+    <div>
+      { isRender ? specifications.map((specification, index) => {
+        return (
+          <SpecificationCard
+            specification={specification}
+            key={index} />
+        )
+      }) : null
+      }
+    </div>
+  )
+}
+
+
+const mapActionsToProps = (dispatch) => {
+  return {
+
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    specifications: state.jobsiteState.specifications
+  }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(SpecificationList)
