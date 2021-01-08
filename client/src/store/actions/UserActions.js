@@ -12,6 +12,7 @@ import {
   GET_ENTITY, 
   CREATE_ENTITY, 
   UPDATE_ENTITY,
+  UPDATE_LOGIN_FORM,
   LOGIN_USER,
   LOGOUT_USER
 } from '../types'
@@ -28,7 +29,7 @@ export const getGetUsers = () => async (dispatch) => {
   }
 }
 
-export const getGetUser = () => async (dispatch) => {
+export const getUser = () => async (dispatch) => {
   try{
     const user = await __GetUser()
     dispatch({
@@ -64,9 +65,14 @@ export const updateUser = () => async (dispatch) => {
   }
 }
 
-export const loginUser = () => async (dispatch) => {
+export const updateLoginForm =  (formValue) => ({
+  type: UPDATE_LOGIN_FORM,
+  payload: formValue
+})
+
+export const loginUser = (loginFormValues) => async (dispatch) => {
   try{
-    const user = await __LoginUser()
+    const user = await __LoginUser(loginFormValues)
     dispatch({
       type: LOGIN_USER,
       payload: user

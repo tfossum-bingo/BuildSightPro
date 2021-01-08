@@ -37,4 +37,11 @@ export const __UpdateJobsite = async (jobsite_id, formData) => {
   }
 };
 
-
+export const __GetCompanyJobsites = async (companyId) => {
+  try {
+    const res = await ApiClient.get(`/companies/${companyId}/jobsites`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};

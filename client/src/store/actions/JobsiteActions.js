@@ -35,9 +35,9 @@ export const getGetJobsite = () => async (dispatch) => {
   }
 }
 
-export const createJobsite = () => async (dispatch) => {
+export const createJobsite = (formValues) => async (dispatch) => {
   try{
-    const entity = await __CreateJobsite()
+    const entity = await __CreateJobsite(formValues)
     dispatch({
       type: CREATE_ENTITY,
       payload: entity
@@ -58,3 +58,8 @@ export const updateJobsite = () => async (dispatch) => {
     throw error
   }
 }
+
+export const updateJobsiteForm =  (formValue) => ({
+  type: UPDATE_LOGIN_FORM,
+  payload: formValue
+})

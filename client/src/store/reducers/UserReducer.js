@@ -8,7 +8,9 @@ const {
 const iState = {
   users: [],
   usersLoading: '', // Should be type enum('Loading', 'Loaded', 'Inactive'),
-  user: null
+  loginForm: {},
+  user: null,
+  refreshNeeded: true
 }
 
 const JobsiteReducer = (state = iState, action) => {
@@ -18,11 +20,17 @@ const JobsiteReducer = (state = iState, action) => {
     case GET_ENTITIES:
       return { ...state, user: action.payload }
     case GET_ENTITY:
-      return { ...state, user: action.payload }
+      return {
+        ...state,
+        user: action.payload,
+        refreshNeeded: false
+      }
     case CREATE_ENTITY:
       return { ...state, user: action.payload }
     case UPDATE_ENTITY:
       return { ...state, user: action.payload }
+    case UPDATE_LOGIN_FORM:
+      return { ...state, loginForm: action.payload }
     case LOGIN_USER:
       return { ...state, user: action.payload }
     case LOGOUT_USER:

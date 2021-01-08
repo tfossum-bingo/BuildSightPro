@@ -1,41 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import TextInput from '../components/TextInput';
 import { loginUser } from '../store/actions/UserActions'
 import { __LoginUser } from '../services/UserService';
-// import '../styles/Button.css'
-// import '../styles/SignUp.css'
 
 const SignInPage = (props) => {
-    const { setUser } = props
-    const [loginValue, setLoginValue] = useState('');
-    const [passwordValue, setPasswordValue] = useState('');
-    const [formError, setFormError] = useState(false);
 
-    const emailField = (e) => {
-        setLoginValue(e.target.value);
-        console.log('Email: ', loginValue);
-    };
+    useEffect(() => {
+        
+    }, [])
 
-    const passwordField = (e) => {
-        setPasswordValue(e.target.value);
-        console.log('Password: ', passwordValue);
-    };
+    const handleChange = (event) => {
+        props.createTodo(event.target.value)
+    }
 
     const handleSubmit = async (event) => {
         console.log('HIT handleLogin Submit', loginValue, passwordValue);
         event.preventDefault();
-        try {
-            const userData = { email: loginValue, password: passwordValue };
-            const loginResponse = await __LoginUser(userData);
-            console.log('Login Response: ', loginResponse === undefined);
-            if (loginResponse !== "") {
-                setUser(loginResponse)
-                props.history.push('/home');
-            }
-        } catch (error) {
-            setFormError(true);
-        }
+        props.loginUser(props.userState.loginForm)
     };
 
 
@@ -51,7 +33,7 @@ const SignInPage = (props) => {
                             placeholder='email'
                             name='email'
                             type='email'
-                            onChange={emailField}
+                            onChange={handleChange}
                         />
                     </label>
                 </div>
@@ -63,7 +45,7 @@ const SignInPage = (props) => {
                             placeholder='password'
                             name='password'
                             type='password'
-                            onChange={passwordField}
+                            onChange={handleChange}
                         />
                     </label>
                 </div>
@@ -82,4 +64,22 @@ const SignInPage = (props) => {
     );
 };
 
-export default SignInPage;
+const mapActionsToProps = (dispatch) => {
+    return {
+
+        loginForm: (formFields) => dispatch(FormEntry(formFields)),
+        loginUser: () => dispatch(loginUser())
+        // completeTodo: (index) => dispatch(CompleteTodo(index)),
+        // createTodo: (formValue) => dispatch(CreateNewTodo(formValue)),
+        // removeTodo: (index) => dispatch(RemoveTodo(index))
+    }
+}
+
+const mapStateToProps = (state) => {
+    // console.log('MapStateToProps: ', state)
+    return {
+        userState: state.userState
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(SignInPage)

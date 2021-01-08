@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux'
 
 // import Button from '../components/Button';
 import TextInput from '../TextInput';
@@ -121,4 +121,24 @@ const JobsiteForm = (props) => {
         </div>
     );
 };
-export default JobsiteForm;
+
+
+const mapActionsToProps = (dispatch) => {
+    return {
+
+        jobsiteForm: (formFields) => dispatch(FormEntry(formFields)),
+        // loginUser: () => dispatch(loginUser())
+        // completeTodo: (index) => dispatch(CompleteTodo(index)),
+        // createTodo: (formValue) => dispatch(CreateNewTodo(formValue)),
+        // removeTodo: (index) => dispatch(RemoveTodo(index))
+    }
+}
+
+const mapStateToProps = (state) => {
+    // console.log('MapStateToProps: ', state)
+    return {
+        userState: state.userState
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(JobsiteForm)

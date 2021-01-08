@@ -2,12 +2,16 @@ const {
   GET_ENTITIES,
   GET_ENTITY,
   CREATE_ENTITY,
-  UPDATE_ENTITY
+  UPDATE_ENTITY,
+  UPDATE_JOBSITE_FORM
 } = require('../types')
+
+import { userRefreshNeeded } from '../actions/UserActions'
 
 const iState = {
   jobsites: [],
   jobsitesLoading: '', // Should be type enum('Loading', 'Loaded', 'Inactive'),
+  jobsiteForm: {},
   jobsite: null
 }
 
@@ -23,6 +27,8 @@ const JobsiteReducer = (state = iState, action) => {
       return { ...state, jobsite: action.payload }
     case UPDATE_ENTITY:
       return { ...state, jobsite: action.payload }
+    case UPDATE_JOBSITE_FORM:
+      return { ...state, jobsiteForm: action.payload }
     default:
       return { ...state }
   }
