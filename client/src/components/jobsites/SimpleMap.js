@@ -5,7 +5,7 @@ import { faTimesCircle, faWrench } from "@fortawesome/free-solid-svg-icons";
  
 const AnyReactComponent = ({ text }) => <div style={{color: 'red', fontWeight: "bold"}}>
                   <FontAwesomeIcon
-                className="fas fa-white"
+                className="fas fa-white jobsite-wrench"
                 icon={faWrench}
             />
 </div>;
