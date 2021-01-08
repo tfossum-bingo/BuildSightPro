@@ -33,15 +33,3 @@ import {
 //   }
 // }
 
-
-export const acknowledgeSpecification = () => async (dispatch) => {
-  try{
-    const entity = await __AcknowledgeSpecification()
-    dispatch({
-      type: ACKNOWLEDGE_SPECIFICATION,
-      payload: entity
-    })
-  }catch(error){
-    throw error
-  }
-}

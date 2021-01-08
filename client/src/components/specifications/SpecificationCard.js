@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { acknowledgeSpecification } from '../../store/actions/SpecificationActions'
+import { acknowledgeSpecification } from '../../store/actions/UserActions'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
@@ -11,9 +11,8 @@ const SpecificationCard = (props) => {
         userId: props.userState.user.id,
         specificationId: specification.id
     }
-
+    console.log("SpecCard ackData: ", ackData)
     const imageLink = () => {
-        console.log("HIT imageLink: ", specification.attachmentUrl)
         if (specification.attachmentUrl !== null && specification.attachmentUrl !== "") {
             return (
                 <a href={specification.attachmentUrl} target='_blank'>Link</a>
@@ -36,7 +35,7 @@ const SpecificationCard = (props) => {
                 )
             }
             return (
-                <button onClick={(e) => acknowledgeSpecification(ackData)}>Acknowledge</button>
+                <button onClick={() => props.acknowledgeSpecification(ackData)}>Acknowledge</button>
             )
         }
         return null
