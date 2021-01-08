@@ -25,7 +25,15 @@ export const __GetUser = async (user_id) => {
 export const __RegisterUser = async (formData) => {
   try {
     const res = await ApiClient.post('/users/', formData);
-    setLocalUserId(res.data.id);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const __UpdateUser = async (formData) => {
+  try {
+    const res = await ApiClient.put('/users/', formData);
     return res.data;
   } catch (error) {
     throw error;
@@ -35,7 +43,6 @@ export const __RegisterUser = async (formData) => {
 export const __LoginUser = async (userData) => {
   try {
     const res = await ApiClient.post('/users/login', userData);
-    setLocalUserId(res.data.id);
     console.log('Logged in');
     return res.data;
   } catch (error) {
@@ -43,11 +50,4 @@ export const __LoginUser = async (userData) => {
   }
 };
 
-export const _LogoutUser = () => {
-  localStorage.clear('user_id');
-};
-
-const setLocalUserId = (user_id) => {
-  localStorage.setItem('user_id', user_id);
-};
 

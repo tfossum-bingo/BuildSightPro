@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux'
 import TextInput from '../components/TextInput';
-import { loginUser } from '../store/actions/UserActions'
-import { __LoginUser } from '../services/UserService';
+import { loginUser, updateLoginForm } from '../store/actions/UserActions'
+
 
 const SignInPage = (props) => {
 
-    useEffect(() => {
-        
-    }, [])
-
     const handleChange = (event) => {
-        props.createTodo(event.target.value)
+        console.log('HIT SI handleChange: ', event.target.value)
+        
+        props.loginForm(event.target.name, event.target.value)
     }
 
     const handleSubmit = async (event) => {
-        console.log('HIT handleLogin Submit', loginValue, passwordValue);
+        console.log('HIT handleLogin Submit', props.userState);
         event.preventDefault();
-        props.loginUser(props.userState.loginForm)
-    };
+        const userData = {email: props.userState.email, password: props.userState.password}
+        props.loginUser(userData)
+    }
 
 
-    return (
+    return props.userState.user === null ? (
         <div className='form-container'>
             <form className='form-content-right' onSubmit={(e) => handleSubmit(e)}>
                 <h1>Sign In</h1>
@@ -33,6 +33,7 @@ const SignInPage = (props) => {
                             placeholder='email'
                             name='email'
                             type='email'
+                            value={props.userState.email}
                             onChange={handleChange}
                         />
                     </label>
@@ -45,6 +46,7 @@ const SignInPage = (props) => {
                             placeholder='password'
                             name='password'
                             type='password'
+                            value={props.userState.password}
                             onChange={handleChange}
                         />
                     </label>
@@ -61,14 +63,16 @@ const SignInPage = (props) => {
             </form>
 
         </div>
-    );
-};
+    ) : (
+        <Redirect to="/jobsites" />
+     )
+}
 
 const mapActionsToProps = (dispatch) => {
     return {
 
-        loginForm: (formFields) => dispatch(FormEntry(formFields)),
-        loginUser: () => dispatch(loginUser())
+        loginForm: (name, value) => dispatch(updateLoginForm(name, value)),
+        loginUser: (formValues) => dispatch(loginUser(formValues))
         // completeTodo: (index) => dispatch(CompleteTodo(index)),
         // createTodo: (formValue) => dispatch(CreateNewTodo(formValue)),
         // removeTodo: (index) => dispatch(RemoveTodo(index))

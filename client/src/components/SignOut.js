@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Redirect } from 'react-router'
+import { connect } from 'react-redux'
+import { logoutUser } from '../store/actions/UserActions'
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
-export default ({ children, type, onClick, buttonStyle, buttonSize }) => {
+const SignOut =  ({ children, type, onClick, buttonStyle, buttonSize }) => {
     const [signedOut, setSignedOut] = useState(false)
 
     const clearUser = () => {
@@ -31,3 +34,19 @@ export default ({ children, type, onClick, buttonStyle, buttonSize }) => {
         );
     }
 };
+
+const mapActionsToProps = (dispatch) => {
+    return {
+        logoutUser: () => dispatch(logoutUser()),
+  
+    }
+  }
+  
+  const mapStateToProps = (state) => {
+    // console.log('MapStateToProps: ', state)
+    return {
+        userState: state.userState
+    }
+  }
+  
+  export default connect(mapStateToProps, mapActionsToProps)(SignOut)

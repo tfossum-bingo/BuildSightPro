@@ -1,5 +1,14 @@
 import ApiClient from './ApiClient';
 
+export const __GetCompanyJobsites = async (companyId) => {
+  try {
+    const res = await ApiClient.get(`/companies/${companyId}/jobsites`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const __GetJobsites = async () => {
   try {
     const res = await ApiClient.get(`/jobsites`);
@@ -10,6 +19,7 @@ export const __GetJobsites = async () => {
 };
 
 export const __GetJobsite = async (jobsite_id) => {
+  console.log("SVC 1 GetJobsite: ", jobsite_id)
   try {
     const res = await ApiClient.get(`/jobsites/${jobsite_id}`);
     console.log("SVC GetJobsite: ", res.data.address_1)
@@ -31,15 +41,6 @@ export const __CreateJobsite = async (formData) => {
 export const __UpdateJobsite = async (jobsite_id, formData) => {
   try {
     const res = await ApiClient.put(`/jobsites/${jobsite_id}`, formData);
-    return res.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const __GetCompanyJobsites = async (companyId) => {
-  try {
-    const res = await ApiClient.get(`/companies/${companyId}/jobsites`);
     return res.data;
   } catch (error) {
     throw error;

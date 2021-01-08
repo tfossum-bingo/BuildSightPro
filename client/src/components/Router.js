@@ -1,45 +1,20 @@
 import React, { useState } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
 
-import HomePage from '../pages/HomePage';
+import JobsitesPage from '../pages/JobsitesPage';
 import JobsitePage from '../pages/JobsitePage'
 import LandingPage from '../pages/LandingPage';
 import ProtectedRoute from './ProtectedRoute'
 import SignInPage from '../pages/SignInPage';
 import SignUpPage from '../pages/SignUpPage';
 
-import { __GetUser } from '../services/UserService';
+
 
 import '../styles/App.css';
 
-export default function Router() {
-    const [user, setUser] = useState(null);
-    const [needsRefresh, setNeedsRefresh] = useState(false)
-
-    const localUserId = localStorage.getItem('user_id');
-
-    const retrieveUser = async (user_id) => {
-        try {
-            const x = await __GetUser();
-            setUser(x);
-            return x;
-        } catch (error) {
-        }
-    }
-
-    if ((user === null && localUserId !== null) || needsRefresh) {
-        console.log("Refreshing User")
-        setNeedsRefresh(false)
-        const retrievedUser = retrieveUser();
-        setUser(retrievedUser);
-    }
-
-    const clearUser = () => {
-        console.log("HIT clearUser()")
-        setNeedsRefresh(false)
-        setUser(null);
-    };
-
+const Router = (props) => {
+    
     return (
         <main>
             <Switch>
@@ -47,36 +22,43 @@ export default function Router() {
                 <Route
                     exact
                     path='/register'
-                    component={(props) => <SignUpPage {...props} setUser={setUser} />}
+                    component={(props) => <SignUpPage />}
                 />
                 <Route
                     exact
                     path='/signin'
-                    component={(props) => <SignInPage {...props} setUser={setUser} />}
+                    component={(props) => <SignInPage />}
                 />
                 <ProtectedRoute
-                    authenticated={user !== null}
-                    path='/home'
+                    authenticated={props.userState.user !== null}
+                    exact path='/jobsites'
                     component={(props) => (
-                        <HomePage
-                            {...props}
-                            user={user}
-                            onClickSignOut={clearUser}
-                            setNeedsRefresh={setNeedsRefresh} />
+                        <JobsitesPage />
                     )}
                 />
                 <ProtectedRoute
-                    authenticated={user !== null}
+                    authenticated={props.userState.user !== null}
                     exact path='/jobsites/:jobsite_id'
                     component={(props) => (
-                        <JobsitePage
-                            {...props}
-                            user={user}
-                            onClickSignOut={clearUser}
-                            setNeedsRefresh={setNeedsRefresh} />
+                        <JobsitePage {...props} />
                     )}
                 />
             </Switch>
         </main>
-    );
+    )
 }
+
+const mapActionsToProps = (dispatch) => {
+    return {
+
+    }
+  }
+  
+  const mapStateToProps = (state) => {
+    // console.log('MapStateToProps: ', state)
+    return {
+        userState: state.userState
+    }
+  }
+  
+  export default connect(mapStateToProps, mapActionsToProps)(Router)

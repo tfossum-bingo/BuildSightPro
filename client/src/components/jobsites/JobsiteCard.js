@@ -1,27 +1,13 @@
 import React from 'react'
-// import Button from '../Button'
 import { useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
-// Import ToDo Update Service
-// Import Todo Delete Service
-
 export default (props) => {
-    // const { jobsite, setNeedsRefresh } = props
+
     const { jobsite, user } = props
     let history = useHistory()
-    console.log("Jobsite props: ", history)
-
-    // const deleteTodo = async (e) => {
-    //     console.log("HIT deleteTodo: ", todo)
-    //     try{
-    //         await __DeleteTodo(todo.id)
-    //         setNeedsRefresh(true)
-    //     } catch(error) {
-    //         console.log(error)
-    //     }
-    // }
+    console.log("Jobsite props: ", jobsite.id)
 
     
     if (jobsite !== null && jobsite !== undefined) {

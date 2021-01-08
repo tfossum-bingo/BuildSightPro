@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom';
-import { __GetJobsite } from '../services/JobsiteService'
+
+import { getJobsite } from '../store/actions/JobsiteActions'
 
 import Header from '../components/Header'
 import Modal from '../components/modals/Modal'
@@ -8,53 +10,37 @@ import SimpleMap from '../components/jobsites/SimpleMap'
 import SpecificationsList from '../components/specifications/SpecificationsList'
 import SpecificationForm from '../components/specifications/SpecificationForm'
 
-// import JobsiteList from '../components/jobsites/JobsitesList'
-import SignOut from '../components/SignOut';
-
 const JobsitePage = (props) => {
-    const { user, onClickSignOut, setNeedsRefresh } = props;
-    // const { onClickSignOut, user } = props;
     const jobsite_id = parseInt(props.match.params.jobsite_id)
+    console.log('JPage: jobsite_id: ', jobsite_id)
+    let x = 0
     const [displaySpecForm, setDisplaySpecForm] = useState(false)
-    const [jobsite, setJobsite] = useState(null)
-    console.log("HIT JobsitePage", jobsite)
 
     useEffect(() => {
-        if (jobsite == null) {
-            console.log('HIT JobsitePage useEffect')
-            findJobsite(jobsite_id)
+        if (props.jobsiteState.refreshJobsite || (props.jobsiteState.jobsite !== null && props.jobsiteState.jobsite.id !== jobsite_id)) {
+            props.getJobsite(jobsite_id)
         }
-    }, [])
-
-    const findJobsite = async (jobsite_id) => {
-        const jobsite = await __GetJobsite(jobsite_id)
-        try {
-            setJobsite(jobsite)
-            console.log('findJobsite: ', jobsite)
-        } catch (error) {
-            console.log("Jobsite Retrieval Error: ", error)
-        }
-    }
+    }, [props.jobsiteState.refreshJobsite])
 
     const toggleSpecForm = () => {
         setDisplaySpecForm(!displaySpecForm)
     }
 
-    if (jobsite !== null && jobsite !== undefined) {
+    if (props.jobsiteState.jobsite !== null && props.jobsiteState.jobsite !== undefined) {
         return (
             <div className={'flex-column'}>
-                {console.log('Jobsite: ', jobsite)}
-                <Header onClickSignOut={onClickSignOut} user={user} />
+                {console.log('Jobsite: ', props.jobsite)}
+                <Header />
 
                 <div className='jobsite-main'>
                     <div className='jobsite-address-container'>
                         <div className='map-container'>
-                            <SimpleMap center={{ lat: jobsite.latitude, lng: jobsite.longitude }} zoom={15} />
+                            <SimpleMap center={{ lat: props.jobsiteState.jobsite.latitude, lng: props.jobsiteState.jobsite.longitude }} zoom={15} />
                         </div>
                         <div className='address-container'>
-                            <p>{jobsite.address_1}</p>
-                            <p>{jobsite.address_2}</p>
-                            <p>{`${jobsite.city}, ${jobsite.state} ${jobsite.postalCode}`} </p>
+                            <p>{props.jobsiteState.jobsite.address_1}</p>
+                            <p>{props.jobsiteState.jobsite.address_2}</p>
+                            <p>{`${props.jobsiteState.jobsite.city}, ${props.jobsiteState.jobsite.state} ${props.jobsiteState.jobsite.postalCode}`} </p>
                         </div>
                         <div className="add-spec-container">
                             <button
@@ -63,33 +49,47 @@ const JobsitePage = (props) => {
                             </button>
                             <Modal show={displaySpecForm}>
                                 <SpecificationForm
-                                    jobsiteId={jobsite.id}
-                                    userId={user.id}
+                                    jobsiteId={props.jobsiteState.jobsite.id}
+                                    userId={props.userState.user.id}
                                     toggleModal={toggleSpecForm}
-                                    setNeedsRefresh={setNeedsRefresh}
-                                    {...props} />
+                                />
                             </Modal>
                         </div>
                     </div>
                     <div>
                         <SpecificationsList
-                            jobsite={jobsite}
-                            setNeedsRefresh={setNeedsRefresh}
-                            user={user} />
+                            jobsite={props.jobsiteState.jobsite}
+                            user={props.userState.user}
+                        />
                     </div>
                     <div>
-                        <NavLink to='/home' activeclassName='nav-active'>
+                        <NavLink to='/jobsites' activeclassName='nav-active'>
                             <p>All Jobsites</p>
                         </NavLink>
                     </div>
                 </div>
             </div>
-        );
+        )
     } else {
         return (
             <div>Loading...</div>
         )
     }
-};
+}
 
-export default JobsitePage
+
+const mapActionsToProps = (dispatch) => {
+    return {
+        getJobsite: (jobsiteId) => dispatch(getJobsite(jobsiteId))
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        jobsiteState: state.jobsiteState,
+        userState: state.userState,
+        user: state.userState.user
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(JobsitePage)

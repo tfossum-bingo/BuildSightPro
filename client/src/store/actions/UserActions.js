@@ -65,9 +65,12 @@ export const updateUser = () => async (dispatch) => {
   }
 }
 
-export const updateLoginForm =  (formValue) => ({
+export const updateLoginForm = (name, value) => ({
   type: UPDATE_LOGIN_FORM,
-  payload: formValue
+  payload: {
+    name,
+    value
+  }
 })
 
 export const loginUser = (loginFormValues) => async (dispatch) => {
@@ -82,14 +85,7 @@ export const loginUser = (loginFormValues) => async (dispatch) => {
   }
 }
 
-export const logoutUser = () => async (dispatch) => {
-  try{
-    const user = await __LogoutUser()
-    dispatch({
-      type: LOGOUT_USER,
-      payload: user
-    })
-  }catch(error){
-    throw error
-  }
-}
+export const logoutUser =  () => ({
+  type: LOGOUT_USER,
+  payload: null
+})

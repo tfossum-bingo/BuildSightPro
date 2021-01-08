@@ -1,17 +1,34 @@
 import {
+  __GetCompanyJobsites,
   __GetJobsite,
-  __GetJobsite,
+  __GetJobsites,
   __CreateJobsite,
   __UpdateJobsite
 } from '../../services/JobsiteService'
-import { 
+
+import {
+  GET_COMPANY_JOBSITES,
   GET_ENTITIES, 
-  GET_ENTITY, 
+  GET_JOBSITE, 
   CREATE_ENTITY, 
-  UPDATE_ENTITY
+  UPDATE_ENTITY,
+  UPDATE_JOBSITE_FORM
 } from '../types'
 
-export const getGetJobsites = () => async (dispatch) => {
+
+export const getCompanyJobsites = (companyId) => async (dispatch) => {
+  try{
+    const entities = await __GetCompanyJobsites(companyId)
+    dispatch({
+      type: GET_COMPANY_JOBSITES,
+      payload: entities
+    })
+  }catch(error){
+    throw error
+  }
+}
+
+export const getJobsites = () => async (dispatch) => {
   try{
     const entities = await __GetJobsites()
     dispatch({
@@ -23,11 +40,12 @@ export const getGetJobsites = () => async (dispatch) => {
   }
 }
 
-export const getGetJobsite = () => async (dispatch) => {
+export const getJobsite = (jobsiteId) => async (dispatch) => {
   try{
-    const entity = await __GetJobsite()
+    const entity = await __GetJobsite(jobsiteId)
+    console.log("Action getJobsite: ", entity)
     dispatch({
-      type: GET_ENTITY,
+      type: GET_JOBSITE,
       payload: entity
     })
   }catch(error){
@@ -60,6 +78,6 @@ export const updateJobsite = () => async (dispatch) => {
 }
 
 export const updateJobsiteForm =  (formValue) => ({
-  type: UPDATE_LOGIN_FORM,
+  type: UPDATE_JOBSITE_FORM,
   payload: formValue
 })
