@@ -3,7 +3,7 @@ import React from 'react'
 import SignOut from '../components/SignOut'
 
 export default (props) => {
-    
+
     return (
         <div className='header'>
             <div className="flex-row header-row">
