@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { getJobsite, hideSpecForm , showSpecForm } from '../store/actions/JobsiteActions'
+import { getJobsite, hideSpecForm, showSpecForm } from '../store/actions/JobsiteActions'
 
 import Header from '../components/Header'
 import Modal from '../components/modals/Modal'
@@ -21,7 +21,7 @@ const JobsitePage = (props) => {
         }
     }, [props.jobsiteState.refreshJobsite, props.specificationState.displaySpecForm])
 
-    
+
     if (props.jobsiteState.jobsite !== null && props.jobsiteState.jobsite !== undefined) {
         return (
             <div className={'flex-column'}>
@@ -29,6 +29,11 @@ const JobsitePage = (props) => {
                 <Header />
 
                 <div className='jobsite-main'>
+                    <div>
+                        <NavLink to='/jobsites' activeclassName='nav-active'>
+                            <p>All Jobsites</p>
+                        </NavLink>
+                    </div>
                     <div className='jobsite-address-container'>
                         <div className='map-container'>
                             <SimpleMap center={{ lat: props.jobsiteState.jobsite.latitude, lng: props.jobsiteState.jobsite.longitude }} zoom={15} />
@@ -53,11 +58,6 @@ const JobsitePage = (props) => {
                     </div>
                     <div>
                         <SpecificationsList />
-                    </div>
-                    <div>
-                        <NavLink to='/jobsites' activeclassName='nav-active'>
-                            <p>All Jobsites</p>
-                        </NavLink>
                     </div>
                 </div>
             </div>
