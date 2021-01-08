@@ -37,7 +37,7 @@ const JobsiteReducer = (state = iState, action) => {
     case LOGIN_USER:
       return { ...state, user: action.payload }
     case LOGOUT_USER:
-      return { ...state, user: action.payload }
+      return { ...state, user: null, email: null, password: null }
     default:
       return { ...state }
   }

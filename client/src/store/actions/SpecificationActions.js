@@ -2,13 +2,11 @@ import {
   __AcknowledgeSpecification,
   __CreateSpecification
 } from '../../services/SpecificationService'
+
 import { 
   // GET_ENTITIES, 
   // GET_ENTITY, 
-  ACKNOWLEDGE_SPECIFICATION,
-  CREATE_SPECIFICATION,
-  HIDE_SPECIFICATION_FORM,
-  SHOW_SPECIFICATION_FORM
+  ACKNOWLEDGE_SPECIFICATION
 } from '../types'
 
 // export const getGetSpecifications = () => async (dispatch) => {
@@ -35,17 +33,6 @@ import {
 //   }
 // }
 
-export const createSpecification = (formData) => async (dispatch) => {
-  try{
-    const entity = await __CreateSpecification(formData)
-    dispatch({
-      type: CREATE_SPECIFICATION,
-      payload: entity
-    })
-  }catch(error){
-    throw error
-  }
-}
 
 export const acknowledgeSpecification = () => async (dispatch) => {
   try{
@@ -58,13 +45,3 @@ export const acknowledgeSpecification = () => async (dispatch) => {
     throw error
   }
 }
-
-export const hideSpecForm = (dispatch) => ({
-  type: HIDE_SPECIFICATION_FORM,
-  payload: null
-})
-
-export const showSpecForm = (dispatch) => ({
-  type: SHOW_SPECIFICATION_FORM,
-  payload: null
-})

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { NavLink, useHistory } from 'react-router-dom';
 
-import { createSpecification, hideSpecForm } from '../../store/actions/SpecificationActions'
+import { createSpecification, hideSpecForm } from '../../store/actions/JobsiteActions'
 import TextInput from '../TextInput';
 
 

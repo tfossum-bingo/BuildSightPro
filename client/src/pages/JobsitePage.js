@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { getJobsite } from '../store/actions/JobsiteActions'
-import { showSpecForm, hideSpecForm } from '../store/actions/SpecificationActions'
+import { getJobsite, hideSpecForm , showSpecForm } from '../store/actions/JobsiteActions'
 
 import Header from '../components/Header'
 import Modal from '../components/modals/Modal'
@@ -52,10 +51,7 @@ const JobsitePage = (props) => {
                         </div>
                     </div>
                     <div>
-                        <SpecificationsList
-                            jobsite={props.jobsiteState.jobsite}
-                            user={props.userState.user}
-                        />
+                        <SpecificationsList />
                     </div>
                     <div>
                         <NavLink to='/jobsites' activeclassName='nav-active'>
