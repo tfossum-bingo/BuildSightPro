@@ -1,45 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux'
 import TextInput from '../components/TextInput';
-import { loginUser } from '../store/actions/UserActions'
-import { __LoginUser } from '../services/UserService';
-// import '../styles/Button.css'
-// import '../styles/SignUp.css'
+import { loginUser, updateLoginForm } from '../store/actions/UserActions'
+
 
 const SignInPage = (props) => {
-    const { setUser } = props
-    const [loginValue, setLoginValue] = useState('');
-    const [passwordValue, setPasswordValue] = useState('');
-    const [formError, setFormError] = useState(false);
 
-    const emailField = (e) => {
-        setLoginValue(e.target.value);
-        console.log('Email: ', loginValue);
-    };
-
-    const passwordField = (e) => {
-        setPasswordValue(e.target.value);
-        console.log('Password: ', passwordValue);
-    };
+    const handleChange = (event) => {
+        console.log('HIT SI handleChange: ', event.target.value)
+        
+        props.loginForm(event.target.name, event.target.value)
+    }
 
     const handleSubmit = async (event) => {
-        console.log('HIT handleLogin Submit', loginValue, passwordValue);
+        console.log('HIT handleLogin Submit', props.userState);
         event.preventDefault();
-        try {
-            const userData = { email: loginValue, password: passwordValue };
-            const loginResponse = await __LoginUser(userData);
-            console.log('Login Response: ', loginResponse === undefined);
-            if (loginResponse !== "") {
-                setUser(loginResponse)
-                props.history.push('/home');
-            }
-        } catch (error) {
-            setFormError(true);
-        }
-    };
+        const userData = {email: props.userState.email, password: props.userState.password}
+        props.loginUser(userData)
+    }
 
 
-    return (
+    return props.userState.user === null ? (
         <div className='form-container'>
             <form className='form-content-right' onSubmit={(e) => handleSubmit(e)}>
                 <h1>Sign In</h1>
@@ -51,7 +33,8 @@ const SignInPage = (props) => {
                             placeholder='email'
                             name='email'
                             type='email'
-                            onChange={emailField}
+                            value={props.userState.email}
+                            onChange={handleChange}
                         />
                     </label>
                 </div>
@@ -63,7 +46,8 @@ const SignInPage = (props) => {
                             placeholder='password'
                             name='password'
                             type='password'
-                            onChange={passwordField}
+                            value={props.userState.password}
+                            onChange={handleChange}
                         />
                     </label>
                 </div>
@@ -79,7 +63,27 @@ const SignInPage = (props) => {
             </form>
 
         </div>
-    );
-};
+    ) : (
+        <Redirect to="/jobsites" />
+     )
+}
 
-export default SignInPage;
+const mapActionsToProps = (dispatch) => {
+    return {
+
+        loginForm: (name, value) => dispatch(updateLoginForm(name, value)),
+        loginUser: (formValues) => dispatch(loginUser(formValues))
+        // completeTodo: (index) => dispatch(CompleteTodo(index)),
+        // createTodo: (formValue) => dispatch(CreateNewTodo(formValue)),
+        // removeTodo: (index) => dispatch(RemoveTodo(index))
+    }
+}
+
+const mapStateToProps = (state) => {
+    // console.log('MapStateToProps: ', state)
+    return {
+        userState: state.userState
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(SignInPage)

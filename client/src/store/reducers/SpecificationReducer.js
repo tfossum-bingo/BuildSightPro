@@ -1,6 +1,9 @@
 const {
   ACKNOWLEDGE_SPECIFICATION,
-  CREATE_ENTITY
+  CREATE_ENTITY,
+  GET_ENTITIES,
+  GET_ENTITY,
+  UPDATE_ENTITY
 } = require('../types')
 
 const iState = {
@@ -11,8 +14,6 @@ const iState = {
 
 const JobsiteReducer = (state = iState, action) => {
   switch (action.type) {
-    case DEPARTMENT_LOADING_TYPE:
-      return { ...state, departmentsLoading: action.payload }
     case GET_ENTITIES:
       return { ...state, jobsites: action.payload }
     case GET_ENTITY:

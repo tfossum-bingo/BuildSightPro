@@ -1,21 +1,25 @@
-import React from 'react';
-import JobsiteCard from './JobsiteCard';
+import React, { useEffect} from 'react';
+import { connect } from 'react-redux'
+import { getCompanyJobsites } from '../../store/actions/JobsiteActions'
+import JobsiteCard from './JobsiteCard'
 
-export default (props) => {
-  const { setNeedsRefresh, user } = props
-  const { jobsites } = props.user.Company
+const JobsiteList = (props) => {
+  
+  useEffect(() => {
+    if (props.jobsiteState.refreshJobsiteList) {
+        props.getCompanyJobsites(props.userState.user.companyId)
+    }
+}, [props.jobsiteState.refreshJobsiteList])
 
-  if (jobsites !== null && jobsites !== undefined && jobsites.length > 0) {
+  if (props.jobsiteState.companyJobsites.length > 0) {
     return (
       <div>
-        {jobsites.map((jobsite, index) => {
+        {props.jobsiteState.companyJobsites.map((jobsite, index) => {
           return (
             <JobsiteCard
               jobsite={jobsite}
               key={index}
-              history={props.history}
-              setNeedsRefresh={setNeedsRefresh}
-              user={user} />
+            />
           )
         })
         }
@@ -25,3 +29,19 @@ export default (props) => {
     return null
   }
 }
+
+const mapActionsToProps = (dispatch) => {
+  return {
+      getCompanyJobsites: (companyId) => dispatch(getCompanyJobsites(companyId))
+  }
+}
+
+const mapStateToProps = (state) => {
+  // console.log('MapStateToProps: ', state)
+  return {
+      jobsiteState: state.jobsiteState,
+      userState: state.userState
+  }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(JobsiteList)
