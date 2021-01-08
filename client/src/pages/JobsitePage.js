@@ -21,6 +21,7 @@ const JobsitePage = (props) => {
         }
     }, [props.jobsiteState.refreshJobsite, props.specificationState.displaySpecForm])
 
+    
     if (props.jobsiteState.jobsite !== null && props.jobsiteState.jobsite !== undefined) {
         return (
             <div className={'flex-column'}>
@@ -42,7 +43,7 @@ const JobsitePage = (props) => {
                                 onClick={e => props.showSpecForm()} >
                                 Add Specification Doc
                             </button>
-                            <Modal show={props.specificationState.displaySpecForm}>
+                            <Modal show={props.jobsiteState.displaySpecForm}>
                                 <SpecificationForm
                                     jobsiteId={props.jobsiteState.jobsite.id}
                                     userId={props.userState.user.id}

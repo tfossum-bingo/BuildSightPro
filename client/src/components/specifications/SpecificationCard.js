@@ -5,34 +5,16 @@ import { acknowledgeSpecification } from '../../store/actions/SpecificationActio
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
-
-// Import ToDo Update Service
-// Import Todo Delete Service
-
 const SpecificationCard = (props) => {
-    // const { jobsite, setNeedsRefresh } = props
-    const { setNeedsRefresh, specification, user } = props
+    const { specification } = props
     const ackData = {
         userId: props.userState.user.id,
         specificationId: specification.id
     }
 
-    // const acknowledgeSpecification = async () => {
-    //     console.log('HIT AckSpec User: ', user)
-
-    //     console.log('HIT AckSpec: ', data)
-    //     try {
-    //         const ackResponse = await __AcknowledgeSpecification(data)
-    //         setNeedsRefresh(true)
-    //         return true
-    //     } catch (error) {
-    //         console.log('AckSpec error: ', error)
-    //     }
-    // }
-
     const imageLink = () => {
         console.log("HIT imageLink: ", specification.attachmentUrl)
-        if(specification.attachmentUrl !== null && specification.attachmentUrl !== ""){
+        if (specification.attachmentUrl !== null && specification.attachmentUrl !== "") {
             return (
                 <a href={specification.attachmentUrl} target='_blank'>Link</a>
             )
@@ -41,21 +23,23 @@ const SpecificationCard = (props) => {
     }
 
     const isAcknowledged = () => {
-        const specUser = specification.specification_users.find(spec => spec.user_id == props.userState.user.id)
-        console.log('isAck: ', specUser, specification.specification_users)
-        console.log('isAck2: ', specUser)
-        if (specUser !== undefined) {
+        if (specification.specification_users !== undefined) {
+            const specUser = specification.specification_users.find(spec => spec.user_id == props.userState.user.id)
+            console.log('isAck2: ', specUser)
+            if (specUser !== undefined) {
+                return (
+                    <FontAwesomeIcon
+                        className="fas fa-white"
+                        style={{ color: "green" }}
+                        icon={faCheckCircle}
+                    />
+                )
+            }
             return (
-                <FontAwesomeIcon
-                    className="fas fa-white"
-                    style={{ color: "green" }}
-                    icon={faCheckCircle}
-                />
+                <button onClick={(e) => acknowledgeSpecification(ackData)}>Acknowledge</button>
             )
         }
-        return (
-            <button onClick={(e) => acknowledgeSpecification(ackData)}>Acknowledge</button>
-        )
+        return null
     }
 
     if (specification !== null && specification !== undefined) {

@@ -35,9 +35,17 @@ const createOne = async (req, res) => {
         let entityBody = {
             ...req.body
         }
-        const newAccount = Specification.build({...entityBody, attachmentUrl})
+        let newAccount = Specification.build({...entityBody, attachmentUrl})
         await newAccount.validate()
         await newAccount.save()
+        newAccount = await Specification.findByPk(newAccount.id, {
+            include: [
+                {
+                    all: true,
+                    nested: true
+                }
+            ]
+        })
         // let entity = await Account.create(entityBody)
         res.send(newAccount)
     } catch (error) {
