@@ -7,12 +7,7 @@ import {
   __UpdateUser
 } from '../../services/UserService'
 
-import {
-  __AcknowledgeSpecification
-} from '../../services/SpecificationService'
-
 import { 
-  ACKNOWLEDGE_SPECIFICATION,
   GET_ENTITIES, 
   GET_ENTITY, 
   CREATE_ENTITY, 
@@ -22,20 +17,6 @@ import {
   LOGOUT_USER
 } from '../types'
 
-
-export const acknowledgeSpecification = (ackData) => async (dispatch) => {
-  try{
-    console.log(dispatch)
-    const entity = await __AcknowledgeSpecification(ackData)
-    console.log("SVC Ack Resp: ", entity)
-    dispatch({
-      type: ACKNOWLEDGE_SPECIFICATION,
-      payload: entity
-    })
-  }catch(error){
-    throw error
-  }
-}
 
 export const getGetUsers = () => async (dispatch) => {
   try{

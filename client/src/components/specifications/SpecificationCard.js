@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { acknowledgeSpecification } from '../../store/actions/UserActions'
+import { acknowledgeSpecification } from '../../store/actions/JobsiteActions'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";

@@ -1,4 +1,4 @@
-const { SpecificationUser, User } = require('../models')
+const { SpecificationUser, Specification } = require('../models')
 const { ValidationError } = require('sequelize');
 
 const getAll = async (req, res) => {
@@ -36,7 +36,7 @@ const createOne = async (req, res) => {
         await entity.validate()
         await entity.save()
         
-        const updatedUser = await User.findByPk(entity.userId, {
+        const updatedSpecification = await Specification.findByPk(entityBody.specificationId, {
             include: [
                 {
                     all: true,
@@ -44,8 +44,7 @@ const createOne = async (req, res) => {
                 }
             ]
         })
-
-        res.send(updatedUser)
+        res.send(updatedSpecification)
     } catch (error) {
         if (error instanceof ValidationError) {
             return console.error('Captured validation error: ', error.errors[0].message);

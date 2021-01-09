@@ -1,5 +1,4 @@
 const {
-  ACKNOWLEDGE_SPECIFICATION,
   GET_ENTITIES,
   GET_ENTITY,
   CREATE_ENTITY,
@@ -20,8 +19,6 @@ const iState = {
 
 const JobsiteReducer = (state = iState, action) => {
   switch (action.type) {
-    case ACKNOWLEDGE_SPECIFICATION:
-      return { ...state, user: action.payload }  
     case GET_ENTITIES:
       return { ...state, user: action.payload }
     case GET_ENTITY:

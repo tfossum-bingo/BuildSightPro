@@ -1,4 +1,5 @@
 const {
+  ACKNOWLEDGE_SPECIFICATION,
   CREATE_JOBSITE,
   CREATE_SPECIFICATION,
   GET_COMPANY_JOBSITES,
@@ -23,8 +24,14 @@ const iState = {
   specifications: []
 }
 
+
 const JobsiteReducer = (state = iState, action) => {
   switch (action.type) {
+    case ACKNOWLEDGE_SPECIFICATION:
+      console.log("HIT Reduc jobsite ACK_Spec: ", state.specifications)
+      const fewerSpecs = state.specifications.filter((spec, index) => spec.id !== action.payload.id)
+      console.log("HIT Reduc jobsite ACK_Spec2: ", action.payload)
+      return { ...state, specifications: [...fewerSpecs, action.payload]}
     case GET_COMPANY_JOBSITES:
       return {
         ...state,

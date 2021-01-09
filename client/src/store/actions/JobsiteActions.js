@@ -11,6 +11,11 @@ import {
 } from '../../services/SpecificationService'
 
 import {
+  __AcknowledgeSpecification
+} from '../../services/SpecificationService'
+
+import {
+  ACKNOWLEDGE_SPECIFICATION,
   CREATE_SPECIFICATION,
   GET_COMPANY_JOBSITES,
   CREATE_ENTITY, 
@@ -22,6 +27,19 @@ import {
   UPDATE_JOBSITE_FORM
 } from '../types'
 
+export const acknowledgeSpecification = (ackData) => async (dispatch) => {
+  try{
+    console.log(dispatch)
+    const entity = await __AcknowledgeSpecification(ackData)
+    console.log("SVC Ack Resp: ", entity)
+    dispatch({
+      type: ACKNOWLEDGE_SPECIFICATION,
+      payload: entity
+    })
+  }catch(error){
+    throw error
+  }
+}
 
 export const createJobsite = (formValues) => async (dispatch) => {
   try{
