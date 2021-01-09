@@ -7,7 +7,7 @@ export default (props) => {
     return (
         <div className='header'>
             <div className="flex-row header-row">
-                <h1>JobSitePro</h1>
+                <h1>JobSightPro</h1>
                 <div>
                     <SignOut />
                 </div>

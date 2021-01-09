@@ -9,15 +9,18 @@ export default (props) => {
     let history = useHistory()
     console.log("Jobsite props: ", jobsite.id)
 
-    
+
     if (jobsite !== null && jobsite !== undefined) {
         return (
-            <div>
-                {jobsite.address_1}
-                <FontAwesomeIcon
-                    className="fas fa-white"
-                    icon={faTimesCircle}
-                />
+            <div className="jobsite-card-container">
+                <p>
+                    {jobsite.address_1}
+                    {jobsite.address_2}
+                </p>
+                <p>
+                    {jobsite.city}, {jobsite.state} {jobsite.postal_code}
+                </p>
+
                 <button onClick={() => history.push(`/jobsites/${jobsite.id}`)}>Read More</button>
             </div>
         )

@@ -97,3 +97,9 @@
 .jobsite-wrench {
   font-size: 20px;
 }
+
+.jobsite-card-container {
+  border: 1px black solid;
+  width: 300px;
+  padding: 20px;
+}
