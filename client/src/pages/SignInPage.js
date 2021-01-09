@@ -10,11 +10,10 @@ const SignInPage = (props) => {
     const handleChange = (event) => {
         console.log('HIT SI handleChange: ', event.target.value)
         
-        props.loginForm(event.target.name, event.target.value)
+        props.updateLoginForm(event.target.name, event.target.value)
     }
 
     const handleSubmit = async (event) => {
-        console.log('HIT handleLogin Submit', props.userState);
         event.preventDefault();
         const userData = {email: props.userState.email, password: props.userState.password}
         props.loginUser(userData)
@@ -70,17 +69,12 @@ const SignInPage = (props) => {
 
 const mapActionsToProps = (dispatch) => {
     return {
-
-        loginForm: (name, value) => dispatch(updateLoginForm(name, value)),
+        updateLoginForm: (name, value) => dispatch(updateLoginForm(name, value)),
         loginUser: (formValues) => dispatch(loginUser(formValues))
-        // completeTodo: (index) => dispatch(CompleteTodo(index)),
-        // createTodo: (formValue) => dispatch(CreateNewTodo(formValue)),
-        // removeTodo: (index) => dispatch(RemoveTodo(index))
     }
 }
 
 const mapStateToProps = (state) => {
-    // console.log('MapStateToProps: ', state)
     return {
         userState: state.userState
     }

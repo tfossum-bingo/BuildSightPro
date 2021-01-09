@@ -2,6 +2,7 @@ import React from 'react'
 
 export default (props) => {
     const { selectOptions, value, onChange, name } = props
+    console.log("SO value: ", value)
     return (
         <select
             className="task-entry"

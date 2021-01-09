@@ -22,7 +22,7 @@ export const __GetUser = async (user_id) => {
   }
 };
 
-export const __RegisterUser = async (formData) => {
+export const __CreateUser = async (formData) => {
   try {
     const res = await ApiClient.post('/users/', formData);
     return res.data;

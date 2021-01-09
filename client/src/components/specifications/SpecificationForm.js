@@ -26,8 +26,6 @@ const SpecificationForm = (props) => {
     }
 
     const handleSubmit = async (event) => {
-        
-
         event.preventDefault()
         let formData = new FormData()
         formData.append('title', form.title)

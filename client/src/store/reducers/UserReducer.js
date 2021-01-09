@@ -3,7 +3,6 @@ import { resetJobsiteState } from '../actions/JobsiteActions'
 const {
   GET_ENTITIES,
   GET_ENTITY,
-  CREATE_ENTITY,
   UPDATE_ENTITY,
   UPDATE_LOGIN_FORM,
   LOGIN_USER,
@@ -20,7 +19,7 @@ const iState = {
 }
 
 
-const JobsiteReducer = (state = iState, action) => {
+const UserReducer = (state = iState, action) => {
   switch (action.type) {
     case GET_ENTITIES:
       return { ...state, user: action.payload }
@@ -30,8 +29,6 @@ const JobsiteReducer = (state = iState, action) => {
         user: action.payload,
         refreshNeeded: false
       }
-    case CREATE_ENTITY:
-      return { ...state, user: action.payload }
     case UPDATE_ENTITY:
       return { ...state, user: action.payload }
     case UPDATE_LOGIN_FORM:
@@ -47,4 +44,4 @@ const JobsiteReducer = (state = iState, action) => {
   }
 }
 
-export default JobsiteReducer
+export default UserReducer

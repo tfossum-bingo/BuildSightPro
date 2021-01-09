@@ -3,7 +3,7 @@ import {
   __GetUser,
   __LoginUser,
   __LogoutUser,
-  __RegisterUser,
+  __CreateUser,
   __UpdateUser
 } from '../../services/UserService'
 
@@ -42,9 +42,10 @@ export const getUser = () => async (dispatch) => {
   }
 }
 
-export const createUser = () => async (dispatch) => {
+export const createUser = (formValues) => async (dispatch) => {
+  console.log("SVC createUser: ", formValues)
   try{
-    const user = await __RegisterUser()
+    const user = await __CreateUser(formValues)
     dispatch({
       type: CREATE_ENTITY,
       payload: user

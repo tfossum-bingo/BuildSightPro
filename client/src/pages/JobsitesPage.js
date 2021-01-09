@@ -42,16 +42,10 @@ const JobsitesPage = (props) => {
 const mapActionsToProps = (dispatch) => {
     return {
         getUser: () => dispatch(getUser())
-        // loginForm: (formFields) => dispatch(FormEntry(formFields)),
-        // loginUser: () => dispatch(loginUser())
-        // completeTodo: (index) => dispatch(CompleteTodo(index)),
-        // createTodo: (formValue) => dispatch(CreateNewTodo(formValue)),
-        // removeTodo: (index) => dispatch(RemoveTodo(index))
     }
 }
 
 const mapStateToProps = (state) => {
-    // console.log('MapStateToProps: ', state)
     return {
         userState: state.userState
     }

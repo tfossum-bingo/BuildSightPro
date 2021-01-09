@@ -1,57 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 
-// import Button from '../components/Button';
-import TextInput from '../components/TextInput';
-import { __RegisterUser } from '../services/UserService';
-// import '../styles/SignUp.css'
-// import '../styles/Button.css'
+import { __GetCompanies } from '../services/CompanyService'
+
+import { populateCompanyOptions, updateSignUpForm } from '../store/actions/SignUpActions'
+import { createUser } from '../store/actions/UserActions'
+import SelectOption from '../components/SelectOption'
+import TextInput from '../components/TextInput'
 
 const SignUpPage = (props) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setlastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [formError, setFormError] = useState(false);
+  const [formError, setFormErrors] = useState(false)
+  const [form, setForm] = useState({
+    companyId: null,
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: ''
+})
+
+  useEffect(() => {
+    if (props.signUpState.companyOptions.length === 0) {
+      console.log("HIT useEffect pop companies")
+      props.populateCompanyOptions()
+    }
+  }, [])
+
 
   const formFieldChange = (e) => {
-    const fieldName = e.target.name;
-    const fieldValue = e.target.value;
-    switch (fieldName) {
-      case 'firstName':
-        setFirstName(fieldValue);
-        break;
-      case 'lastName':
-        setlastName(fieldValue);
-        break;
-      case 'email':
-        setEmail(fieldValue);
-        break;
-      case 'password':
-        setPassword(fieldValue);
-        break;
-    }
-  };
+    setForm({...form, [e.target.name]: e.target.value})
+  }
+
+  const companyIDChange = (e) => {
+    setForm({...form, [e.target.name]: parseInt(e.target.value)})
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const formState = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      zipCode: zipCode,
-    };
-    try {
-      const accountResponse = await __RegisterUser(formState);
-      props.setUser(accountResponse)
-      props.history.push('/home');
-    } catch (error) {
-      setFormError(true);
+      firstName: form.firstName,
+      lastName: form.lastName,
+      email: form.email,
+      password: form.password,
+      zipCode: form.zipCode,
     }
-  };
+    console.log("formState: ", form)
+    props.createUser(form)
+  }
 
   return (
     <div className='form-container'>
@@ -61,9 +56,10 @@ const SignUpPage = (props) => {
           <label htmlFor='firtName' >
             First Name
             <TextInput
-              type='text'
-              name='firstName'
               className='form-input'
+              type='text'
+              placeholder="First Name"
+              name='firstName'
               onChange={formFieldChange}
             />
           </label>
@@ -72,9 +68,10 @@ const SignUpPage = (props) => {
           <label htmlFor='lastName' >
             Last Name
             <TextInput
-              type='text'
-              name='lastName'
               className='form-input'
+              type='text'
+              placeholder="Last Name"
+              name='lastName'
               onChange={formFieldChange}
             />
           </label>
@@ -83,9 +80,10 @@ const SignUpPage = (props) => {
           <label htmlFor='email' className='form-label'>
             Email
             <TextInput
-              type='text'
-              name='email'
               className='form-input'
+              type='email'
+              placeholder="Email Name"
+              name='email'
               onChange={formFieldChange}
             />
           </label>
@@ -94,13 +92,20 @@ const SignUpPage = (props) => {
           <label htmlFor='password' className='form-label'>
             Password
             <TextInput
-              type='text'
-              name='password'
               className='form-input'
+              type='password'
+              placeholder="Password"
+              name='password'
               onChange={formFieldChange}
             />
           </label>
         </div>
+        <SelectOption
+          selectOptions={props.signUpState.companyOptions}
+          // value={form.companyId}
+          name="companyId"
+          onChange={companyIDChange}
+        />
         <div>
           <button
             className='btns'
@@ -111,13 +116,28 @@ const SignUpPage = (props) => {
           </button>
         </div>
         <div>
-        <NavLink to='/signin' activeclassName='nav-active'>
-        <p>Have an account?</p>
-        </NavLink>
-      </div>
+          <NavLink to='/signin' activeclassName='nav-active'>
+            <p>Have an account?</p>
+          </NavLink>
+        </div>
       </form>
-      
+
     </div>
-  );
-};
-export default SignUpPage;
+  )
+}
+
+const mapActionsToProps = (dispatch) => {
+  return {
+    populateCompanyOptions: () => dispatch(populateCompanyOptions()),
+    createUser: (formValues) => dispatch(createUser(formValues)),
+    updateSignUpForm: (name, value) => dispatch(updateSignUpForm(name, value))
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    signUpState: state.signUpState
+  }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(SignUpPage)
