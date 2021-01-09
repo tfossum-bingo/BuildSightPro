@@ -18,10 +18,13 @@ import {
   ACKNOWLEDGE_SPECIFICATION,
   CREATE_SPECIFICATION,
   GET_COMPANY_JOBSITES,
-  CREATE_ENTITY, 
+  CREATE_JOBSITE, 
   GET_ENTITIES, 
   GET_JOBSITE,
+  SHOW_JOBSITE_FORM,
+  HIDE_JOBSITE_FORM,
   HIDE_SPECIFICATION_FORM,
+  RESET_JOBSITE_STATE,
   SHOW_SPECIFICATION_FORM,
   UPDATE_ENTITY,
   UPDATE_JOBSITE_FORM
@@ -42,10 +45,11 @@ export const acknowledgeSpecification = (ackData) => async (dispatch) => {
 }
 
 export const createJobsite = (formValues) => async (dispatch) => {
+  console.log("HIT Act createJobsite: ", formValues)
   try{
     const entity = await __CreateJobsite(formValues)
     dispatch({
-      type: CREATE_ENTITY,
+      type: CREATE_JOBSITE,
       payload: entity
     })
   }catch(error){
@@ -102,6 +106,21 @@ export const getJobsite = (jobsiteId) => async (dispatch) => {
     throw error
   }
 }
+
+export const resetJobsiteState = () => ({
+  type: RESET_JOBSITE_STATE,
+  payload: null
+})
+
+export const hideJobsiteForm = (dispatch) => ({
+  type: HIDE_JOBSITE_FORM,
+  payload: null
+})
+
+export const showJobsiteForm = (dispatch) => ({
+  type: SHOW_JOBSITE_FORM,
+  payload: null
+})
 
 export const hideSpecForm = (dispatch) => ({
   type: HIDE_SPECIFICATION_FORM,

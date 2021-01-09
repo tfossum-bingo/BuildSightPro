@@ -1,3 +1,5 @@
+import { resetJobsiteState } from '../actions/JobsiteActions'
+
 const {
   GET_ENTITIES,
   GET_ENTITY,
@@ -16,6 +18,7 @@ const iState = {
   user: null,
   refreshNeeded: true
 }
+
 
 const JobsiteReducer = (state = iState, action) => {
   switch (action.type) {
@@ -37,6 +40,7 @@ const JobsiteReducer = (state = iState, action) => {
     case LOGIN_USER:
       return { ...state, user: action.payload }
     case LOGOUT_USER:
+      resetJobsiteState()
       return { ...state, user: null, email: null, password: null }
     default:
       return { ...state }

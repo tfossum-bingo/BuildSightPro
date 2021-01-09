@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { updateJobsiteForm} from '../../store/actions/JobsiteActions'
+import { 
+    createJobsite,
+    hideJobsiteForm,
+    updateJobsiteForm,  } from '../../store/actions/JobsiteActions'
 
 // import Button from '../components/Button';
 import TextInput from '../TextInput'
@@ -19,8 +22,8 @@ const JobsiteForm = (props) => {
         state: '',
         postalCode: '',
         clientName: '',
-        user_id: props.userId,
-        company_id: props.companyId
+        user_id: props.userState.user.id,
+        company_id: props.userState.user.company_id
     })
 
 
@@ -36,15 +39,7 @@ const JobsiteForm = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        try {
-            const jobsiteResponse = await __CreateJobsite(form);
-            props.toggleModal()
-            props.setNeedsRefresh(true)
-            history.push('/home');
-        } catch (error) {
-            setFormError(true);
-        }
+        props.createJobsite(form)
     }
 
     return (
@@ -118,7 +113,7 @@ const JobsiteForm = (props) => {
                 </div>
 
             </form>
-            <button onClick={toggleJobsiteModal}>Close</button>
+            <button onClick={props.hideJobsiteForm}>Close</button>
         </div>
     );
 };
@@ -126,14 +121,19 @@ const JobsiteForm = (props) => {
 
 const mapActionsToProps = (dispatch) => {
     return {
+        hideJobsiteForm: () => dispatch(hideJobsiteForm()),
         updateJobsiteForm: (formFields) => dispatch(updateJobsiteForm(formFields)),
+        createJobsite: (formFields) => dispatch(createJobsite(formFields)),
+
 
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        userState: state.userState
+        userState: state.userState,
+        jobsiteState: state.jobsiteState
+
     }
 }
 
