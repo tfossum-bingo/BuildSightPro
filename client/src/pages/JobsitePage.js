@@ -45,18 +45,6 @@ const JobsitePage = (props) => {
                             <p>{props.jobsiteState.jobsite.address_2}</p>
                             <p>{`${props.jobsiteState.jobsite.city}, ${props.jobsiteState.jobsite.state} ${props.jobsiteState.jobsite.postalCode}`} </p>
                         </div>
-                        <div className="add-spec-container">
-                            <button
-                                onClick={e => props.showSpecForm()} >
-                                Add Specification Doc
-                            </button>
-                            <Modal show={props.jobsiteState.displaySpecForm}>
-                                <SpecificationForm
-                                    jobsiteId={props.jobsiteState.jobsite.id}
-                                    userId={props.userState.user.id}
-                                />
-                            </Modal>
-                        </div>
                         <div className="add-jobsiteuser-container">
                             <button
                                 onClick={props.showJobsiteUserForm} >
@@ -87,9 +75,7 @@ const JobsitePage = (props) => {
 const mapActionsToProps = (dispatch) => {
     return {
         getJobsite: (jobsiteId) => dispatch(getJobsite(jobsiteId)),
-        hideSpecForm: () => dispatch(hideSpecForm()),
-        showJobsiteUserForm: () => dispatch(showJobsiteUserForm()),
-        showSpecForm: () => dispatch(showSpecForm())
+        showJobsiteUserForm: () => dispatch(showJobsiteUserForm())
     }
 }
 

@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { refreshSpecificationsList, setSpecificationsNeedRefresh } from '../../store/actions/JobsiteActions'
+import { hideSpecForm, showSpecForm } from '../../store/actions/JobsiteActions'
 
+import Modal from '../../components/modals/Modal'
 import SpecificationsList from './SpecificationsList'
+import SpecificationForm from './SpecificationForm'
 
 const Specifications = (props) => {
-    const { jobsite, specificationsNeedsRefresh } = props.jobsiteState
+    const { displaySpecForm, jobsite, specificationsNeedsRefresh } = props.jobsiteState
+    const { user } = props.userState
     useEffect(() => {
         if (specificationsNeedsRefresh === true) {
             console.log("HIT useEffect Refresh List")
@@ -15,6 +19,18 @@ const Specifications = (props) => {
 
     return (
         <div className='flex-column'>
+            <div className="add-spec-container">
+                <button
+                    onClick={e => props.showSpecForm()} >
+                    Add Specification Doc
+                            </button>
+                <Modal show={displaySpecForm}>
+                    <SpecificationForm
+                        jobsiteId={jobsite.id}
+                        userId={user.id}
+                    />
+                </Modal>
+            </div>
             <div className='refesh-button-container'>
                 <button onClick={props.setSpecificationsNeedRefresh}>
                     Refresh Button
@@ -31,14 +47,17 @@ const Specifications = (props) => {
 
 const mapActionsToProps = (dispatch) => {
     return {
+        refreshSpecificationsList: (companyId) => dispatch(refreshSpecificationsList(companyId)),
+        hideSpecForm: () => dispatch(hideSpecForm()),
         setSpecificationsNeedRefresh: () => dispatch(setSpecificationsNeedRefresh()),
-        refreshSpecificationsList: (companyId) => dispatch(refreshSpecificationsList(companyId))
+        showSpecForm: () => dispatch(showSpecForm())
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        jobsiteState: state.jobsiteState
+        jobsiteState: state.jobsiteState,
+        userState: state.userState
     }
 }
 
