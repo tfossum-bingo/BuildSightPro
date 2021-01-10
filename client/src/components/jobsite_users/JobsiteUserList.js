@@ -16,7 +16,7 @@ const JobsiteUserList = (props) => {
         </div>
     ) : (
             <div>
-                Loading...
+                No workers assigned
             </div>
         )
 }

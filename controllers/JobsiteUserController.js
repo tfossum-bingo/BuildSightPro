@@ -47,7 +47,6 @@ const createOne = async (req, res) => {
         })
         console.log("Updated Jobsite: ", updatedJobsite)
         res.send(updatedJobsite)
-        res.send(entity)
     } catch (error) {
         if (error instanceof ValidationError) {
             return console.error('Captured validation error: ', error.errors[0].message);
@@ -90,6 +89,8 @@ const deleteOne = async (req, res) => {
         throw error
     }
 }
+
+
 
 
 module.exports = {

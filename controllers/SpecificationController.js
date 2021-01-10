@@ -1,4 +1,5 @@
 const { Specification } = require('../models')
+const { sendSpecEmail } = require('../services/SpecMailer')
 const { ValidationError } = require('sequelize');
 const upload = require('../middleware/awsUpload')
 
@@ -35,10 +36,10 @@ const createOne = async (req, res) => {
         let entityBody = {
             ...req.body
         }
-        let newAccount = Specification.build({...entityBody, attachmentUrl})
-        await newAccount.validate()
-        await newAccount.save()
-        newAccount = await Specification.findByPk(newAccount.id, {
+        let newSpecification = Specification.build({ ...entityBody, attachmentUrl })
+        await newSpecification.validate()
+        await newSpecification.save()
+        newSpecification = await Specification.findByPk(newSpecification.id, {
             include: [
                 {
                     all: true,
@@ -46,8 +47,8 @@ const createOne = async (req, res) => {
                 }
             ]
         })
-        // let entity = await Account.create(entityBody)
-        res.send(newAccount)
+        sendNewSpecEmailNotification(newSpecification)
+        res.send(newSpecification)
     } catch (error) {
         if (error instanceof ValidationError) {
             return console.error('Captured validation error: ', error.errors[0].message);
@@ -90,6 +91,20 @@ const deleteOne = async (req, res) => {
     }
 }
 
+const sendNewSpecEmailNotification = (specification) => {
+    const jobsite = specification.Jobsite
+    const jobsiteUsers = specification.Jobsite.jobsiteUsers
+    const emails = jobsiteUsers.map((jobsiteUser, index) => {
+        return jobsiteUser.User.email
+    })
+
+    const jobsiteAddress = `${jobsite.address_1}; ${jobsite.city}, ${jobsite.state} ${jobsite.postalCode}`
+    const specLink = specification.attachmentUrl
+    if(emails.length > 0 ){
+        console.log(emails)
+        sendSpecEmail(emails, jobsiteAddress, specLink)
+    }
+}
 
 module.exports = {
     getAll,
