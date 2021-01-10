@@ -1,4 +1,4 @@
-const { Jobsite } = require('../models')
+const { Jobsite, Specification } = require('../models')
 const { ValidationError } = require('sequelize');
 const { getGeoLocation } = require('../services/GeoApiClient')
 
@@ -24,6 +24,27 @@ const getOne = async (req, res) => {
         })
         getGeoLocation(entity)
         res.send(entity)
+    } catch (error) {
+        throw error
+    }
+}
+
+const getAllJobsiteSpecifications = async (req, res) => {
+    console.log("HIT Cont getAllJobSpec")
+    const entityId = req.params.id
+    try {
+        const entities = await Specification.findAll({
+            where: {
+                jobsite_id: entityId
+            },
+            include: [
+                {
+                    all: true,
+                    nested: true
+                }
+            ]
+        })
+        res.send(entities)
     } catch (error) {
         throw error
     }
@@ -98,6 +119,7 @@ const addLocationData = async (jobsite) => {
 
 module.exports = {
     getAll,
+    getAllJobsiteSpecifications,
     getOne,
     createOne,
     updateOne,

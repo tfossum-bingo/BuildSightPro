@@ -2,6 +2,7 @@ import {
   __GetCompanyJobsites,
   __GetJobsite,
   __GetJobsites,
+  __GetJobsiteSpecifications,
   __CreateJobsite,
   __UpdateJobsite
 } from '../../services/JobsiteService'
@@ -24,21 +25,23 @@ import {
   CREATE_JOBSITE_USER,
   CREATE_SPECIFICATION,
   GET_COMPANY_JOBSITES,
-  GET_ENTITIES, 
+  GET_ENTITIES,
   GET_JOBSITE,
   HIDE_JOBSITE_FORM,
   HIDE_JOBSITE_USER_FORM,
   HIDE_SPECIFICATION_FORM,
   RESET_JOBSITE_STATE,
+  REFRESH_SPECIFICATIONS_LIST,
   SHOW_JOBSITE_FORM,
   SHOW_JOBSITE_USER_FORM,
   SHOW_SPECIFICATION_FORM,
+  SPECIFICATIONS_NEED_REFRESH,
   UPDATE_ENTITY,
   UPDATE_JOBSITE_FORM
 } from '../types'
 
 export const acknowledgeSpecification = (ackData) => async (dispatch) => {
-  try{
+  try {
     console.log(dispatch)
     const entity = await __AcknowledgeSpecification(ackData)
     console.log("SVC Ack Resp: ", entity)
@@ -46,75 +49,75 @@ export const acknowledgeSpecification = (ackData) => async (dispatch) => {
       type: ACKNOWLEDGE_SPECIFICATION,
       payload: entity
     })
-  }catch(error){
+  } catch (error) {
     throw error
   }
 }
 
 export const createJobsite = (formValues) => async (dispatch) => {
   console.log("HIT Act createJobsite: ", formValues)
-  try{
+  try {
     const entity = await __CreateJobsite(formValues)
     dispatch({
       type: CREATE_JOBSITE,
       payload: entity
     })
-  }catch(error){
+  } catch (error) {
     throw error
   }
 }
 
 export const createJobsiteUser = (formData) => async (dispatch) => {
-  try{
+  try {
     const entity = await __CreateJobsiteUser(formData)
     console.log("SVC create JobsiteUser: ", entity)
     dispatch({
       type: CREATE_JOBSITE_USER,
       payload: entity
     })
-  }catch(error){
+  } catch (error) {
     throw error
   }
 }
 
 export const createSpecification = (formData) => async (dispatch) => {
-  try{
+  try {
     const entity = await __CreateSpecification(formData)
     dispatch({
       type: CREATE_SPECIFICATION,
       payload: entity
     })
-  }catch(error){
+  } catch (error) {
     throw error
   }
 }
 
 export const getCompanyJobsites = (companyId) => async (dispatch) => {
-  try{
+  try {
     const entities = await __GetCompanyJobsites(companyId)
     dispatch({
       type: GET_COMPANY_JOBSITES,
       payload: entities
     })
-  }catch(error){
+  } catch (error) {
     throw error
   }
 }
 
 export const getJobsites = () => async (dispatch) => {
-  try{
+  try {
     const entities = await __GetJobsites()
     dispatch({
       type: GET_ENTITIES,
       payload: entities
     })
-  }catch(error){
+  } catch (error) {
     throw error
   }
 }
 
 export const getJobsite = (jobsiteId) => async (dispatch) => {
-  try{
+  try {
     const entity = await __GetJobsite(jobsiteId)
     console.log("Action getJobsite: ", entity)
     dispatch({
@@ -122,13 +125,30 @@ export const getJobsite = (jobsiteId) => async (dispatch) => {
       payload: entity
     })
     //perform second action
-  }catch(error){
+  } catch (error) {
+    throw error
+  }
+}
+
+export const refreshSpecificationsList = (jobsiteId) => async (dispatch) => {
+  try {
+    const refreshedSpecList = await __GetJobsiteSpecifications(jobsiteId)
+    dispatch({
+      type: REFRESH_SPECIFICATIONS_LIST,
+      payload: refreshedSpecList
+    })
+  } catch (error) {
     throw error
   }
 }
 
 export const resetJobsiteState = () => ({
   type: RESET_JOBSITE_STATE,
+  payload: null
+})
+
+export const setSpecificationsNeedRefresh = (dispatch) => ({
+  type: SPECIFICATIONS_NEED_REFRESH,
   payload: null
 })
 
@@ -163,18 +183,18 @@ export const showSpecForm = (dispatch) => ({
 })
 
 export const updateJobsite = () => async (dispatch) => {
-  try{
+  try {
     const entity = await __UpdateJobsite()
     dispatch({
       type: UPDATE_ENTITY,
       payload: entity
     })
-  }catch(error){
+  } catch (error) {
     throw error
   }
 }
 
-export const updateJobsiteForm =  (formValue) => ({
+export const updateJobsiteForm = (formValue) => ({
   type: UPDATE_JOBSITE_FORM,
   payload: formValue
 })

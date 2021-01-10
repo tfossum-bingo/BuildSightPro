@@ -9,7 +9,7 @@ import JobsiteUserForm from '../components/jobsite_users/JobsiteUserForm'
 import Header from '../components/Header'
 import Modal from '../components/modals/Modal'
 import SimpleMap from '../components/jobsites/SimpleMap'
-import SpecificationsList from '../components/specifications/SpecificationsList'
+import Specifications from '../components/specifications/Specifications'
 import SpecificationForm from '../components/specifications/SpecificationForm'
 
 const JobsitePage = (props) => {
@@ -71,7 +71,7 @@ const JobsitePage = (props) => {
                         </div>
                     </div>
                     <div>
-                        <SpecificationsList />
+                        <Specifications />
                     </div>
                 </div>
             </div>

@@ -10,4 +10,6 @@ Router.post('/', controller.createOne)
 Router.put('/:id', controller.updateOne)
 Router.delete('/:id', controller.deleteOne)
 
+Router.get('/:id/specifications', controller.getAllJobsiteSpecifications)
+
 module.exports = Router

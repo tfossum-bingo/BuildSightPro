@@ -9,10 +9,12 @@ const {
   HIDE_JOBSITE_FORM,
   HIDE_JOBSITE_USER_FORM,
   HIDE_SPECIFICATION_FORM,
+  REFRESH_SPECIFICATIONS_LIST,
   RESET_JOBSITE_STATE,
   SHOW_JOBSITE_FORM,
   SHOW_JOBSITE_USER_FORM,
   SHOW_SPECIFICATION_FORM,
+  SPECIFICATIONS_NEED_REFRESH,
   UPDATE_JOBSITE_FORM
 } = require('../types')
 
@@ -29,7 +31,8 @@ const iState = {
   //spec list
   refreshJobsiteList: true,
   refreshJobsite: true,
-  specifications: []
+  specifications: [],
+  specificationsNeedsRefresh: false
 }
 
 const JobsiteReducer = (state = iState, action) => {
@@ -64,12 +67,16 @@ const JobsiteReducer = (state = iState, action) => {
       return { ...state, displayJobsiteUserForm: false }
     case HIDE_SPECIFICATION_FORM:
       return { ...state, displaySpecForm: false }
+    case REFRESH_SPECIFICATIONS_LIST:
+      return { ...state, specifications: action.payload, specificationsNeedsRefresh: false }
     case SHOW_JOBSITE_FORM:
       return { ...state, displaySpecForm: true }
     case SHOW_JOBSITE_USER_FORM:
       return { ...state, displayJobsiteUserForm: true }
     case SHOW_SPECIFICATION_FORM:
       return { ...state, displaySpecForm: true }
+    case SPECIFICATIONS_NEED_REFRESH:
+      return { ...state, specificationsNeedsRefresh: true }
     case CREATE_SPECIFICATION:
       return { ...state, specifications: [...state.specifications, action.payload], displaySpecForm: false }
     case UPDATE_JOBSITE_FORM:
