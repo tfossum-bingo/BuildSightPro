@@ -6,17 +6,19 @@ import { loginUser, updateLoginForm } from '../store/actions/UserActions'
 
 
 const SignInPage = (props) => {
+    const [formError, setFormErrors] = useState(false)
+    const [form, setForm] = useState({
+      email: '',
+      password: ''
+  })
 
     const handleChange = (event) => {
-        console.log('HIT SI handleChange: ', event.target.value)
-        
-        props.updateLoginForm(event.target.name, event.target.value)
+        setForm({...form, [event.target.name]: event.target.value})
     }
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        const userData = {email: props.userState.email, password: props.userState.password}
-        props.loginUser(userData)
+        event.preventDefault()
+        props.loginUser(form)
     }
 
 
@@ -32,7 +34,6 @@ const SignInPage = (props) => {
                             placeholder='email'
                             name='email'
                             type='email'
-                            value={props.userState.email}
                             onChange={handleChange}
                         />
                     </label>
@@ -45,7 +46,6 @@ const SignInPage = (props) => {
                             placeholder='password'
                             name='password'
                             type='password'
-                            value={props.userState.password}
                             onChange={handleChange}
                         />
                     </label>
