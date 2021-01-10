@@ -1,7 +1,9 @@
 const { Specification } = require('../models')
+const sharp = require('sharp')
 const { sendSpecEmail } = require('../services/SpecMailer')
 const { ValidationError } = require('sequelize');
-const upload = require('../middleware/awsUpload')
+const upload = require('../middleware/awsUpload');
+const specification = require('../models/specification');
 
 const getAll = async (req, res) => {
     try {
@@ -30,15 +32,12 @@ const getOne = async (req, res) => {
 }
 
 const createOne = async (req, res) => {
-    console.log('CONT SpecCreateOne: ', req.file)
     try {
         let attachmentUrl = await upload(req.file)
-        let entityBody = {
-            ...req.body
-        }
         let newSpecification = Specification.build({ ...entityBody, attachmentUrl })
         await newSpecification.validate()
         await newSpecification.save()
+
         newSpecification = await Specification.findByPk(newSpecification.id, {
             include: [
                 {
@@ -100,19 +99,12 @@ const sendNewSpecEmailNotification = (specification) => {
 
     const jobsiteAddress = `${jobsite.address_1}; ${jobsite.city}, ${jobsite.state} ${jobsite.postalCode}`
     const specLink = specification.attachmentUrl
-    if(emails.length > 0 ){
+    if (emails.length > 0) {
         console.log(emails)
         sendSpecEmail(emails, jobsiteAddress, specLink)
     }
 }
 
-const createThumbnail = (attachment) => {
-
-}
-
-const createMainImage = (attachment) = {
-    
-}
 
 module.exports = {
     getAll,

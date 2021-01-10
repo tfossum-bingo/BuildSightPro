@@ -3,10 +3,10 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return Promise.all([
-      queryInterface.addColumn('specifications', 'smallThumbnaillUrl', {
+      queryInterface.addColumn('specifications', 'smallThumbnailUrl', {
         type: Sequelize.STRING
       }),
-      queryInterface.addColumn('specifications', 'largeThumbnaillUrl', {
+      queryInterface.addColumn('specifications', 'largeThumbnailUrl', {
         type: Sequelize.STRING
       }),
     ])
@@ -14,8 +14,8 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     return Promise.all([
-      queryInterface.removeColumn('smallThumbnaillUrl', 'smallThumbnaillUrl'),
-      queryInterface.removeColumn('largeThumbnaillUrl', 'largeThumbnaillUrl')
+      queryInterface.removeColumn('specifications', 'smallThumbnailUrl'),
+      queryInterface.removeColumn('specifications', 'largeThumbnailUrl')
     ])
   }
 };
