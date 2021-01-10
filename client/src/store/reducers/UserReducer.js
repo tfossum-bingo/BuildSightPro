@@ -1,9 +1,8 @@
-import { resetJobsiteState } from '../actions/JobsiteActions'
+import { connect } from 'react-redux'
 
 const {
   GET_ENTITIES,
   GET_ENTITY,
-  UPDATE_ENTITY,
   UPDATE_LOGIN_FORM,
   LOGIN_USER,
   LOGOUT_USER
@@ -19,7 +18,7 @@ const iState = {
 }
 
 
-const UserReducer = (state = iState, action) => {
+const UserReducer = (state = iState, action, props) => {
   switch (action.type) {
     case GET_ENTITIES:
       return { ...state, user: action.payload }
@@ -29,15 +28,12 @@ const UserReducer = (state = iState, action) => {
         user: action.payload,
         refreshNeeded: false
       }
-    case UPDATE_ENTITY:
-      return { ...state, user: action.payload }
     case UPDATE_LOGIN_FORM:
       console.log('HIT RED updateLoginForm: ', action.payload.name, action.payload.value)
       return { ...state, [action.payload.name]: action.payload.value }
     case LOGIN_USER:
       return { ...state, user: action.payload }
     case LOGOUT_USER:
-      resetJobsiteState()
       return { ...state, user: null, email: null, password: null }
     default:
       return { ...state }

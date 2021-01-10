@@ -43,7 +43,8 @@ export const __UpdateUser = async (formData) => {
 export const __LoginUser = async (userData) => {
   try {
     const res = await ApiClient.post('/users/login', userData);
-    console.log('Logged in');
+    console.log('Logged in: ', res.data);
+    localStorage.setItem("userId", res.data.id)
     return res.data;
   } catch (error) {
     throw error;

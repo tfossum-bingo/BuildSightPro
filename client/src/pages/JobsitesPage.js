@@ -18,7 +18,7 @@ const JobsitesPage = (props) => {
     return (
         <div className={'home-container-grid'}>
             <Header />
-            <div className="create-task-button">
+            <div>
                 <button
                     onClick={e => toggleJobsiteModal()} >
                     New Jobsite

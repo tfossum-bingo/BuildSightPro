@@ -8,7 +8,7 @@ const JobsiteUserList = (props) => {
         <div>
                 {jobsiteUsers.map((jobsiteUser, index) => {
                     return (
-                        <p>
+                        <p key={index}>
                             {`${jobsiteUser.User.firstName} ${jobsiteUser.User.lastName}`}
                         </p>
                     )

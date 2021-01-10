@@ -10,7 +10,6 @@ import SignInPage from '../pages/SignInPage';
 import SignUpPage from '../pages/SignUpPage';
 
 
-
 import '../styles/App.css';
 
 const Router = (props) => {
