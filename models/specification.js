@@ -28,6 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     attachmentUrl: DataTypes.STRING,
+    smallThumbnaillUrl: DataTypes.STRING,
+    largeThumbnaillUrl: DataTypes.STRING,
     jobsiteId: {
       type: DataTypes.INTEGER,
       field: 'jobsite_id',

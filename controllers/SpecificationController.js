@@ -106,6 +106,14 @@ const sendNewSpecEmailNotification = (specification) => {
     }
 }
 
+const createThumbnail = (attachment) => {
+
+}
+
+const createMainImage = (attachment) = {
+    
+}
+
 module.exports = {
     getAll,
     getOne,
