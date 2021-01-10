@@ -1,5 +1,4 @@
 const { Specification } = require('../models')
-const sharp = require('sharp')
 const { sendSpecEmail } = require('../services/SpecMailer')
 const { ValidationError } = require('sequelize');
 const upload = require('../middleware/awsUpload');

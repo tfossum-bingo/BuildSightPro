@@ -8,6 +8,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       }),
+      Jobsite.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+      }),
         Jobsite.hasMany(models.Specification, {
           foreignKey: 'jobsite_id',
           as: 'specifications',
@@ -38,7 +43,15 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'company',
         key: 'id'
-      }
+      }, 
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      field: 'user_id',
+      references: {
+        model: 'user',
+        key: 'id'
+      }, 
     }
   }, {
     sequelize,

@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom';
+
+import { __CreateJobsite } from '../../services/JobsiteService';
+
 import { 
     createJobsite,
     hideJobsiteForm,
-    updateJobsiteForm,  } from '../../store/actions/JobsiteActions'
+    updateJobsiteForm 
+} from '../../store/actions/JobsiteActions'
+import { populateCompanyUserOptions } from '../../store/actions/CompanyActions'
 
-// import Button from '../components/Button';
+import SelectOption from '../SelectOption'
 import TextInput from '../TextInput'
-import { __CreateJobsite } from '../../services/JobsiteService';
-// import '../styles/SignUp.css'
-// import '../styles/Button.css'
+
+
 
 const JobsiteForm = (props) => {
     let history = useHistory()
+    const { companyUserOptions } = props.companyState
     const { toggleJobsiteModal } = props
+    const { user } = props.userState
+
     const [form, setForm] = useState({
         address_1: '',
         address_2: '',
@@ -22,22 +29,28 @@ const JobsiteForm = (props) => {
         state: '',
         postalCode: '',
         clientName: '',
-        user_id: props.userState.user.id,
+        userId: null,
         company_id: props.userState.user.company_id
     })
-
-
-
     const [formError, setFormError] = useState(false);
 
-    const formFieldChange = (e) => {
-        const fieldName = e.target.name;
-        const fieldValue = e.target.value;
+    useEffect(() => {
+        if (companyUserOptions.length === 0) {
+            props.populateCompanyUserOptions(user.companyId)
+        }
+    }, [])
 
-        setForm({ ...form, [fieldName]: fieldValue })
+
+    const formFieldChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value })
+    }
+
+    const formUserIdChange = (e) => {
+        setForm({...form, userId: parseInt(e.target.value)})
     }
 
     const handleSubmit = async (event) => {
+        console.log("JS Form Submit: ", form)
         event.preventDefault();
         props.createJobsite(form)
     }
@@ -91,6 +104,17 @@ const JobsiteForm = (props) => {
                     </label>
                 </div>
                 <div className='form-inputs'>
+                    <label htmlFor='postalCode' className='form-label'>
+                        Postal Code
+                    <TextInput
+                            type='text'
+                            name='postalCode'
+                            className='form-input'
+                            onChange={formFieldChange}
+                        />
+                    </label>
+                </div>
+                <div className='form-inputs'>
                     <label htmlFor='clientName' className='form-label'>
                         Client Name
             <TextInput
@@ -100,6 +124,13 @@ const JobsiteForm = (props) => {
                             onChange={formFieldChange}
                         />
                     </label>
+                </div>
+                <div>
+                    <SelectOption
+                        selectOptions={props.companyState.companyUserOptions}
+                        name="userId"
+                        onChange={formUserIdChange}
+                    />
                 </div>
 
                 <div>
@@ -122,8 +153,9 @@ const JobsiteForm = (props) => {
 const mapActionsToProps = (dispatch) => {
     return {
         hideJobsiteForm: () => dispatch(hideJobsiteForm()),
-        updateJobsiteForm: (formFields) => dispatch(updateJobsiteForm(formFields)),
         createJobsite: (formFields) => dispatch(createJobsite(formFields)),
+        populateCompanyUserOptions: (companyId) => dispatch(populateCompanyUserOptions(companyId)),
+        updateJobsiteForm: (formFields) => dispatch(updateJobsiteForm(formFields)),
 
 
     }
@@ -131,9 +163,9 @@ const mapActionsToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        userState: state.userState,
-        jobsiteState: state.jobsiteState
-
+        companyState: state.companyState,
+        jobsiteState: state.jobsiteState,
+        userState: state.userState
     }
 }
 
