@@ -1,27 +1,31 @@
 const {
   ACKNOWLEDGE_SPECIFICATION,
   CREATE_JOBSITE,
+  CREATE_JOBSITE_USER,
   CREATE_SPECIFICATION,
   GET_COMPANY_JOBSITES,
   GET_ENTITIES,
   GET_JOBSITE,
   HIDE_JOBSITE_FORM,
+  HIDE_JOBSITE_USER_FORM,
   HIDE_SPECIFICATION_FORM,
   RESET_JOBSITE_STATE,
   SHOW_JOBSITE_FORM,
+  SHOW_JOBSITE_USER_FORM,
   SHOW_SPECIFICATION_FORM,
-  UPDATE_ENTITY,
   UPDATE_JOBSITE_FORM
 } = require('../types')
 
 const iState = {
   companyJobsites: [],
   displayJobsiteForm: false,
+  displayJobsiteUserForm: false,
   displaySpecForm: false,
-  jobsites: [],
-  jobsitesLoading: '', // Should be type enum('Loading', 'Loaded', 'Inactive'),
   jobsiteForm: {},
   jobsite: null,
+  jobsiteUsers: [],
+  jobsitesLoading: '', // Should be type enum('Loading', 'Loaded', 'Inactive'),
+  jobsites: [],
   //spec list
   refreshJobsiteList: true,
   refreshJobsite: true,
@@ -46,27 +50,32 @@ const JobsiteReducer = (state = iState, action) => {
       return {
         ...state,
         jobsite: action.payload,
+        jobsiteUsers: action.payload.jobsiteUsers,
         refreshJobsite: false,
         specifications: action.payload.specifications
       }
     case CREATE_JOBSITE:
       return { ...state, companyJobsites: [...state.companyJobsites, action.payload], displayJobsiteForm: false }
+    case CREATE_JOBSITE_USER:
+      return { ...state, jobsiteUsers: [...state.jobsiteUsers, action.payload], displayJobsiteUserForm: false }
     case HIDE_JOBSITE_FORM:
       return { ...state, displaySpecForm: false }
+    case HIDE_JOBSITE_USER_FORM:
+      return { ...state, displayJobsiteUserForm: false }
     case HIDE_SPECIFICATION_FORM:
       return { ...state, displaySpecForm: false }
-    case SHOW_SPECIFICATION_FORM:
-      return { ...state, displaySpecForm: true }
     case SHOW_JOBSITE_FORM:
+      return { ...state, displaySpecForm: true }
+    case SHOW_JOBSITE_USER_FORM:
+      return { ...state, displayJobsiteUserForm: true }
+    case SHOW_SPECIFICATION_FORM:
       return { ...state, displaySpecForm: true }
     case CREATE_SPECIFICATION:
       return { ...state, specifications: [...state.specifications, action.payload], displaySpecForm: false }
-    case UPDATE_ENTITY:
-      return { ...state, jobsite: action.payload }
     case UPDATE_JOBSITE_FORM:
       return { ...state, jobsiteForm: action.payload }
     case RESET_JOBSITE_STATE:
-      return { ...state, companyJobsites: [], jobsites: [], jobsite: null, specifications: [] }
+      return { ...state, companyJobsites: [], jobsites: [], jobsite: null, jobsiteUsers: [], specifications: [] }
     default:
       return { ...state }
   }

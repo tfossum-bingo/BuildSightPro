@@ -37,7 +37,7 @@ const createOne = async (req, res) => {
         await entity.validate()
         await entity.save()
         
-        const updatedJobsite = await Jobsite.findByPk(entityBody.jobsite_id, {
+        const updatedJobsite = await JobsiteUser.findByPk(entity.id, {
             include: [
                 {
                     all: true,
@@ -47,6 +47,7 @@ const createOne = async (req, res) => {
         })
         console.log("Updated Jobsite: ", updatedJobsite)
         res.send(updatedJobsite)
+        res.send(entity)
     } catch (error) {
         if (error instanceof ValidationError) {
             return console.error('Captured validation error: ', error.errors[0].message);

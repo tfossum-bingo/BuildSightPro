@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { getJobsite, hideSpecForm, showSpecForm } from '../store/actions/JobsiteActions'
+import { getJobsite, hideSpecForm, showJobsiteUserForm, showSpecForm } from '../store/actions/JobsiteActions'
 
+import JobsiteUsers from '../components/jobsite_users/JobsiteUsers'
+import JobsiteUserForm from '../components/jobsite_users/JobsiteUserForm'
 import Header from '../components/Header'
 import Modal from '../components/modals/Modal'
 import SimpleMap from '../components/jobsites/SimpleMap'
@@ -55,6 +57,18 @@ const JobsitePage = (props) => {
                                 />
                             </Modal>
                         </div>
+                        <div className="add-jobsiteuser-container">
+                            <button
+                                onClick={props.showJobsiteUserForm} >
+                                Add User to Jobsite
+                            </button>
+                            <Modal show={props.jobsiteState.displayJobsiteUserForm}>
+                                <JobsiteUserForm />
+                            </Modal>
+                        </div>
+                        <div className='jobsiteuser-container'>
+                            <JobsiteUsers />
+                        </div>
                     </div>
                     <div>
                         <SpecificationsList />
@@ -74,6 +88,7 @@ const mapActionsToProps = (dispatch) => {
     return {
         getJobsite: (jobsiteId) => dispatch(getJobsite(jobsiteId)),
         hideSpecForm: () => dispatch(hideSpecForm()),
+        showJobsiteUserForm: () => dispatch(showJobsiteUserForm()),
         showSpecForm: () => dispatch(showSpecForm())
     }
 }

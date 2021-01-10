@@ -1,4 +1,4 @@
-const { Company, Jobsite } = require('../models')
+const { Company, Jobsite, User } = require('../models')
 const { ValidationError } = require('sequelize');
 
 const getAll = async (req, res) => {
@@ -80,7 +80,6 @@ const deleteOne = async (req, res) => {
 }
 
 const getAllJobsites = async (req, res) => {
-    console.log("HIT getAllJobsites")
     const entityId = req.params.id
     try {
         const entities = await Jobsite.findAll({
@@ -100,11 +99,26 @@ const getAllJobsites = async (req, res) => {
     }
 }
 
+const getAllUsers = async (req, res) => {
+    const entityId = req.params.id
+    try {
+        const entities = await User.findAll({
+            where: {
+                company_id: entityId
+            }
+        })
+        res.send(entities)
+    } catch (error) {
+        throw error
+    }
+}
+
 module.exports = {
     getAll,
     getOne,
     createOne,
     updateOne,
     deleteOne,
-    getAllJobsites
+    getAllJobsites,
+    getAllUsers
 }

@@ -26,7 +26,6 @@ const SignUpPage = (props) => {
     }
   }, [])
 
-
   const formFieldChange = (e) => {
     setForm({...form, [e.target.name]: e.target.value})
   }

@@ -8,12 +8,18 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       }),
-      Jobsite.hasMany(models.Specification, {
-        foreignKey: 'jobsite_id',
-        as: 'specifications',
-        onDelete: 'cascade',
-        onUpdate: 'cascade'
-      })
+        Jobsite.hasMany(models.Specification, {
+          foreignKey: 'jobsite_id',
+          as: 'specifications',
+          onDelete: 'cascade',
+          onUpdate: 'cascade'
+        }),
+        Jobsite.hasMany(models.JobsiteUser, {
+          foreignKey: 'jobsite_id',
+          as: 'jobsiteUsers',
+          onDelete: 'cascade',
+          onUpdate: 'cascade'
+        })
     }
   };
   Jobsite.init({

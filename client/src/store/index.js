@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import CompanyReducer from './reducers/CompanyReducer'
 import JobsiteReducer from './reducers/JobsiteReducer'
 import SignUpReducer from './reducers/SignUpReducer'
 import SpecificationReducer from './reducers/SpecificationReducer'
@@ -9,6 +10,7 @@ import thunk from 'redux-thunk'
 
 const store = createStore(
   combineReducers({
+    companyState: CompanyReducer,
     jobsiteState: JobsiteReducer,
     userState: UserReducer,
     signUpState: SignUpReducer,
