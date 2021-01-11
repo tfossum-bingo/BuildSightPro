@@ -62,6 +62,10 @@
   justify-content: center;
 }
 
+.flex-align-center {
+  align-items: center;
+}
+
 .header {
   background-color: rgb(76, 94, 122);
   width: 100%;

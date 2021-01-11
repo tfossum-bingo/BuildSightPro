@@ -4,10 +4,10 @@ import { faPlusSquare, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
 
 export default (props) => {
     // const {addForm, refreshAction} = props
-    const { displayFormAction, refreshAction, title } = props
-
+    const { displayFormAction, refreshAction, title, width } = props
+    const appliedWidth = width ? width : '300px'
     return (
-        <div class='list-header-container'>
+        <div class='list-header-container' style={{ width: appliedWidth }}>
             <div className='list-header-add list-header-icons-containers'>
                 <FontAwesomeIcon
                     onClick={displayFormAction}

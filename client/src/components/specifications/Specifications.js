@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { refreshSpecificationsList, setSpecificationsNeedRefresh } from '../../store/actions/JobsiteActions'
 import { hideSpecForm, showSpecForm } from '../../store/actions/JobsiteActions'
 
+import ListHeader from '../../components/ListHeader'
 import Modal from '../../components/modals/Modal'
 import SpecificationsList from './SpecificationsList'
 import SpecificationForm from './SpecificationForm'
@@ -18,24 +19,31 @@ const Specifications = (props) => {
     }, [])
 
     return (
-        <div className='flex-column'>
-            <div className="add-spec-container">
-                <button
+        <div className='flex-column flex-align-center specifications-container'>
+            <div>
+                <ListHeader
+                    displayFormAction={props.showSpecForm}
+                    refreshAction={props.setSpecificationsNeedRefresh}
+                    width='500px'
+                    title='Specifications'
+                />
+            </div>
+            {/* <button
                     onClick={e => props.showSpecForm()} >
                     Add Specification Doc
-                            </button>
-                <Modal show={displaySpecForm}>
-                    <SpecificationForm
-                        jobsiteId={jobsite.id}
-                        userId={user.id}
-                    />
-                </Modal>
-            </div>
-            <div className='refesh-button-container'>
+                            </button> */}
+            <Modal show={displaySpecForm}>
+                <SpecificationForm
+                    jobsiteId={jobsite.id}
+                    userId={user.id}
+                />
+            </Modal>
+
+            {/* <div className='refesh-button-container'>
                 <button onClick={props.setSpecificationsNeedRefresh}>
                     Refresh Button
                 </button>
-            </div>
+            </div> */}
             <div className='flex-column'>
                 <div>
                     <SpecificationsList />
