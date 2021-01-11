@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default (props) => {
+const SelectOption = (props) => {
     const { selectOptions, value, onChange, name } = props
     console.log("SO value: ", value)
     return (
@@ -15,3 +15,5 @@ export default (props) => {
         </select>
     )
 }
+
+export default SelectOption

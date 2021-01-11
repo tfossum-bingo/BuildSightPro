@@ -13,7 +13,6 @@ const LandingPage = (props) => {
             <div className="landing-btns">
             <NavLink 
             to='/register'
-            activeclassName='nav-active'
             onClick={handleClick}
              >
                 <Button>

@@ -1,10 +1,11 @@
 import React from 'react';
 import JobsiteUserList from './JobsiteUserList'
 
-export default () => {
+const JobsiteUsers = () => {
     return (
         <div>
             <JobsiteUserList />
         </div>
     )
 }
+export default JobsiteUsers

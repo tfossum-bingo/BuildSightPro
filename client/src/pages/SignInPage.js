@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux'
 import TextInput from '../components/TextInput';
@@ -6,7 +6,6 @@ import { loginUser, updateLoginForm } from '../store/actions/UserActions'
 
 
 const SignInPage = (props) => {
-    const [formError, setFormErrors] = useState(false)
     const [form, setForm] = useState({
       email: '',
       password: ''

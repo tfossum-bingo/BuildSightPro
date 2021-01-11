@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 
-import { __GetCompanies } from '../services/CompanyService'
-
 import { populateCompanyOptions, updateSignUpForm } from '../store/actions/SignUpActions'
 import { createUser } from '../store/actions/UserActions'
 import SelectOption from '../components/SelectOption'
 import TextInput from '../components/TextInput'
 
 const SignUpPage = (props) => {
-  const [formError, setFormErrors] = useState(false)
+  const {companyOptions} = props.signUpState
   const [form, setForm] = useState({
     companyId: null,
     email: '',
@@ -20,7 +18,7 @@ const SignUpPage = (props) => {
 })
 
   useEffect(() => {
-    if (props.signUpState.companyOptions.length === 0) {
+    if (companyOptions.length === 0) {
       console.log("HIT useEffect pop companies")
       props.populateCompanyOptions()
     }

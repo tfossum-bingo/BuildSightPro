@@ -2,7 +2,6 @@ import {
   __GetProfiles,
   __GetUser,
   __LoginUser,
-  __LogoutUser,
   __CreateUser,
   __UpdateUser
 } from '../../services/UserService'

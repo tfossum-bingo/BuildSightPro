@@ -1,5 +1,3 @@
-import { connect } from 'react-redux'
-
 const {
   GET_ENTITIES,
   GET_ENTITY,

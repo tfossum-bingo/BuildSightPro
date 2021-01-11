@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import { NavLink, useHistory } from 'react-router-dom';
 
 import { createSpecification, hideSpecForm } from '../../store/actions/JobsiteActions'
 import TextInput from '../TextInput';
 
 
 const SpecificationForm = (props) => {
-    let history = useHistory()
-    const { toggleModal } = props
-    const [formError, setFormError] = useState(false);
     const [form, setForm] = useState({
         title: '',
         description: '',

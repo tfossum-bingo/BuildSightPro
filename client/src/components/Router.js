@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 
@@ -54,7 +54,6 @@ const mapActionsToProps = (dispatch) => {
   }
   
   const mapStateToProps = (state) => {
-    // console.log('MapStateToProps: ', state)
     return {
         userState: state.userState
     }

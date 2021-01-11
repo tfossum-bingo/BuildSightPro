@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom';
-
-import { __CreateJobsite } from '../../services/JobsiteService';
 
 import { 
     createJobsite,
@@ -15,12 +12,9 @@ import SelectOption from '../SelectOption'
 import TextInput from '../TextInput'
 
 
-
 const JobsiteForm = (props) => {
-    let history = useHistory()
-    const { companyUserOptions } = props.companyState
-    const { toggleJobsiteModal } = props
-    const { user } = props.userState
+    const { hideJobsiteForm } = props
+    // const [formError, setFormError] = useState(false)
 
     const [form, setForm] = useState({
         address_1: '',
@@ -32,11 +26,10 @@ const JobsiteForm = (props) => {
         userId: null,
         company_id: props.userState.user.company_id
     })
-    const [formError, setFormError] = useState(false);
-
+    
     useEffect(() => {
-        if (companyUserOptions.length === 0) {
-            props.populateCompanyUserOptions(user.companyId)
+        if (props.companyState.companyUserOptions.length === 0) {
+            props.populateCompanyUserOptions(props.userState.user.companyId)
         }
     }, [])
 
@@ -51,7 +44,7 @@ const JobsiteForm = (props) => {
 
     const handleSubmit = async (event) => {
         console.log("JS Form Submit: ", form)
-        event.preventDefault();
+        event.preventDefault()
         props.createJobsite(form)
     }
 
@@ -144,10 +137,10 @@ const JobsiteForm = (props) => {
                 </div>
 
             </form>
-            <button onClick={props.hideJobsiteForm}>Close</button>
+            <button onClick={hideJobsiteForm}>Close</button>
         </div>
-    );
-};
+    )
+}
 
 
 const mapActionsToProps = (dispatch) => {

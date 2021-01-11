@@ -9,12 +9,10 @@ import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 const SignOut = (props) => {
     
     if (props.userState.user === null) {
-        { console.log("HIT Signed Out") }
         < Redirect to='/' push={true} />
     } else {
         return (
             <button
-                className={'btn-list'}
                 onClick={(e) => props.logoutUser()}
             >
                 <FontAwesomeIcon

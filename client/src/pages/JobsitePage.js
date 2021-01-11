@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { getJobsite, hideSpecForm, showJobsiteUserForm, showSpecForm } from '../store/actions/JobsiteActions'
+import { getJobsite, showJobsiteUserForm } from '../store/actions/JobsiteActions'
 
 import JobsiteUsers from '../components/jobsite_users/JobsiteUsers'
 import JobsiteUserForm from '../components/jobsite_users/JobsiteUserForm'
@@ -10,18 +10,15 @@ import Header from '../components/Header'
 import Modal from '../components/modals/Modal'
 import SimpleMap from '../components/jobsites/SimpleMap'
 import Specifications from '../components/specifications/Specifications'
-import SpecificationForm from '../components/specifications/SpecificationForm'
 
 const JobsitePage = (props) => {
     const jobsite_id = parseInt(props.match.params.jobsite_id)
-    console.log('JPage: jobsite_id: ', jobsite_id)
-    let x = 0
 
     useEffect(() => {
         if (props.jobsiteState.refreshJobsite || (props.jobsiteState.jobsite !== null && props.jobsiteState.jobsite.id !== jobsite_id)) {
             props.getJobsite(jobsite_id)
         }
-    }, [props.jobsiteState.refreshJobsite, props.specificationState.displaySpecForm])
+    }, [props.jobsiteState.refreshJobsite])
 
 
     if (props.jobsiteState.jobsite !== null && props.jobsiteState.jobsite !== undefined) {
@@ -32,7 +29,7 @@ const JobsitePage = (props) => {
 
                 <div className='jobsite-main'>
                     <div>
-                        <NavLink to='/jobsites' activeclassName='nav-active'>
+                        <NavLink to='/jobsites'>
                             <p>All Jobsites</p>
                         </NavLink>
                     </div>

@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from 'react'
-// import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
+
 import {
     createJobsiteUser,
     hideJobsiteUserForm,
 } from '../../store/actions/JobsiteActions'
-
 import { populateCompanyUserOptions } from '../../store/actions/CompanyActions'
 
-import { __GetCompanyUsers } from '../../services/JobsiteService'
 import SelectOption from '../SelectOption'
 
 const JobsiteUserForm = (props) => {
+    const {populateCompanyUserOptions} = props
     const [form, setForm] = useState({
         user_id: null,
         jobsite_id: props.jobsiteState.jobsite.id
     })
 
-    const [formError, setFormError] = useState(false);
-
     useEffect(() => {
         if (props.companyState.companyUserOptions.length === 0) {
-            props.populateCompanyUserOptions(props.jobsiteState.jobsite.companyId)
+            populateCompanyUserOptions(props.jobsiteState.jobsite.companyId)
         }
     }, [])
 

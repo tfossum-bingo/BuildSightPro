@@ -5,13 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       SpecificationUser.belongsTo(models.Specification, {
         foreignKey: 'specification_id',
-        onDelete: 'cascade',
-        onUpdate: 'cascade'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       }),
       SpecificationUser.belongsTo(models.User, {
           foreignKey: 'user_id',
-          onDelete: 'cascade',
-          onUpdate: 'cascade'
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
       })
     }
   };

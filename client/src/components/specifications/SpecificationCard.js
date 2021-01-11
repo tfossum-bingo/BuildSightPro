@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { acknowledgeSpecification } from '../../store/actions/JobsiteActions'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimesCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const SpecificationCard = (props) => {
     const { specification } = props
@@ -23,7 +23,7 @@ const SpecificationCard = (props) => {
 
     const isAcknowledged = () => {
         if (specification.specification_users !== undefined) {
-            const specUser = specification.specification_users.find(spec => spec.user_id == props.userState.user.id)
+            const specUser = specification.specification_users.find(spec => spec.user_id === props.userState.user.id)
             console.log('isAck2: ', specUser)
             if (specUser !== undefined) {
                 return (

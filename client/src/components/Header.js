@@ -2,7 +2,7 @@ import React from 'react'
 
 import SignOut from '../components/SignOut'
 
-export default (props) => {
+const Header = () => {
 
     return (
         <div className='header'>
@@ -16,3 +16,5 @@ export default (props) => {
     )
 
 }
+
+export default Header

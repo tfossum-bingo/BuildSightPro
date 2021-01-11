@@ -3,7 +3,6 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import CompanyReducer from './reducers/CompanyReducer'
 import JobsiteReducer from './reducers/JobsiteReducer'
 import SignUpReducer from './reducers/SignUpReducer'
-import SpecificationReducer from './reducers/SpecificationReducer'
 import UserReducer from './reducers/UserReducer'
 
 import thunk from 'redux-thunk'
@@ -13,8 +12,7 @@ const store = createStore(
     companyState: CompanyReducer,
     jobsiteState: JobsiteReducer,
     userState: UserReducer,
-    signUpState: SignUpReducer,
-    specificationState: SpecificationReducer
+    signUpState: SignUpReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 )
