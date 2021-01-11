@@ -1,13 +1,13 @@
 require('dotenv').config()
 
 module.exports = {
-  "development": {
-   "database": "buildsightpro_development",
-    "dialect": "postgres"
+  development: {
+   database: "buildsightpro_development",
+    dialect: "postgres"
   },
-  "test": {
-    "database": "buildsightpro_test",
-    "dialect": "postgres"
+  test: {
+    database: "buildsightpro_test",
+    dialect: "postgres"
   },
   production: {
     username: process.env.RDS_USERNAME,
