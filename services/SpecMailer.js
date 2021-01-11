@@ -15,7 +15,7 @@ const sendSpecEmail = (emailsAddresses, jobsiteAddress, attachmentUrl) => {
     const mailOptions = {
         from: 'support@bowlmetrix.com',
         to: emailsAddresses,
-        subject: 'Sending Email using Node.js',
+        subject: `JobSightPro: New Spec for ${jobsiteAddress}`,
         text: `A new design specification has been added to jobsite: ${jobsiteAddress}. It can be viewed here: ${attachmentUrl}`
     }
 

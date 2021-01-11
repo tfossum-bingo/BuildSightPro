@@ -29,7 +29,6 @@ const SpecificationCard = (props) => {
             return specUser !== undefined ? (
                 <FontAwesomeIcon
                     className="fas fa-white spec-acknowledged"
-                    // style={{ color: "green" }}
                     icon={faCheckCircle}
                 />
             ) : (
