@@ -7,7 +7,6 @@ import TextInput from '../components/TextInput'
 
 const SignUpPage = (props) => {
   const [form, setForm] = useState({
-    companyId: null,
     name: '',
     websiteUrl: ''
   })
