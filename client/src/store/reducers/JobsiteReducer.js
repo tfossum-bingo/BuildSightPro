@@ -39,14 +39,6 @@ const iState = {
   specificationsNeedsRefresh: false
 }
 
-// const sortAll = (a, b) => {
-//   if (a < b ) {
-//     return -1
-//   } else if ( a > b ) {
-//     return 1
-//   }
-//   return 0
-// }
 
 const preSortSpecs = (specList) => {
   const theSpecs = [...specList]
@@ -69,6 +61,15 @@ const fullName = (user) => {
   return user.User.firstName.toLowerCase() + " " + user.User.lastName.toLowerCase()
 }
 
+
+const preSortJobsites = (companyJobsites) => {
+  const jobsites = [...companyJobsites]
+  jobsites.sort(function (x, y) {
+    return AlphaSort(x.address_1, y.address_1)
+  })
+  return jobsites
+}
+
 const JobsiteReducer = (state = iState, action) => {
   switch (action.type) {
     case ACKNOWLEDGE_SPECIFICATION:
@@ -78,7 +79,7 @@ const JobsiteReducer = (state = iState, action) => {
     case GET_COMPANY_JOBSITES:
       return {
         ...state,
-        companyJobsites: action.payload,
+        companyJobsites: preSortJobsites(action.payload),
         refreshJobsiteList: false
       }
     case GET_ENTITIES:
@@ -92,7 +93,9 @@ const JobsiteReducer = (state = iState, action) => {
         specifications: preSortSpecs(action.payload.specifications)
       }
     case CREATE_JOBSITE:
-      return { ...state, companyJobsites: [...state.companyJobsites, action.payload], displayJobsiteForm: false }
+      const createJobsites = [...state.companyJobsites, action.payload]
+      preSortJobsites(createJobsites)
+      return { ...state, companyJobsites: createJobsites, displayJobsiteForm: false }
     case CREATE_JOBSITE_USER:
       let createJobsiteUsers = [...state.jobsiteUsers, action.payload]
       createJobsiteUsers = preSortUsers(createJobsiteUsers)
