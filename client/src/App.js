@@ -1,5 +1,6 @@
 import './styles/App.css'
 import './styles/Form.css'
+import './styles/Header.css'
 import './styles/Jobsites.css'
 import './styles/JobsiteCard.css'
 import './styles/JobsiteUsers.css'

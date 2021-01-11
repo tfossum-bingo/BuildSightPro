@@ -12,7 +12,7 @@ const JobsiteUserDelete = (props) => {
             <FontAwesomeIcon
                 onClick={() => props.deleteJobsiteUser(jobsiteUserId)}
                 className="fas fa-white"
-                style={{ color: "green" }}
+                style={{ color: "darkred" }}
                 icon={faTrashAlt}
             />
         </div>

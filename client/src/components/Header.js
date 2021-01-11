@@ -1,20 +1,52 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import Menu from '../components/Menu'
 import SignOut from '../components/SignOut'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faBars } from "@fortawesome/free-solid-svg-icons"
 
-const Header = () => {
+const Header = (props) => {
+    const { user } = props.userState
+    const [displayMenu, setDisplayMenu] = useState(false)
+
+
+    const toggleMenu = () => {
+        setDisplayMenu(!displayMenu)
+    }
 
     return (
-        <div className='header'>
-            <div className="flex-row header-row">
-                <h1>JobSightPro</h1>
-                <div>
-                    <SignOut />
+        <div className="header">
+            <div className='logo-box'>
+                <h1 id='header-logo'>JobSightPro</h1>
+            </div>
+            <div className="flex-row">
+                <div className='menu-box' onClick={toggleMenu} >
+                    <FontAwesomeIcon
+                        onClick={() => toggleMenu()}
+                        className="fas fa-white menu-bars"
+                        // style={{ color: "lightgray" }}
+                        icon={faBars}
+                    />
                 </div>
+                <Menu
+                    displayMenu={displayMenu}
+                    user={user}
+                    onClick={toggleMenu} />
             </div>
         </div>
     )
-
 }
 
-export default Header
+const mapActionsToProps = (dispatch) => {
+    return {
+
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        userState: state.userState
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Header)
