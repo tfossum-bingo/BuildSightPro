@@ -13,45 +13,42 @@ const SpecificationCard = (props) => {
     }
 
     const imageLink = () => {
-        if (specification.attachmentUrl !== null && specification.attachmentUrl !== "") {
-            return (
-                <a href={specification.attachmentUrl} target='_blank'>Link</a>
-            )
-        }
-        return null
+        const doRender = specification.attachmentUrl !== null && specification.attachmentUrl !== ""
+        return doRender ? (
+            <a href={specification.attachmentUrl} target='_blank'>Link</a>
+        ) : (
+            null
+        )
     }
 
     const isAcknowledged = () => {
         if (specification.specification_users !== undefined) {
             const specUser = specification.specification_users.find(spec => spec.user_id === props.userState.user.id)
-            if (specUser !== undefined) {
-                return (
-                    <FontAwesomeIcon
-                        className="fas fa-white"
-                        style={{ color: "green" }}
-                        icon={faCheckCircle}
-                    />
-                )
-            }
-            return (
+            return specUser !== undefined ? (
+                <FontAwesomeIcon
+                    className="fas fa-white"
+                    style={{ color: "green" }}
+                    icon={faCheckCircle}
+                />
+            ) : (
                 <button onClick={() => props.acknowledgeSpecification(ackData)}>Acknowledge</button>
             )
         }
         return null
     }
 
-    if (specification !== null && specification !== undefined) {
-        return (
-            <div className="spec-container">
-                <h3>{specification.title}</h3>
-                <p>{specification.description}</p>
-                {imageLink()}
-                <h2>{isAcknowledged()}</h2>
-            </div>
+    const doRender = specification !== null && specification !== undefined
+
+    return doRender ? (
+        <div className="spec-container">
+            <h3>{specification.title}</h3>
+            <p>{specification.description}</p>
+            {imageLink()}
+            <h2>{isAcknowledged()}</h2>
+        </div>
+    ) : (
+            null
         )
-    } else {
-        return null
-    }
 }
 
 const mapActionsToProps = (dispatch) => {
