@@ -1,0 +1,25 @@
+.jobsite-card-container {
+    display: flex;
+    flex-direction: row;
+    border: 1px black solid;
+    border-radius: 7px;
+    width: 500px;
+    padding: 20px;
+    margin: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+.jobsite-card-meta {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    text-align: left;
+}
+
+.jobsite-card-action {
+    width: 95px;
+}
+
+.jobsite-card-action button {
+    height: 95px;
+}

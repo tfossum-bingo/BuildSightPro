@@ -59,8 +59,10 @@
 }
 
 .header {
-  background-color: cadetblue;
+  background-color: rgb(76, 94, 122);
   width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: lightgray;
 }
 
 .header-just {
@@ -108,11 +110,6 @@
   font-size: 20px;
 }
 
-.jobsite-card-container {
-  border: 1px black solid;
-  width: 300px;
-  padding: 20px;
-}
 
 .refesh-button-container {
   height: 100px;
