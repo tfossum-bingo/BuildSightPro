@@ -1,3 +1,43 @@
 .specifications-container {
     margin-top: 15px;
 }
+
+
+.spec-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px black solid;
+    border-radius: 5px;
+    width: 788px;
+    margin: 20px;
+    padding: 7px;
+  }
+  
+  .spec-meta-container {
+    width: auto;
+  }
+
+  .spec-action-container {
+    width: 200px;
+  }
+
+  .spec-title {
+      font-weight: bold;
+  }
+
+.spec-acknowledged {
+    font-size: 3em;
+    color: green;
+}
+
+.spec-delete-container {
+    width: 100px;
+}
+
+.spec-delete {
+    color: darkred;
+}
+  a.spec-link:link :visited {
+      font-size: 5em;
+  }

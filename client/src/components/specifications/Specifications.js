@@ -24,7 +24,7 @@ const Specifications = (props) => {
                 <ListHeader
                     displayFormAction={props.showSpecForm}
                     refreshAction={props.setSpecificationsNeedRefresh}
-                    width='500px'
+                    width='800px'
                     title='Specifications'
                 />
             </div>

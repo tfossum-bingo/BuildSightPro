@@ -10,11 +10,10 @@ const SpecificationDelete = (props) => {
     const doRender = userId === managerId
 
     return doRender ? (
-        <div>
+        <div className='spec-delete-container'>
             <FontAwesomeIcon
                 onClick={() => props.deleteSpecification(specificationId)}
-                className="fas fa-white"
-                style={{ color: "green" }}
+                className="fas fa-white spec-delete"
                 icon={faTrashAlt}
             />
         </div>

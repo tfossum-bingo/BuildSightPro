@@ -17,7 +17,7 @@ const SpecificationCard = (props) => {
     const imageLink = () => {
         const doRender = specification.attachmentUrl !== null && specification.attachmentUrl !== ""
         return doRender ? (
-            <a href={specification.attachmentUrl} target='_blank'>Link</a>
+            <a classname='spec-link' href={specification.attachmentUrl} target='_blank'>View</a>
         ) : (
                 null
             )
@@ -28,8 +28,8 @@ const SpecificationCard = (props) => {
             const specUser = specification.specification_users.find(spec => spec.user_id === props.userState.user.id)
             return specUser !== undefined ? (
                 <FontAwesomeIcon
-                    className="fas fa-white"
-                    style={{ color: "green" }}
+                    className="fas fa-white spec-acknowledged"
+                    // style={{ color: "green" }}
                     icon={faCheckCircle}
                 />
             ) : (
@@ -42,15 +42,21 @@ const SpecificationCard = (props) => {
     const doRender = specification !== null && specification !== undefined
 
     return doRender ? (
-        <div key={key} className="spec-container">
-            <h3>{specification.title}</h3>
-            <p>{specification.description}</p>
-            {imageLink()}
-            <h2>{isAcknowledged()}</h2>
+        <div key={key} className="basic-card spec-card">
+
             <SpecificationDelete
                 userId={props.userState.user.id}
                 managerId={props.jobsiteState.jobsite.userId}
                 specificationId={specification.id} />
+
+            <div className='spec-meta-container'>
+                <span className='spec-title'>{specification.title}</span><br />
+                {specification.description}<br />
+                {imageLink()}
+            </div>
+            <div className='spec-action-container'>
+                {isAcknowledged()}
+            </div>
         </div>
     ) : (
             null
