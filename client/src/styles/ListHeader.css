@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: rgb(190, 190, 190);
-    margin: 5px;
+    /* margin: 5px; */
     height: 30px;
     width: 300px;
     border: 1px darkgrey solid;

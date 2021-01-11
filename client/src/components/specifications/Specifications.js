@@ -28,22 +28,12 @@ const Specifications = (props) => {
                     title='Specifications'
                 />
             </div>
-            {/* <button
-                    onClick={e => props.showSpecForm()} >
-                    Add Specification Doc
-                            </button> */}
             <Modal show={displaySpecForm}>
                 <SpecificationForm
                     jobsiteId={jobsite.id}
                     userId={user.id}
                 />
             </Modal>
-
-            {/* <div className='refesh-button-container'>
-                <button onClick={props.setSpecificationsNeedRefresh}>
-                    Refresh Button
-                </button>
-            </div> */}
             <div className='flex-column'>
                 <div>
                     <SpecificationsList />

@@ -10,7 +10,7 @@ const JobsiteCard = (props) => {
     const doRender = jobsite !== null && jobsite !== undefined
 
     return doRender ? (
-        <div className="jobsite-card-container">
+        <div className="basic-card jobsite-card-container">
             <JobsiteMeta jobsite={jobsite} />
             <div className='jobsite-card-action'>
                 <button

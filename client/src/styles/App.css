@@ -37,6 +37,12 @@
   }
 }
 
+.basic-card {
+  border: 1px black solid;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .spec-container {
   border: 1px black solid;
   border-radius: 5px;
@@ -114,7 +120,7 @@
 }
 
 .jobsite-wrench {
-  font-size: 20px;
+  font-size: 3em;
 }
 
 .refesh-button-container {

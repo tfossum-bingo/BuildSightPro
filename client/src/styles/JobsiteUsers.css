@@ -1,5 +1,11 @@
 .jobsite-user-container {
     display: flex;
     flex-direction: column;
+    padding: 5px;
 }
 
+.jobsite-user-card {
+    width: 280px;
+    margin: 5px;
+    padding: 5px;
+}

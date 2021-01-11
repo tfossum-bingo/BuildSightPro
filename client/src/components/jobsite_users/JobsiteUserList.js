@@ -9,11 +9,15 @@ const JobsiteUserList = (props) => {
         <div>
             {jobsiteUsers.map((jobsiteUser, index) => {
                 return (
-                    <div>
-                        <p key={index}>
+                    <div
+                        className='basic-card jobsite-user-card flex-row'
+                        key={index}>
+                        <div>
                             {`${jobsiteUser.User.firstName} ${jobsiteUser.User.lastName}`}
-                        </p>
-                        <JobsiteUserDelete jobsiteUserId={jobsiteUser.id}/>
+                        </div>
+                        <div>
+                            <JobsiteUserDelete jobsiteUserId={jobsiteUser.id} />
+                        </div>
                     </div>
                 )
             })}
