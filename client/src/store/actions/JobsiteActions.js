@@ -1,14 +1,15 @@
 import {
+  __CreateJobsite,
   __GetCompanyJobsites,
   __GetJobsite,
   __GetJobsites,
   __GetJobsiteSpecifications,
-  __CreateJobsite,
   __UpdateJobsite
 } from '../../services/JobsiteService'
 
 import {
-  __CreateJobsiteUser
+  __CreateJobsiteUser,
+  __DeleteJobsiteUser
 } from '../../services/JobsiteUserService'
 
 import {
@@ -24,6 +25,7 @@ import {
   CREATE_JOBSITE,
   CREATE_JOBSITE_USER,
   CREATE_SPECIFICATION,
+  DELETE_JOBSITE_USER,
   DELETE_SPECIFICATION,
   GET_COMPANY_JOBSITES,
   GET_ENTITIES,
@@ -89,12 +91,21 @@ export const createSpecification = (formData) => async (dispatch) => {
   }
 }
 
-export const deleteSpecification = (specificationId) => async (dispatch) => {
-  console.log("HIT ACT1")
+export const deleteJobsiteUser = (jobsiteUserId) => async (dispatch) => {
   try {
-    const entity = await __DeleteSpecification(specificationId)
-    console.log("HIT ACT2", entity)
-    
+    await __DeleteJobsiteUser(jobsiteUserId)
+    dispatch({
+      type: DELETE_JOBSITE_USER,
+      payload: jobsiteUserId
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+export const deleteSpecification = (specificationId) => async (dispatch) => {
+  try {
+    await __DeleteSpecification(specificationId)  
     dispatch({
       type: DELETE_SPECIFICATION,
       payload: specificationId
