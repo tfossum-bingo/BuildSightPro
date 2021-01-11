@@ -129,9 +129,6 @@ const JobsiteForm = (props) => {
 
                 <div>
                     <button
-                        className='btns'
-                        buttonStyle='btn--outline'
-                        buttonSize='btn--large'
                     >
                         Submit
                     </button>

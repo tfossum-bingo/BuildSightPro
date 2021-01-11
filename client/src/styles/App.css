@@ -58,6 +58,10 @@
   justify-content: flex-start;
 }
 
+.flex-justify-center {
+  justify-content: center;
+}
+
 .header {
   background-color: rgb(76, 94, 122);
   width: 100%;
@@ -71,6 +75,8 @@
 
 .jobsite-main {
   padding: 0px 0px 20px 0px;
+  max-width: 1300px;
+  margin: 0px auto;
 }
 
 .jobsite-address-container {
@@ -92,14 +98,11 @@
 
 .address-container {
   grid-area: 1/2/2/3;
-}
-
-.add-jobsiteuser-container {
-  grid-area: 2/2/3/3;
+  padding: 5px;
 }
 
 .jobsiteuser-container {
-  grid-area: 3/2/4/3;
+  grid-area: 2/2/4/3;
 }
 
 .add-spec-container {
@@ -109,7 +112,6 @@
 .jobsite-wrench {
   font-size: 20px;
 }
-
 
 .refesh-button-container {
   height: 100px;

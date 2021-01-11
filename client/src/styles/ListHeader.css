@@ -1,0 +1,29 @@
+.list-header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(190, 190, 190);
+    margin: 5px;
+    height: 30px;
+    width: 300px;
+    border: 1px darkgrey solid;
+    border-radius: 5px;
+}
+
+.list-header-item {}
+
+.list-header-icons-containers {
+    margin: 2px;
+    padding: 2px;
+}
+
+.list-header-title {
+    /* color: #555555; */
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.list-header-icons {
+    font-size: 1.5em;
+}

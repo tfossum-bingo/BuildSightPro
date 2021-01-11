@@ -1,11 +1,33 @@
-import React from 'react';
-import JobsiteUserList from './JobsiteUserList'
+import React from 'react'
+import { connect } from 'react-redux'
+import { showJobsiteUserForm } from '../../store/actions/JobsiteActions'
 
-const JobsiteUsers = () => {
+import JobsiteUserList from './JobsiteUserList'
+import ListHeader from '../ListHeader'
+
+
+const JobsiteUsers = (props) => {
     return (
-        <div>
+        <div className='jobsite-user-container'>
+            <ListHeader
+                displayFormAction={props.showJobsiteUserForm}
+                refreshAction={null}
+                title='Technicians' />
             <JobsiteUserList />
         </div>
     )
 }
-export default JobsiteUsers
+
+const mapActionsToProps = (dispatch) => {
+    return {
+        showJobsiteUserForm: () => dispatch(showJobsiteUserForm())
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(JobsiteUsers)

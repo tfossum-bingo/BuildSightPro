@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 import { getJobsite, showJobsiteUserForm } from '../store/actions/JobsiteActions'
 
+import JobsiteMeta from '../components/jobsites/JobsiteMeta'
 import JobsiteUsers from '../components/jobsite_users/JobsiteUsers'
 import JobsiteUserForm from '../components/jobsite_users/JobsiteUserForm'
 import Header from '../components/Header'
@@ -36,22 +37,16 @@ const JobsitePage = (props) => {
                             <SimpleMap center={{ lat: props.jobsiteState.jobsite.latitude, lng: props.jobsiteState.jobsite.longitude }} zoom={15} />
                         </div>
                         <div className='address-container'>
-                            <p>{props.jobsiteState.jobsite.address_1}</p>
-                            <p>{props.jobsiteState.jobsite.address_2}</p>
-                            <p>{`${props.jobsiteState.jobsite.city}, ${props.jobsiteState.jobsite.state} ${props.jobsiteState.jobsite.postalCode}`} </p>
-                        </div>
-                        <div className="add-jobsiteuser-container">
-                            <button
-                                onClick={props.showJobsiteUserForm} >
-                                Add User to Jobsite
-                            </button>
-                            <Modal show={props.jobsiteState.displayJobsiteUserForm}>
-                                <JobsiteUserForm />
-                            </Modal>
+                            <JobsiteMeta jobsite={props.jobsiteState.jobsite} />
                         </div>
                         <div className='jobsiteuser-container'>
                             <JobsiteUsers />
                         </div>
+                    </div>
+                    <div>
+                        <Modal show={props.jobsiteState.displayJobsiteUserForm}>
+                            <JobsiteUserForm />
+                        </Modal>
                     </div>
                     <div>
                         <Specifications />

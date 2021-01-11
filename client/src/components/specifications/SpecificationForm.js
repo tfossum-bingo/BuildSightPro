@@ -66,11 +66,7 @@ const SpecificationForm = (props) => {
                     onChange={formFieldChange}
                 />
                 <div>
-                    <button
-                        className='btns'
-                        buttonStyle='btn--outline'
-                        buttonSize='btn--large'
-                    >
+                    <button>
                         Submit
                     </button>
                 </div>

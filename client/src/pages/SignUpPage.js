@@ -101,16 +101,12 @@ const SignUpPage = (props) => {
             onChange={companyIDChange}
           />
           <div>
-            <button
-              className='btns'
-              buttonStyle='btn--outline'
-              buttonSize='btn--large'
-            >
+            <button>
               Submit
           </button>
           </div>
           <div>
-            <NavLink to='/signin' activeclassName='nav-active'>
+            <NavLink to='/signin'>
               <p>Have an account?</p>
             </NavLink>
           </div>

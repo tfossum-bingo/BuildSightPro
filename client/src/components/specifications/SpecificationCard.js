@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
 
 const SpecificationCard = (props) => {
-    const { specification } = props
+    const { specification, key } = props
     const ackData = {
         userId: props.userState.user.id,
         specificationId: specification.id
@@ -42,7 +42,7 @@ const SpecificationCard = (props) => {
     const doRender = specification !== null && specification !== undefined
 
     return doRender ? (
-        <div className="spec-container">
+        <div key={key} className="spec-container">
             <h3>{specification.title}</h3>
             <p>{specification.description}</p>
             {imageLink()}
