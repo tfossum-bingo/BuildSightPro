@@ -1,3 +1,5 @@
+import AlphaSort from '../../utils/AlphaSort'
+
 const {
   ACKNOWLEDGE_SPECIFICATION,
   CREATE_JOBSITE,
@@ -37,11 +39,42 @@ const iState = {
   specificationsNeedsRefresh: false
 }
 
+// const sortAll = (a, b) => {
+//   if (a < b ) {
+//     return -1
+//   } else if ( a > b ) {
+//     return 1
+//   }
+//   return 0
+// }
+
+const preSortSpecs = (specList) => {
+  const theSpecs = [...specList]
+  theSpecs.sort(function (x, y) {
+    return AlphaSort(x.title.toLowerCase(), y.title.toLowerCase())
+  })
+  return theSpecs
+}
+
+const preSortUsers = (userList) => {
+  const theUsers = [...userList]
+  theUsers.sort(function (x, y) {
+    return AlphaSort(fullName(x), fullName(y))
+  })
+  return theUsers
+}
+
+const fullName = (user) => {
+  console.log("fullname: ", user)
+  return user.User.firstName.toLowerCase() + " " + user.User.lastName.toLowerCase()
+}
+
 const JobsiteReducer = (state = iState, action) => {
   switch (action.type) {
     case ACKNOWLEDGE_SPECIFICATION:
-      const fewerSpecs = state.specifications.filter((spec, index) => spec.id !== action.payload.id)
-      return { ...state, specifications: [...fewerSpecs, action.payload] }
+      let ackSpecs = state.specifications.filter((spec, index) => spec.id !== action.payload.id)
+      ackSpecs.push(action.payload)
+      ackSpecs = preSortSpecs(ackSpecs)
     case GET_COMPANY_JOBSITES:
       return {
         ...state,
@@ -54,17 +87,26 @@ const JobsiteReducer = (state = iState, action) => {
       return {
         ...state,
         jobsite: action.payload,
-        jobsiteUsers: action.payload.jobsiteUsers,
+        jobsiteUsers: preSortUsers(action.payload.jobsiteUsers),
         refreshJobsite: false,
-        specifications: action.payload.specifications
+        specifications: preSortSpecs(action.payload.specifications)
       }
     case CREATE_JOBSITE:
       return { ...state, companyJobsites: [...state.companyJobsites, action.payload], displayJobsiteForm: false }
     case CREATE_JOBSITE_USER:
-      return { ...state, jobsiteUsers: [...state.jobsiteUsers, action.payload], displayJobsiteUserForm: false }
+      let createJobsiteUsers = [...state.jobsiteUsers, action.payload]
+      createJobsiteUsers = preSortUsers(createJobsiteUsers)
+      return { 
+        ...state, 
+        jobsiteUsers: createJobsiteUsers, 
+        displayJobsiteUserForm: false 
+      }
     case DELETE_JOBSITE_USER:
-      const postDeleteJobsiteUsers = state.jobsiteUsers.filter((jobsiteUser, index) => jobsiteUser.id !== action.payload)
-      return { ...state, jobsiteUsers: [...postDeleteJobsiteUsers] }
+      const deleteJobsiteUsers = state.jobsiteUsers.filter((jobsiteUser, index) => jobsiteUser.id !== action.payload)
+      return { 
+        ...state, 
+        jobsiteUsers: preSortUsers(deleteJobsiteUsers) 
+      }
     case DELETE_SPECIFICATION:
       const postDeleteSpecs = state.specifications.filter((spec, index) => spec.id !== action.payload)
       return { ...state, specifications: [...postDeleteSpecs] }
@@ -75,7 +117,8 @@ const JobsiteReducer = (state = iState, action) => {
     case HIDE_SPECIFICATION_FORM:
       return { ...state, displaySpecForm: false }
     case REFRESH_SPECIFICATIONS_LIST:
-      return { ...state, specifications: action.payload, specificationsNeedsRefresh: false }
+      const refreshSpecs = preSortSpecs(action.payload)
+      return { ...state, specifications: refreshSpecs, specificationsNeedsRefresh: false }
     case SHOW_JOBSITE_FORM:
       return { ...state, displaySpecForm: true }
     case SHOW_JOBSITE_USER_FORM:

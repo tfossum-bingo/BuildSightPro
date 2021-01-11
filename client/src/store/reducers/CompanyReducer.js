@@ -6,9 +6,12 @@ const iState = {
     companyUserOptions: []
 }
 
+
+
 const CompanyReducer = (state = iState, action) => {
     switch (action.type) {
         case POPULATE_COMPANY_USER_OPTIONS:
+
           return { ...state, companyUserOptions: action.payload }
         default:
             return { ...state }

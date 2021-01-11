@@ -1,3 +1,4 @@
+import AlphaSort from '../../utils/AlphaSort'
 import { __GetCompanyUsers } from '../../services/CompanyService'
 
 import {
@@ -19,25 +20,21 @@ export const populateCompanyUserOptions = (companyId) => async (dispatch) => {
   }
 }
 
-// export const resetSignUpForm = () => ({
-//   type: RESET_SIGNUP_FORM,
-//   payload: null
-// })
-
-// export const updateSignUpForm = (name, value) => ({
-//   type: UPDATE_SIGNUP_FORM,
-//   payload: {
-//     name,
-//     value
-//   }
-// })
-
-
 const createCompanyUserOptionsArray = (companyUsers) => {
   let tempCompanyUserOptions = companyUsers.map((companyUser, index) => {
     return [companyUser.id, `${companyUser.firstName} ${companyUser.lastName}`]
   })
+  tempCompanyUserOptions = preSortCompanyUsers(tempCompanyUserOptions)
   tempCompanyUserOptions = [[null, null], ...tempCompanyUserOptions]
   console.log("SVC companyOptions: ", tempCompanyUserOptions)
   return tempCompanyUserOptions
+}
+
+
+const preSortCompanyUsers = (userList) => {
+  const theUsers = [...userList]
+  theUsers.sort(function (x, y) {
+    return AlphaSort(x[1], y[1])
+  })
+  return theUsers
 }
