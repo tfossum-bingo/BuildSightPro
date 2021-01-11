@@ -29,10 +29,8 @@ const SpecificationForm = (props) => {
         formData.append('user_id', form.user_id)
         formData.append('jobsite_id', form.jobsite_id)
         formData.append('specificationImage', form.specificationImage)
-        console.log("formData: ", form)
 
         props.createSpecification(formData);
-
     }
 
     return (

@@ -19,10 +19,8 @@ export const __GetJobsites = async () => {
 }
 
 export const __GetJobsite = async (jobsite_id) => {
-  console.log("SVC 1 GetJobsite: ", jobsite_id)
   try {
     const res = await ApiClient.get(`/jobsites/${jobsite_id}`)
-    console.log("SVC GetJobsite: ", res.data.address_1)
     return res.data
   } catch (error) {
     throw error

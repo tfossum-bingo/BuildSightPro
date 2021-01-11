@@ -11,7 +11,7 @@ const SpecificationCard = (props) => {
         userId: props.userState.user.id,
         specificationId: specification.id
     }
-    console.log("SpecCard ackData: ", ackData)
+
     const imageLink = () => {
         if (specification.attachmentUrl !== null && specification.attachmentUrl !== "") {
             return (
@@ -24,7 +24,6 @@ const SpecificationCard = (props) => {
     const isAcknowledged = () => {
         if (specification.specification_users !== undefined) {
             const specUser = specification.specification_users.find(spec => spec.user_id === props.userState.user.id)
-            console.log('isAck2: ', specUser)
             if (specUser !== undefined) {
                 return (
                     <FontAwesomeIcon

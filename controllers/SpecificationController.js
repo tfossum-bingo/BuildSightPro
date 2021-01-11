@@ -31,6 +31,8 @@ const getOne = async (req, res) => {
 }
 
 const createOne = async (req, res) => {
+    let entityBody = { ...req.body }
+
     try {
         let attachmentUrl = await upload(req.file)
         let newSpecification = Specification.build({ ...entityBody, attachmentUrl })

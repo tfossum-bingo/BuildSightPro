@@ -42,9 +42,7 @@ import {
 
 export const acknowledgeSpecification = (ackData) => async (dispatch) => {
   try {
-    console.log(dispatch)
     const entity = await __AcknowledgeSpecification(ackData)
-    console.log("SVC Ack Resp: ", entity)
     dispatch({
       type: ACKNOWLEDGE_SPECIFICATION,
       payload: entity
@@ -55,7 +53,6 @@ export const acknowledgeSpecification = (ackData) => async (dispatch) => {
 }
 
 export const createJobsite = (formValues) => async (dispatch) => {
-  console.log("HIT Act createJobsite: ", formValues)
   try {
     const entity = await __CreateJobsite(formValues)
     dispatch({
@@ -70,7 +67,6 @@ export const createJobsite = (formValues) => async (dispatch) => {
 export const createJobsiteUser = (formData) => async (dispatch) => {
   try {
     const entity = await __CreateJobsiteUser(formData)
-    console.log("SVC create JobsiteUser: ", entity)
     dispatch({
       type: CREATE_JOBSITE_USER,
       payload: entity
@@ -119,7 +115,6 @@ export const getJobsites = () => async (dispatch) => {
 export const getJobsite = (jobsiteId) => async (dispatch) => {
   try {
     const entity = await __GetJobsite(jobsiteId)
-    console.log("Action getJobsite: ", entity)
     dispatch({
       type: GET_JOBSITE,
       payload: entity

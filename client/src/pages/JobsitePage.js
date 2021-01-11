@@ -24,7 +24,6 @@ const JobsitePage = (props) => {
     if (props.jobsiteState.jobsite !== null && props.jobsiteState.jobsite !== undefined) {
         return (
             <div className={'flex-column'}>
-                {console.log('Jobsite: ', props.jobsite)}
                 <Header />
 
                 <div className='jobsite-main'>

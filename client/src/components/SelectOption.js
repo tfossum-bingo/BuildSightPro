@@ -2,7 +2,6 @@ import React from 'react'
 
 const SelectOption = (props) => {
     const { selectOptions, value, onChange, name } = props
-    console.log("SO value: ", value)
     return (
         <select
             className="task-entry"
