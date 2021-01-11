@@ -1,10 +1,23 @@
 import AlphaSort from '../../utils/AlphaSort'
-import { __GetCompanyUsers } from '../../services/CompanyService'
+import { __CreateCompany,  __GetCompanyUsers } from '../../services/CompanyService'
 
 import {
+  CREATE_COMPANY,
   POPULATE_COMPANY_USER_OPTIONS
 } from '../types'
 
+
+export const createCompany = (formValues) => async (dispatch) => {
+  try{
+    const company = await __CreateCompany(formValues)
+    dispatch({
+      type: CREATE_COMPANY,
+      payload: company
+    })
+  }catch(error){
+    throw error
+  }
+}
 
 export const populateCompanyUserOptions = (companyId) => async (dispatch) => {
   console.log("HIT Act popCoUsers: ", companyId)

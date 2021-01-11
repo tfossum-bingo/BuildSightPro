@@ -1,5 +1,15 @@
 import ApiClient from './ApiClient'
 
+
+export const __CreateCompany = async (formData) => {
+  try {
+    const res = await ApiClient.post('/companies/', formData);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const __GetCompanies = async () => {
   console.log('SVC GetCompanies')
   try {

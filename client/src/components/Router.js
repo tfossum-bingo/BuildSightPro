@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 
+import CompanyPage from '../pages/CompanyPage'
 import JobsitesPage from '../pages/JobsitesPage';
 import JobsitePage from '../pages/JobsitePage'
 import LandingPage from '../pages/LandingPage';
@@ -13,7 +14,7 @@ import SignUpPage from '../pages/SignUpPage';
 import '../styles/App.css';
 
 const Router = (props) => {
-    
+
     return (
         <main>
             <Switch>
@@ -22,6 +23,11 @@ const Router = (props) => {
                     exact
                     path='/register'
                     component={(props) => <SignUpPage />}
+                />
+                <Route
+                    exact
+                    path='/company'
+                    component={(props) => <CompanyPage />}
                 />
                 <Route
                     exact
@@ -51,12 +57,12 @@ const mapActionsToProps = (dispatch) => {
     return {
 
     }
-  }
-  
-  const mapStateToProps = (state) => {
+}
+
+const mapStateToProps = (state) => {
     return {
         userState: state.userState
     }
-  }
-  
-  export default connect(mapStateToProps, mapActionsToProps)(Router)
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Router)
