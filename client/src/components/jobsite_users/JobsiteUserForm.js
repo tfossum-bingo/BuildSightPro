@@ -34,7 +34,7 @@ const JobsiteUserForm = (props) => {
     return (
         <div className='form-container'>
             <form className='form-content-right' onSubmit={(e) => handleSubmit(e)}>
-                <h1>Create Jobsite</h1>
+                <h1 className='form-title'>Assign Technician</h1>
                 <div>
                     <SelectOption
                         selectOptions={props.companyState.companyUserOptions}

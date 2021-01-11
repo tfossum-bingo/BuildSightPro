@@ -25,11 +25,10 @@ const JobsitePage = (props) => {
         return (
             <div className={'flex-column'}>
                 <Header />
-
                 <div className='jobsite-main'>
-                    <div>
+                    <div className='flex-row flex-justify-start' id='all-jobsites-link'>
                         <NavLink to='/jobsites'>
-                            <p>All Jobsites</p>
+                            - Return to All Jobsites
                         </NavLink>
                     </div>
                     <div className='jobsite-address-container'>

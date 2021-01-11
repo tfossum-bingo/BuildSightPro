@@ -22,12 +22,11 @@ const SignInPage = (props) => {
 
 
     return props.userState.user === null ? (
-        <div className='form-container'>
-            <form className='form-content-right' onSubmit={(e) => handleSubmit(e)}>
+        <div className=''>
+            <form className='' onSubmit={(e) => handleSubmit(e)}>
                 <h1>Sign In</h1>
-                <div className='form-inputs'>
+                <div className=''>
                     <label htmlFor='email' className='form-label'>
-                        Email
                         <TextInput
                             className='form-input'
                             placeholder='email'
@@ -39,7 +38,6 @@ const SignInPage = (props) => {
                 </div>
                 <div className='form-inputs'>
                     <label htmlFor='password' className='form-label'>
-                        Password
                         <TextInput
                             className='form-input'
                             placeholder='password'

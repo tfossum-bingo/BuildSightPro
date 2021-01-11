@@ -1,4 +1,6 @@
-import './styles/App.css';
+import './styles/App.css'
+import './styles/Form.css'
+
 import Router from './components/Router'
 
 
@@ -8,7 +10,7 @@ function App() {
     <div className='App'>
       <Router />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

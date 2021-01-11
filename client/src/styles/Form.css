@@ -1,0 +1,82 @@
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+button {
+  font-size: 1em;
+  color: white;
+  background-color: rgb(76, 94, 122) ;
+  border-radius: 5px;
+  text-decoration: none;
+  border: white solid 2px;
+  padding: 5px 10px;
+  display: inline-block;
+}
+
+button:hover {
+  background-color: rgb(83, 85, 87);
+}
+
+input[type=text],input[type=email], input[type=password], select {
+  font-size: 1em;
+  width: 300px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: rgb(31, 75, 102);
+  color: white;
+  padding: 14px 20px;
+  margin: 15px 0 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=file] {
+  width: 65%;
+  background-color:white;
+  /* color: white; */
+  padding: 14px 20px;
+  margin: 15px 0 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-button {
+  background-color: darkred;
+  width: 100px;
+}
+
+.delete-button:hover {
+  background-color: red;
+}
+
+.welcome-header {
+  width: 100%;
+  text-align: center;
+  margin-top: 4em;
+}
+form {
+  width: 100%;
+}
+
+h1.form-title {
+  color: white;
+}

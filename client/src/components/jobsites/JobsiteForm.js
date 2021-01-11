@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
-import { 
+import {
     createJobsite,
     hideJobsiteForm,
-    updateJobsiteForm 
+    updateJobsiteForm
 } from '../../store/actions/JobsiteActions'
 import { populateCompanyUserOptions } from '../../store/actions/CompanyActions'
 
@@ -26,7 +26,7 @@ const JobsiteForm = (props) => {
         userId: null,
         company_id: props.userState.user.company_id
     })
-    
+
     useEffect(() => {
         if (props.companyState.companyUserOptions.length === 0) {
             props.populateCompanyUserOptions(props.userState.user.companyId)
@@ -39,7 +39,7 @@ const JobsiteForm = (props) => {
     }
 
     const formUserIdChange = (e) => {
-        setForm({...form, userId: parseInt(e.target.value)})
+        setForm({ ...form, userId: parseInt(e.target.value) })
     }
 
     const handleSubmit = async (event) => {
@@ -51,69 +51,69 @@ const JobsiteForm = (props) => {
     return (
         <div className='form-container'>
             <form className='form-content-right' onSubmit={(e) => handleSubmit(e)}>
-                <h1>Create Jobsite</h1>
+                <h1 className='form-title'>Create Jobsite</h1>
                 <div className='form-inputs'>
                     <label htmlFor='address_1' >
-                        Address 1
-            <TextInput
-                            type='text'
-                            name='address_1'
+                        <TextInput
                             className='form-input'
+                            placeholder='Address 1'
+                            name='address_1'
+                            type='text'
                             onChange={formFieldChange}
                         />
                     </label>
                 </div>
                 <div className='form-inputs'>
                     <label htmlFor='address_2' >
-                        Address 2
-            <TextInput
-                            type='text'
-                            name='address_2'
+                        <TextInput
                             className='form-input'
+                            name='address_2'
+                            placeholder='Address 2'
+                            type='text'
                             onChange={formFieldChange}
                         />
                     </label>
                 </div>
                 <div className='form-inputs'>
                     <label htmlFor='city' className='form-label'>
-                        City
-            <TextInput
-                            type='text'
-                            name='city'
+                        <TextInput
                             className='form-input'
+                            name='city'
+                            placeholder='City'
+                            type='text'
                             onChange={formFieldChange}
                         />
                     </label>
                 </div>
                 <div className='form-inputs'>
                     <label htmlFor='state' className='form-label'>
-                        State
-                    <TextInput
-                            type='text'
-                            name='state'
+                        <TextInput
                             className='form-input'
+                            name='state'
+                            placeholder='State'
+                            type='text'
                             onChange={formFieldChange}
                         />
                     </label>
                 </div>
                 <div className='form-inputs'>
                     <label htmlFor='postalCode' className='form-label'>
-                        Postal Code
-                    <TextInput
-                            type='text'
-                            name='postalCode'
+                        <TextInput
                             className='form-input'
+                            name='postalCode'
+                            placeholder='Postal Code'
+                            type='text'
                             onChange={formFieldChange}
                         />
                     </label>
                 </div>
                 <div className='form-inputs'>
                     <label htmlFor='clientName' className='form-label'>
-                        Client Name
-            <TextInput
-                            type='text'
-                            name='clientName'
+                        <TextInput
                             className='form-input'
+                            name='clientName'
+                            placeholder='Client Name'
+                            type='text'
                             onChange={formFieldChange}
                         />
                     </label>
@@ -122,6 +122,7 @@ const JobsiteForm = (props) => {
                     <SelectOption
                         selectOptions={props.companyState.companyUserOptions}
                         name="userId"
+                        placeholder='Site Supervisor'
                         onChange={formUserIdChange}
                     />
                 </div>
@@ -137,7 +138,9 @@ const JobsiteForm = (props) => {
                 </div>
 
             </form>
-            <button onClick={hideJobsiteForm}>Close</button>
+            <div form>
+                <button onClick={hideJobsiteForm}>Close</button>
+            </div>
         </div>
     )
 }

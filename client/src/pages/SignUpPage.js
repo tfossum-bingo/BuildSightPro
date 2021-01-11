@@ -8,14 +8,14 @@ import SelectOption from '../components/SelectOption'
 import TextInput from '../components/TextInput'
 
 const SignUpPage = (props) => {
-  const {companyOptions} = props.signUpState
+  const { companyOptions } = props.signUpState
   const [form, setForm] = useState({
     companyId: null,
     email: '',
     firstName: '',
     lastName: '',
     password: ''
-})
+  })
 
   useEffect(() => {
     if (companyOptions.length === 0) {
@@ -25,11 +25,11 @@ const SignUpPage = (props) => {
   }, [])
 
   const formFieldChange = (e) => {
-    setForm({...form, [e.target.name]: e.target.value})
+    setForm({ ...form, [e.target.name]: e.target.value })
   }
 
   const companyIDChange = (e) => {
-    setForm({...form, [e.target.name]: parseInt(e.target.value)})
+    setForm({ ...form, [e.target.name]: parseInt(e.target.value) })
   }
 
   const handleSubmit = async (event) => {
@@ -46,79 +46,76 @@ const SignUpPage = (props) => {
   }
 
   return (
-    <div className='form-container'>
-      <form className='form-content-right' onSubmit={(e) => handleSubmit(e)}>
-        <h1>Sign Up</h1>
-        <div className='form-inputs'>
-          <label htmlFor='firtName' >
-            First Name
+    <div className='flex-row'>
+      <div className='form-container'>
+        <form className='form-content-right' onSubmit={(e) => handleSubmit(e)}>
+          <h1>Sign Up</h1>
+          <div className='form-inputs'>
+            <label htmlFor='firtName' >
             <TextInput
-              className='form-input'
-              type='text'
-              placeholder="First Name"
-              name='firstName'
-              onChange={formFieldChange}
-            />
-          </label>
-        </div>
-        <div className='form-inputs'>
-          <label htmlFor='lastName' >
-            Last Name
+                className='form-input'
+                type='text'
+                placeholder="First Name"
+                name='firstName'
+                onChange={formFieldChange}
+              />
+            </label>
+          </div>
+          <div className='form-inputs'>
+            <label htmlFor='lastName' >
             <TextInput
-              className='form-input'
-              type='text'
-              placeholder="Last Name"
-              name='lastName'
-              onChange={formFieldChange}
-            />
-          </label>
-        </div>
-        <div className='form-inputs'>
-          <label htmlFor='email' className='form-label'>
-            Email
+                className='form-input'
+                type='text'
+                placeholder="Last Name"
+                name='lastName'
+                onChange={formFieldChange}
+              />
+            </label>
+          </div>
+          <div className='form-inputs'>
+            <label htmlFor='email' className='form-label'>
             <TextInput
-              className='form-input'
-              type='email'
-              placeholder="Email Name"
-              name='email'
-              onChange={formFieldChange}
-            />
-          </label>
-        </div>
-        <div className='form-inputs'>
-          <label htmlFor='password' className='form-label'>
-            Password
+                className='form-input'
+                type='email'
+                placeholder="Email Name"
+                name='email'
+                onChange={formFieldChange}
+              />
+            </label>
+          </div>
+          <div className='form-inputs'>
+            <label htmlFor='password' className='form-label'>
             <TextInput
-              className='form-input'
-              type='password'
-              placeholder="Password"
-              name='password'
-              onChange={formFieldChange}
-            />
-          </label>
-        </div>
-        <SelectOption
-          selectOptions={props.signUpState.companyOptions}
-          // value={form.companyId}
-          name="companyId"
-          onChange={companyIDChange}
-        />
-        <div>
-          <button
-            className='btns'
-            buttonStyle='btn--outline'
-            buttonSize='btn--large'
-          >
-            Submit
+                className='form-input'
+                type='password'
+                placeholder="Password"
+                name='password'
+                onChange={formFieldChange}
+              />
+            </label>
+          </div>
+          <SelectOption
+            selectOptions={props.signUpState.companyOptions}
+            // value={form.companyId}
+            name="companyId"
+            onChange={companyIDChange}
+          />
+          <div>
+            <button
+              className='btns'
+              buttonStyle='btn--outline'
+              buttonSize='btn--large'
+            >
+              Submit
           </button>
-        </div>
-        <div>
-          <NavLink to='/signin' activeclassName='nav-active'>
-            <p>Have an account?</p>
-          </NavLink>
-        </div>
-      </form>
-
+          </div>
+          <div>
+            <NavLink to='/signin' activeclassName='nav-active'>
+              <p>Have an account?</p>
+            </NavLink>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

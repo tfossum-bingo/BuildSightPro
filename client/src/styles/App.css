@@ -54,6 +54,10 @@
   flex-direction: row;
 }
 
+.flex-justify-start {
+  justify-content: flex-start;
+}
+
 .header {
   background-color: cadetblue;
   width: 100%;
@@ -64,7 +68,7 @@
 }
 
 .jobsite-main {
-  padding: 50px 0px 20px 0px;
+  padding: 0px 0px 20px 0px;
 }
 
 .jobsite-address-container {
@@ -114,4 +118,9 @@
   height: 100px;
   width: 100px;
   background-color: green;
+}
+
+#all-jobsites-link {
+  width: 200px;
+  padding: 20px 0;
 }

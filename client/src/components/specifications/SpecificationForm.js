@@ -36,25 +36,25 @@ const SpecificationForm = (props) => {
     return (
         <div className='form-container'>
             <form className='form-content-right' onSubmit={(e) => handleSubmit(e)}>
-                <h1>Add Specification</h1>
+                <h1 className='form-title'>Add Specification</h1>
                 <div className='form-inputs'>
                     <label htmlFor='title' >
-                        Title
             <TextInput
-                            type='text'
-                            name='title'
                             className='form-input'
+                            name='title'
+                            placeholder='Title'
+                            type='text'
                             onChange={formFieldChange}
                         />
                     </label>
                 </div>
                 <div className='form-inputs'>
                     <label htmlFor='description' >
-                        Description
             <TextInput
-                            type='text'
-                            name='description'
                             className='form-input'
+                            name='description'
+                            placeholder='Comments'
+                            type='text'
                             onChange={formFieldChange}
                         />
                     </label>
@@ -63,8 +63,6 @@ const SpecificationForm = (props) => {
                     type="file"
                     placeholder="Upload A File"
                     name="specificationImage"
-                    // value={newPerson.profileImage}
-                    // value={fileName || ""}
                     onChange={formFieldChange}
                 />
                 <div>
