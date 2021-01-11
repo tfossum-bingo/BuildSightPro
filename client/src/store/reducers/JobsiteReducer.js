@@ -3,6 +3,7 @@ const {
   CREATE_JOBSITE,
   CREATE_JOBSITE_USER,
   CREATE_SPECIFICATION,
+  DELETE_SPECIFICATION,
   GET_COMPANY_JOBSITES,
   GET_ENTITIES,
   GET_JOBSITE,
@@ -49,7 +50,6 @@ const JobsiteReducer = (state = iState, action) => {
     case GET_ENTITIES:
       return { ...state, jobsites: action.payload }
     case GET_JOBSITE:
-      console.log("REDUCER JS Get: ", action.payload)
       return {
         ...state,
         jobsite: action.payload,
@@ -61,6 +61,9 @@ const JobsiteReducer = (state = iState, action) => {
       return { ...state, companyJobsites: [...state.companyJobsites, action.payload], displayJobsiteForm: false }
     case CREATE_JOBSITE_USER:
       return { ...state, jobsiteUsers: [...state.jobsiteUsers, action.payload], displayJobsiteUserForm: false }
+    case DELETE_SPECIFICATION:
+      const postDeleteSpecs = state.specifications.filter((spec, index) => spec.id !== action.payload)
+      return { ...state, specifications: [...postDeleteSpecs] }
     case HIDE_JOBSITE_FORM:
       return { ...state, displaySpecForm: false }
     case HIDE_JOBSITE_USER_FORM:

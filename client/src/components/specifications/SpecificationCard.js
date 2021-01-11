@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { acknowledgeSpecification } from '../../store/actions/JobsiteActions'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import SpecificationDelete from './SpecificationDelete'
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
 
 const SpecificationCard = (props) => {
     const { specification } = props
@@ -17,8 +19,8 @@ const SpecificationCard = (props) => {
         return doRender ? (
             <a href={specification.attachmentUrl} target='_blank'>Link</a>
         ) : (
-            null
-        )
+                null
+            )
     }
 
     const isAcknowledged = () => {
@@ -31,8 +33,8 @@ const SpecificationCard = (props) => {
                     icon={faCheckCircle}
                 />
             ) : (
-                <button onClick={() => props.acknowledgeSpecification(ackData)}>Acknowledge</button>
-            )
+                    <button onClick={() => props.acknowledgeSpecification(ackData)}>Acknowledge</button>
+                )
         }
         return null
     }
@@ -45,6 +47,10 @@ const SpecificationCard = (props) => {
             <p>{specification.description}</p>
             {imageLink()}
             <h2>{isAcknowledged()}</h2>
+            <SpecificationDelete
+                userId={props.userState.user.id}
+                managerId={props.jobsiteState.jobsite.userId}
+                specificationId={specification.id} />
         </div>
     ) : (
             null
@@ -59,6 +65,7 @@ const mapActionsToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
+        jobsiteState: state.jobsiteState,
         userState: state.userState
     }
 }

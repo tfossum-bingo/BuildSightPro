@@ -1,4 +1,4 @@
-const { Specification } = require('../models')
+const { Specification, SpecificationUser } = require('../models')
 const { sendSpecEmail } = require('../services/SpecMailer')
 const { ValidationError } = require('sequelize');
 const upload = require('../middleware/awsUpload');
@@ -73,8 +73,15 @@ const updateOne = async (req, res) => {
 }
 
 const deleteOne = async (req, res) => {
+    let entityId = parseInt(req.params.id)
+
     try {
-        let entityId = parseInt(req.params.id)
+        await SpecificationUser.destroy({
+            where: {
+                specification_id: entityId
+            }
+        })
+
         await Specification.destroy({
             where: { id: entityId }
         })

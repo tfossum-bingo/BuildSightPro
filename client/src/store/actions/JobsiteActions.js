@@ -12,7 +12,7 @@ import {
 } from '../../services/JobsiteUserService'
 
 import {
-  __CreateSpecification
+  __CreateSpecification, __DeleteSpecification
 } from '../../services/SpecificationService'
 
 import {
@@ -24,6 +24,7 @@ import {
   CREATE_JOBSITE,
   CREATE_JOBSITE_USER,
   CREATE_SPECIFICATION,
+  DELETE_SPECIFICATION,
   GET_COMPANY_JOBSITES,
   GET_ENTITIES,
   GET_JOBSITE,
@@ -82,6 +83,21 @@ export const createSpecification = (formData) => async (dispatch) => {
     dispatch({
       type: CREATE_SPECIFICATION,
       payload: entity
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+export const deleteSpecification = (specificationId) => async (dispatch) => {
+  console.log("HIT ACT1")
+  try {
+    const entity = await __DeleteSpecification(specificationId)
+    console.log("HIT ACT2", entity)
+    
+    dispatch({
+      type: DELETE_SPECIFICATION,
+      payload: specificationId
     })
   } catch (error) {
     throw error
