@@ -10,7 +10,7 @@ const LandingPage = (props) => {
     return (
         <div className='landing-container'>
             <WelcomeHeader />
-            <h1>JobSightPro</h1>
+            <h1>BuildSightPro</h1>
             <p>Designs for Accountability</p>
             <div className="landing-btns">
             <NavLink 
