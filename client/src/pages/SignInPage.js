@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { Redirect } from "react-router-dom";
+import React, { useState } from 'react'
+import { Redirect } from "react-router-dom"
+import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import TextInput from '../components/TextInput';
+
+import WelcomeHeader from '../components/WelcomeHeader'
+import TextInput from '../components/TextInput'
 import { loginUser, updateLoginForm } from '../store/actions/UserActions'
 
 
@@ -23,6 +26,7 @@ const SignInPage = (props) => {
 
     return props.userState.user === null ? (
         <div className=''>
+            <WelcomeHeader />
             <form className='' onSubmit={(e) => handleSubmit(e)}>
                 <h1>Sign In</h1>
                 <div className=''>
@@ -53,7 +57,9 @@ const SignInPage = (props) => {
                     </button>
                 </div>
             </form>
-
+            <NavLink to='/register'>
+              <p>Create an account?</p>
+            </NavLink>
         </div>
     ) : (
         <Redirect to="/jobsites" />

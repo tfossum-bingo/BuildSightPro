@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
 import { populateCompanyOptions, updateSignUpForm } from '../store/actions/SignUpActions'
 import { createUser } from '../store/actions/UserActions'
+import WelcomeHeader from '../components/WelcomeHeader'
 import SelectOption from '../components/SelectOption'
 import TextInput from '../components/TextInput'
 
@@ -33,7 +34,7 @@ const SignUpPage = (props) => {
   }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const formState = {
       firstName: form.firstName,
       lastName: form.lastName,
@@ -47,6 +48,7 @@ const SignUpPage = (props) => {
 
   return (
     <div className='flex-row'>
+      <WelcomeHeader />
       <div className='form-container'>
         <form className='form-content-right' onSubmit={(e) => handleSubmit(e)}>
           <h1>Sign Up</h1>

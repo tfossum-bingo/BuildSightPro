@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { NavLink} from 'react-router-dom'
+import WelcomeHeader from '../components/WelcomeHeader'
 import Button from '../components/Button'
 
 const LandingPage = (props) => {
@@ -8,8 +9,9 @@ const LandingPage = (props) => {
 
     return (
         <div className='landing-container'>
+            <WelcomeHeader />
             <h1>JobSightPro</h1>
-            <p>“Specifications and Accountability”</p>
+            <p>Designs for Accountability</p>
             <div className="landing-btns">
             <NavLink 
             to='/register'
