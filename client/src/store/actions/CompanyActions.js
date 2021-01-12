@@ -38,7 +38,6 @@ const createCompanyUserOptionsArray = (companyUsers) => {
   })
   tempCompanyUserOptions = preSortCompanyUsers(tempCompanyUserOptions)
   tempCompanyUserOptions = [[null, null], ...tempCompanyUserOptions]
-  console.log("SVC companyOptions: ", tempCompanyUserOptions)
   return tempCompanyUserOptions
 }
 

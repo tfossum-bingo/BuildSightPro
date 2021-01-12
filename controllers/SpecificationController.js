@@ -107,7 +107,6 @@ const sendNewSpecEmailNotification = (specification) => {
     const jobsiteAddress = `${jobsite.address_1}; ${jobsite.city}, ${jobsite.state} ${jobsite.postalCode}`
     const specLink = specification.attachmentUrl
     if (emails.length > 0) {
-        console.log(emails)
         sendSpecEmail(emails, jobsiteAddress, specLink)
     }
 }

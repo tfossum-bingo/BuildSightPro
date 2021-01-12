@@ -40,6 +40,5 @@ const createCompanyOptionsArray = (companies) => {
     return [company.id, company.name]
   })
   companyOptions = [[null, null], ...companyOptions]
-  console.log("SVC companyOptions: ", companyOptions)
   return companyOptions
 }

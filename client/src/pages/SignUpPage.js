@@ -41,7 +41,6 @@ const SignUpPage = (props) => {
       password: form.password,
       zipCode: form.zipCode,
     }
-    console.log("formState: ", form)
     props.createUser(form)
   }
 

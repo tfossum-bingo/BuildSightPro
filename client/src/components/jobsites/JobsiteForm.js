@@ -43,7 +43,6 @@ const JobsiteForm = (props) => {
     }
 
     const handleSubmit = async (event) => {
-        console.log("JS Form Submit: ", form)
         event.preventDefault()
         props.createJobsite(form)
     }

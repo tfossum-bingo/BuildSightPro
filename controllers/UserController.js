@@ -81,12 +81,10 @@ const deleteOne = async (req, res) => {
 
 const signIn = async (req, res, next) => {
     const userEmail = req.body.email
-    // const accountPassword = req.body.password
     try {
         const user = await User.findOne({
                 where: {
                     email: userEmail
-                    // password: accountPassword
                 },
                 include: [
                     {
@@ -96,7 +94,6 @@ const signIn = async (req, res, next) => {
                 ]
             }
         )
-        console.log("*****signIn: ", user)
         res.send(user)
     } catch (error) {
         console.log(error)

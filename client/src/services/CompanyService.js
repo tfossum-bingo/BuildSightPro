@@ -11,7 +11,6 @@ export const __CreateCompany = async (formData) => {
 };
 
 export const __GetCompanies = async () => {
-  console.log('SVC GetCompanies')
   try {
     const res = await ApiClient.get('/companies/')
     return res.data
@@ -21,7 +20,6 @@ export const __GetCompanies = async () => {
 }
 
 export const __GetCompanyUsers = async (companyId) => {
-  console.log('SVC GetCompanyUsers')
   try {
     const res = await ApiClient.get(`/companies/${companyId}/users`)
     return res.data
@@ -31,7 +29,6 @@ export const __GetCompanyUsers = async (companyId) => {
 }
 
 export const __CreateSpecification = async (formData) => {
-  console.log("SVC CreateSpec", formData)
   try {
     const res = await ApiClient.post('/specifications/', formData)
     return res.data

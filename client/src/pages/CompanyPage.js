@@ -22,7 +22,6 @@ const SignUpPage = (props) => {
       name: form.name,
       websiteUrl: form.websiteUrl
     }
-    console.log("formState: ", form)
     props.createCompany(form)
   }
 

@@ -28,7 +28,6 @@ const getOne = async (req, res) => {
 }
 
 const createOne = async (req, res) => {
-    console.log("CONT jobsiteuser create: ", req.body)
     try {
         let entityBody = {
             ...req.body
@@ -45,7 +44,6 @@ const createOne = async (req, res) => {
                 }
             ]
         })
-        console.log("Updated Jobsite: ", updatedJobsite)
         res.send(updatedJobsite)
     } catch (error) {
         if (error instanceof ValidationError) {

@@ -57,7 +57,6 @@ const preSortUsers = (userList) => {
 }
 
 const fullName = (user) => {
-  console.log("fullname: ", user)
   return user.User.firstName.toLowerCase() + " " + user.User.lastName.toLowerCase()
 }
 

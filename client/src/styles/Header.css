@@ -21,6 +21,9 @@
     color: lightgray;
 }
 
+#header-logo {
+  padding-left: 15px;
+}
 
 .menu-pop-out {
     position: fixed;

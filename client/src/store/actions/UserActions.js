@@ -42,7 +42,6 @@ export const getUser = () => async (dispatch) => {
 }
 
 export const createUser = (formValues) => async (dispatch) => {
-  console.log("SVC createUser: ", formValues)
   try{
     const user = await __CreateUser(formValues)
     dispatch({
