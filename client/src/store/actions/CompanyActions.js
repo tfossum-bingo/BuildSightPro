@@ -20,7 +20,6 @@ export const createCompany = (formValues) => async (dispatch) => {
 }
 
 export const populateCompanyUserOptions = (companyId) => async (dispatch) => {
-  console.log("HIT Act popCoUsers: ", companyId)
   try {
     const companyUsers = await __GetCompanyUsers(companyId)
     const companyUserOptions = createCompanyUserOptionsArray(companyUsers)

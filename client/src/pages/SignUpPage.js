@@ -20,7 +20,6 @@ const SignUpPage = (props) => {
 
   useEffect(() => {
     if (companyOptions.length === 0) {
-      console.log("HIT useEffect pop companies")
       props.populateCompanyOptions()
     }
   }, [])

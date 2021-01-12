@@ -13,7 +13,6 @@ const Specifications = (props) => {
     const { user } = props.userState
     useEffect(() => {
         if (specificationsNeedsRefresh === true) {
-            console.log("HIT useEffect Refresh List")
             props.refreshSpecificationsList(jobsite.id)
         }
     }, [])

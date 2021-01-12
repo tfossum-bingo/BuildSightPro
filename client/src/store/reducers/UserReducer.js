@@ -27,7 +27,6 @@ const UserReducer = (state = iState, action, props) => {
         refreshNeeded: false
       }
     case UPDATE_LOGIN_FORM:
-      console.log('HIT RED updateLoginForm: ', action.payload.name, action.payload.value)
       return { ...state, [action.payload.name]: action.payload.value }
     case LOGIN_USER:
       return { ...state, user: action.payload }

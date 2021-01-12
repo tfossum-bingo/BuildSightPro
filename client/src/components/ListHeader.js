@@ -7,7 +7,7 @@ export default (props) => {
     const { displayFormAction, refreshAction, title, width } = props
     const appliedWidth = width ? width : '300px'
     return (
-        <div class='list-header-container' style={{ width: appliedWidth }}>
+        <div className='list-header-container' style={{ width: appliedWidth }}>
             <div className='list-header-add list-header-icons-containers'>
                 <FontAwesomeIcon
                     onClick={displayFormAction}

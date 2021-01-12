@@ -30,7 +30,6 @@ const getOne = async (req, res) => {
 }
 
 const getAllJobsiteSpecifications = async (req, res) => {
-    console.log("HIT Cont getAllJobSpec")
     const entityId = req.params.id
     try {
         const entities = await Specification.findAll({
@@ -59,8 +58,16 @@ const createOne = async (req, res) => {
         await newJobsite.validate()
         await newJobsite.save()
         await addLocationData(newJobsite)
+        const entity = await Jobsite.findByPk(newJobsite.id, {
+            include: [
+                {
+                    all: true,
+                    nested: true
+                }
+            ]
+        })
         // let entity = await Account.create(entityBody)
-        res.send(newJobsite)
+        res.send(entity)
     } catch (error) {
         if (error instanceof ValidationError) {
             return console.error('Captured validation error: ', error.errors[0].message);
@@ -70,7 +77,6 @@ const createOne = async (req, res) => {
 }
 
 const updateOne = async (req, res) => {
-    console.log(`HIT account UpdateOne:`, req.body)
     try {
         let entity = parseInt(req.params.id)
         let updatedEntity = await Jobsite.update(req.body, {

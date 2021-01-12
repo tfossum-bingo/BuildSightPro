@@ -21,7 +21,6 @@ const SignUpReducer = (state = iState, action) => {
         case RESET_SIGNUP_FORM:
             return { ...state, firstName: '', lastName: '', email: '', password: '', companyId: null }
         case UPDATE_SIGNUP_FORM:
-            console.log('HIT RED updateLoginForm: ', action.payload.name, action.payload.value)
             return { ...state, [action.payload.name]: action.payload.value }
         default:
             return { ...state }

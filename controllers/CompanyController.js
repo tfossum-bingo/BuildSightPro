@@ -46,7 +46,6 @@ const createOne = async (req, res) => {
 }
 
 const updateOne = async (req, res) => {
-    console.log(`HIT account UpdateOne:`, req.body)
     try {
         let entity = parseInt(req.params.id)
         let updatedEntity = await Company.update(req.body, {
