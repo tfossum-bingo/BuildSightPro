@@ -16,7 +16,7 @@ const Header = (props) => {
     return (
         <div className="header">
             <div className='logo-box'>
-                <h1 id='header-logo'>BuildSightPro</h1>
+                <h1 className='header-logo'>BuildSightPro</h1>
             </div>
             <div className="flex-row">
                 <div className='menu-box' onClick={toggleMenu} >
