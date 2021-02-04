@@ -13,6 +13,7 @@ const {
   HIDE_JOBSITE_FORM,
   HIDE_JOBSITE_USER_FORM,
   HIDE_SPECIFICATION_FORM,
+  JOBSITES_NEED_REFRESH,
   REFRESH_SPECIFICATIONS_LIST,
   RESET_JOBSITE_STATE,
   SHOW_JOBSITE_FORM,
@@ -118,7 +119,9 @@ const JobsiteReducer = (state = iState, action) => {
       return { ...state, displayJobsiteUserForm: false }
     case HIDE_SPECIFICATION_FORM:
       return { ...state, displaySpecForm: false }
-    case REFRESH_SPECIFICATIONS_LIST:
+    case JOBSITES_NEED_REFRESH:
+      return { ...state, refreshJobsiteList: true }
+      case REFRESH_SPECIFICATIONS_LIST:
       const refreshSpecs = preSortSpecs(action.payload)
       return { ...state, specifications: refreshSpecs, specificationsNeedsRefresh: false }
     case SHOW_JOBSITE_FORM:

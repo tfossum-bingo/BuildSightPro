@@ -15,7 +15,7 @@ const Specifications = (props) => {
         if (specificationsNeedsRefresh === true) {
             props.refreshSpecificationsList(jobsite.id)
         }
-    }, [])
+    },[])
 
     return (
         <div className='flex-column flex-align-center specifications-container'>

@@ -2,19 +2,23 @@
 .header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between ;
+    justify-content: space-between;
     background-color: rgb(76, 94, 122);
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: lightgray;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
-  }
-  
-  .header-just {
+}
+
+.header-just {
     justify-content: space-around;
-  }
-  .menu-box {
+}
+
+.header-logo {
+    padding-left: 15px;
+}
+.menu-box {
     padding: 10px;
 }
 
@@ -24,11 +28,6 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }
-
-.header-logo {
-  padding-left: 15px;
-}
-
 .menu-pop-out {
     position: fixed;
     z-index: 1;
