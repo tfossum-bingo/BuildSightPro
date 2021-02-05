@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusSquare, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
 
-export default (props) => {
+const ListHeader = (props) => {
     // const {addForm, refreshAction} = props
     const { displayFormAction, refreshAction, title, width } = props
     const appliedWidth = width ? width : '300px'
@@ -31,3 +31,4 @@ export default (props) => {
     )
 
 }
+export default ListHeader
