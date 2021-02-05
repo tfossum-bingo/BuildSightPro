@@ -1,48 +1,71 @@
-import React from 'react';
-import { connect } from 'react-redux'
-import { Switch, Route } from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
+import {connect} from 'react-redux'
+import {Switch, Route} from 'react-router-dom'
+
+import {getUser} from '../store/actions/UserActions'
 
 import CompanyPage from '../pages/CompanyPage'
-import JobsitesPage from '../pages/JobsitesPage';
+import JobsitesPage from '../pages/JobsitesPage'
 import JobsitePage from '../pages/JobsitePage'
-import LandingPage from '../pages/LandingPage';
+import LandingPage from '../pages/LandingPage'
 import ProtectedRoute from './ProtectedRoute'
-import SignInPage from '../pages/SignInPage';
-import SignUpPage from '../pages/SignUpPage';
+import SignInPage from '../pages/SignInPage'
+import SignUpPage from '../pages/SignUpPage'
 
 
-import '../styles/App.css';
+import '../styles/App.css'
 
 const Router = (props) => {
+    // const [localUserId, setLocalUserId] = useState(null)
+    const [authenticated, setAuthenticated] = useState(false)
+
+    const luid = localStorage.getItem("userId")
+    console.log("localUserId: ", luid)
+
+    useEffect(() => {
+        if (luid !== null && props.userState.user === null) {
+            props.getUser(luid)
+        }
+    })
+
+    const checkAuthenticated = () => {
+        console.log("Authenticating")
+        if (luid !== null) {
+            console.log("Auth: true")
+            return true
+        }
+        console.log("Auth: false")
+        return false
+    }
 
     return (
         <main>
             <Switch>
-                <Route exact path='/' component={(props) => <LandingPage />} />
+                <Route exact path='/' component={(props) => <LandingPage/>}/>
                 <Route
                     exact
                     path='/register'
-                    component={(props) => <SignUpPage />}
+                    component={(props) => <SignUpPage/>}
                 />
                 <Route
                     exact
                     path='/company'
-                    component={(props) => <CompanyPage />}
+                    component={(props) => <CompanyPage/>}
                 />
                 <Route
                     exact
                     path='/signin'
-                    component={(props) => <SignInPage />}
+                    component={(props) => <SignInPage/>}
                 />
                 <ProtectedRoute
-                    authenticated={props.userState.user !== null}
+                    authenticated={checkAuthenticated()}
                     exact path='/jobsites'
                     component={(props) => (
-                        <JobsitesPage />
+                        <JobsitesPage/>
                     )}
                 />
                 <ProtectedRoute
-                    authenticated={props.userState.user !== null}
+                    authenticated={checkAuthenticated()}
                     exact path='/jobsites/:jobsite_id'
                     component={(props) => (
                         <JobsitePage {...props} />
@@ -55,6 +78,7 @@ const Router = (props) => {
 
 const mapActionsToProps = (dispatch) => {
     return {
+        getUser: (userId) => dispatch(getUser(userId))
 
     }
 }

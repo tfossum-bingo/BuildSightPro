@@ -16,7 +16,7 @@ const JobsiteForm = (props) => {
     const { hideJobsiteForm } = props
     // const [formError, setFormError] = useState(false)
 
-    const [form, setForm] = useState({
+    const [jobsiteForm, setJobsiteForm] = useState({
         address_1: '',
         address_2: '',
         city: '',
@@ -35,16 +35,16 @@ const JobsiteForm = (props) => {
 
 
     const formFieldChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value })
+        setJobsiteForm({ ...jobsiteForm, [e.target.name]: e.target.value })
     }
 
     const formUserIdChange = (e) => {
-        setForm({ ...form, userId: parseInt(e.target.value) })
+        setJobsiteForm({ ...jobsiteForm, userId: parseInt(e.target.value) })
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        props.createJobsite(form)
+        props.createJobsite(jobsiteForm)
     }
 
     return (

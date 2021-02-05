@@ -31,6 +31,8 @@ const UserReducer = (state = iState, action, props) => {
     case LOGIN_USER:
       return { ...state, user: action.payload }
     case LOGOUT_USER:
+      console.log("Logging Out")
+      localStorage.removeItem("userId")
       return { ...state, user: null, email: null, password: null }
     default:
       return { ...state }

@@ -6,7 +6,7 @@ import JobsiteCard from './JobsiteCard'
 const JobsiteList = (props) => {
 
   useEffect(() => {
-    if (props.jobsiteState.refreshJobsiteList === true) {
+    if (props.userState.user && props.jobsiteState.refreshJobsiteList === true) {
       props.getCompanyJobsites(props.userState.user.companyId)
     }
   }, [])

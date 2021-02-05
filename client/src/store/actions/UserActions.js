@@ -29,9 +29,9 @@ export const getGetUsers = () => async (dispatch) => {
   }
 }
 
-export const getUser = () => async (dispatch) => {
+export const getUser = (userId) => async (dispatch) => {
   try{
-    const user = await __GetUser()
+    const user = await __GetUser(userId)
     dispatch({
       type: GET_ENTITY,
       payload: user

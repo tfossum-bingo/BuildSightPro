@@ -16,7 +16,7 @@ const JobsitesPage = (props) => {
     const [displayJobsiteModal, setDisplayModal] = useState(false)
 
     useEffect(() => {
-        if(props.companyState.companyUserOptions.length === 0) {
+        if(props.userState.user && props.companyState.companyUserOptions.length === 0) {
             props.populateCompanyUserOptions(props.userState.user.companyId)
         }
     }, [])
@@ -25,7 +25,7 @@ const JobsitesPage = (props) => {
         setDisplayModal(!displayJobsiteModal)
     }
 
-    return (
+    return props.userState.user !== null ? (
         <div className={'home-container-grid'}>
             <Header />
             <div className='jobsites-container'>
@@ -47,13 +47,17 @@ const JobsitesPage = (props) => {
             </div>
 
         </div>
+    ) : (
+        <div>
+            Loading...
+        </div>
     )
 }
 
 
 const mapActionsToProps = (dispatch) => {
     return {
-        getUser: () => dispatch(getUser()),
+        getUser: (userId) => dispatch(getUser(userId)),
         populateCompanyUserOptions: (companyId) => dispatch(populateCompanyUserOptions(companyId)),
         setJobsitesNeedsRefresh: () => dispatch(setJobsitesNeedsRefresh())
     }

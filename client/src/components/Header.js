@@ -13,6 +13,19 @@ const Header = (props) => {
         setDisplayMenu(!displayMenu)
     }
 
+    const menu = () => {
+        return props.userState.user !== null ? (
+            <Menu
+                displayMenu={displayMenu}
+                user={user}
+                onClick={toggleMenu} />
+        ) : (
+            <div>
+                null
+            </div>
+        )
+    }
+
     return (
         <div className="header">
             <div className='logo-box'>
@@ -27,10 +40,7 @@ const Header = (props) => {
                         icon={faBars}
                     />
                 </div>
-                <Menu
-                    displayMenu={displayMenu}
-                    user={user}
-                    onClick={toggleMenu} />
+                {menu()}
             </div>
         </div>
     )
