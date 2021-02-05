@@ -17,10 +17,8 @@ const SpecificationCard = (props) => {
     const imageLink = () => {
         const doRender = specification.attachmentUrl !== null && specification.attachmentUrl !== ""
         return doRender ? (
-            <a classname='spec-link' href={specification.attachmentUrl} target='_blank'>View</a>
-        ) : (
-                null
-            )
+            <a className='spec-link' href={specification.attachmentUrl} rel="noreferrer" target='_blank'>View</a>
+        ) : null
     }
 
     const isAcknowledged = () => {
@@ -57,9 +55,7 @@ const SpecificationCard = (props) => {
                 {isAcknowledged()}
             </div>
         </div>
-    ) : (
-            null
-        )
+    ) : null
 }
 
 const mapActionsToProps = (dispatch) => {

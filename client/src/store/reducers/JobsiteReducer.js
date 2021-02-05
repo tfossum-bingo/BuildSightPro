@@ -79,6 +79,7 @@ const JobsiteReducer = (state = iState, action) => {
             let ackSpecs = state.specifications.filter((spec, index) => spec.id !== action.payload.id)
             ackSpecs.push(action.payload)
             ackSpecs = preSortSpecs(ackSpecs)
+            break
         case GET_COMPANY_JOBSITES:
             return {
                 ...state,

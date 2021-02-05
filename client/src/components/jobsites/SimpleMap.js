@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWrench, faTools } from "@fortawesome/free-solid-svg-icons";
+import { faTools } from "@fortawesome/free-solid-svg-icons";
  
 const AnyReactComponent = ({ text }) => <div style={{color: 'darkred', fontWeight: "bold"}}>
                   <FontAwesomeIcon

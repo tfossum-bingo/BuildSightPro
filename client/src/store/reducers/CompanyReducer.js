@@ -1,13 +1,10 @@
 const {
-    CREATE_COMPANY,
     POPULATE_COMPANY_USER_OPTIONS
 } = require('../types')
 
 const iState = {
     companyUserOptions: []
 }
-
-
 
 const CompanyReducer = (state = iState, action) => {
     switch (action.type) {

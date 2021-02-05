@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Switch, Route} from 'react-router-dom'
 
@@ -17,7 +17,6 @@ import '../styles/App.css'
 
 const Router = (props) => {
     // const [localUserId, setLocalUserId] = useState(null)
-    const [authenticated, setAuthenticated] = useState(false)
 
     const luid = localStorage.getItem("userId")
 
