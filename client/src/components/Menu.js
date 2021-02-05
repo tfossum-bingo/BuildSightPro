@@ -32,5 +32,5 @@ const Menu = (props) => {
         return null
     }
 }
- Menu
-export default
+
+export default Menu
