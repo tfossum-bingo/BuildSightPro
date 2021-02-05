@@ -1,7 +1,7 @@
 import React from 'react'
 import SignOut from './SignOut'
 
-export default (props) => {
+const Menu = (props) => {
     const { firstName, email } = props.user
 
     if (props.displayMenu) {
@@ -32,3 +32,5 @@ export default (props) => {
         return null
     }
 }
+ Menu
+export default
