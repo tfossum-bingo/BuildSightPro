@@ -20,7 +20,6 @@ const Router = (props) => {
     const [authenticated, setAuthenticated] = useState(false)
 
     const luid = localStorage.getItem("userId")
-    console.log("localUserId: ", luid)
 
     useEffect(() => {
         if (luid !== null && props.userState.user === null) {
@@ -29,12 +28,9 @@ const Router = (props) => {
     })
 
     const checkAuthenticated = () => {
-        console.log("Authenticating")
         if (luid !== null) {
-            console.log("Auth: true")
             return true
         }
-        console.log("Auth: false")
         return false
     }
 
