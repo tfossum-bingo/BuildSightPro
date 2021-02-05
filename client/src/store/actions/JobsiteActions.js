@@ -4,6 +4,7 @@ import {
     __GetJobsite,
     __GetJobsites,
     __GetJobsiteSpecifications,
+    __GetJobsiteUsers,
     __UpdateJobsite
 } from '../../services/JobsiteService'
 
@@ -34,7 +35,9 @@ import {
     HIDE_JOBSITE_USER_FORM,
     HIDE_SPECIFICATION_FORM,
     JOBSITES_NEED_REFRESH,
+    JOBSITEUSERS_NEED_REFRESH,
     RESET_JOBSITE_STATE,
+    REFRESH_JOBSITE_USERS,
     REFRESH_SPECIFICATIONS_LIST,
     SHOW_JOBSITE_FORM,
     SHOW_JOBSITE_USER_FORM,
@@ -168,6 +171,18 @@ export const hideSpecForm = (dispatch) => ({
     payload: null
 })
 
+export const refreshJobsiteUsersList = (jobsiteId) => async (dispatch) => {
+    try {
+        const refreshedJobsiteUserList = await __GetJobsiteUsers(jobsiteId)
+        dispatch({
+            type: REFRESH_JOBSITE_USERS,
+            payload: refreshedJobsiteUserList
+        })
+    } catch (error) {
+        throw error
+    }
+}
+
 export const refreshSpecificationsList = (jobsiteId) => async (dispatch) => {
     try {
         const refreshedSpecList = await __GetJobsiteSpecifications(jobsiteId)
@@ -187,6 +202,11 @@ export const resetJobsiteState = () => ({
 
 export const setJobsitesNeedsRefresh = (dispatch) => ({
     type: JOBSITES_NEED_REFRESH,
+    payload: null
+})
+
+export const setJobsiteUsersNeedRefresh = (dispatch) => ({
+    type: JOBSITEUSERS_NEED_REFRESH,
     payload: null
 })
 

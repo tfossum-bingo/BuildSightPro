@@ -36,6 +36,15 @@ export const __GetJobsiteSpecifications = async (jobsitedId) => {
   }
 }
 
+export const __GetJobsiteUsers = async (jobsitedId) => {
+  try {
+    const res = await ApiClient.get(`jobsites/${jobsitedId}/users`)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export const __CreateJobsite = async (formData) => {
   try {
     const res = await ApiClient.post('/jobsites/', formData)
