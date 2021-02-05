@@ -9,6 +9,7 @@ import SelectOption from '../components/SelectOption'
 import TextInput from '../components/TextInput'
 
 const SignUpPage = (props) => {
+  const {populateCompanyOptions} = props
   const { companyOptions } = props.signUpState
   const [form, setForm] = useState({
     companyId: null,
@@ -20,7 +21,7 @@ const SignUpPage = (props) => {
 
   useEffect(() => {
     if (companyOptions.length === 0) {
-      props.populateCompanyOptions()
+      populateCompanyOptions()
     }
   }, [])
 
@@ -34,13 +35,6 @@ const SignUpPage = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const formState = {
-      firstName: form.firstName,
-      lastName: form.lastName,
-      email: form.email,
-      password: form.password,
-      zipCode: form.zipCode,
-    }
     props.createUser(form)
   }
 
