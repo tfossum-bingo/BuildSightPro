@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default (props) => {
+const JobsiteMeta = (props) => {
     const { jobsite } = props
     return (
         <div className='jobsite-card-meta'>
@@ -17,3 +17,5 @@ export default (props) => {
         </div >
     )
 }
+
+export default JobsiteMeta
