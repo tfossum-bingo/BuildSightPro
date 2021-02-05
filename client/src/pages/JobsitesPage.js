@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux'
-import { getUser } from '../store/actions/UserActions'
-import { setJobsitesNeedsRefresh } from '../store/actions/JobsiteActions'
-import { populateCompanyUserOptions } from '../store/actions/CompanyActions'
+import {getUser} from '../store/actions/UserActions'
+import {setJobsitesNeedsRefresh} from '../store/actions/JobsiteActions'
+import {populateCompanyUserOptions} from '../store/actions/CompanyActions'
 
 import Header from '../components/Header'
 import JobsiteList from '../components/jobsites/JobsitesList'
@@ -16,7 +16,7 @@ const JobsitesPage = (props) => {
     const [displayJobsiteModal, setDisplayModal] = useState(false)
 
     useEffect(() => {
-        if(props.userState.user && props.companyState.companyUserOptions.length === 0) {
+        if (props.userState.user && props.companyState.companyUserOptions.length === 0) {
             props.populateCompanyUserOptions(props.userState.user.companyId)
         }
     }, [])
@@ -27,25 +27,26 @@ const JobsitesPage = (props) => {
 
     return props.userState.user !== null ? (
         <div className={'home-container-grid'}>
-            <Header />
+            <Header/>
             <div className='jobsites-container'>
-                <ListHeader 
-                    displayFormAction={toggleJobsiteModal}
-                    title='Jobsites'
-                    width='550px'
-                    refreshAction={props.setJobsitesNeedsRefresh}
-                />
-                <Modal show={displayJobsiteModal}>
-                    <JobsiteForm
-                        onClick={toggleJobsiteModal}
-                        toggleJobsiteModal={toggleJobsiteModal}
-                        {...props} />
-                </Modal>
+                <div>
+                    <ListHeader
+                        displayFormAction={toggleJobsiteModal}
+                        title='Jobsites'
+                        width='550px'
+                        refreshAction={props.setJobsitesNeedsRefresh}
+                    />
+                    <div>
+                        <JobsiteList/>
+                    </div>
+                </div>
             </div>
-            <div>
-                <JobsiteList />
-            </div>
-
+            <Modal show={displayJobsiteModal}>
+                <JobsiteForm
+                    onClick={toggleJobsiteModal}
+                    toggleJobsiteModal={toggleJobsiteModal}
+                    {...props} />
+            </Modal>
         </div>
     ) : (
         <div>
