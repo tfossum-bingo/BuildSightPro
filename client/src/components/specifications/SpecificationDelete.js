@@ -1,25 +1,27 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { deleteSpecification } from '../../store/actions/JobsiteActions'
+import {connect} from 'react-redux'
+import {deleteSpecification} from '../../store/actions/JobsiteActions'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import {faTrashAlt} from "@fortawesome/free-solid-svg-icons"
 
 const SpecificationDelete = (props) => {
-    const { userId, managerId, specificationId } = props
+    const {userId, managerId, specificationId} = props
     const doRender = userId === managerId
 
     return doRender ? (
         <div className='spec-delete-container'>
-            <FontAwesomeIcon
-                onClick={() => props.deleteSpecification(specificationId)}
-                className="fas fa-white spec-delete"
-                icon={faTrashAlt}
-            />
+            <div>
+                <FontAwesomeIcon
+                    onClick={() => props.deleteSpecification(specificationId)}
+                    className="fas fa-white spec-delete"
+                    icon={faTrashAlt}
+                />
+            </div>
         </div>
     ) : (
-            null
-        )
+        null
+    )
 }
 
 const mapActionsToProps = (dispatch) => {
@@ -29,9 +31,7 @@ const mapActionsToProps = (dispatch) => {
 }
 
 const mapStateToProps = () => {
-    return {
-
-    }
+    return {}
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(SpecificationDelete)
