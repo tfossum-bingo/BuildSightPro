@@ -38,10 +38,18 @@
     justify-content: space-between;
     width: 250px;
     height: 200px;
-    padding: 20px;
+    padding: 10px;
     border-radius: 7px;
     font-size: 1.5;
     -webkit-text-stroke-width: 0px;
+}
+
+.menu-text {
+    text-align: left;
+}
+.menu-close-container {
+    display: flex;
+    justify-content: flex-start;
 }
 
 .menu-logout {
