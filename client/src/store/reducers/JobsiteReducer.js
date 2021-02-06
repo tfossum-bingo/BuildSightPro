@@ -1,4 +1,5 @@
 import AlphaSort from '../../utils/AlphaSort'
+import {refreshSpecificationsList} from "../actions/JobsiteActions";
 
 const {
     ACKNOWLEDGE_SPECIFICATION,
@@ -78,8 +79,8 @@ const JobsiteReducer = (state = iState, action) => {
         case ACKNOWLEDGE_SPECIFICATION:
             let ackSpecs = state.specifications.filter((spec, index) => spec.id !== action.payload.id)
             ackSpecs.push(action.payload)
-            ackSpecs = preSortSpecs(ackSpecs)
-            break
+            ackSpecs = preSortSpecs(ackSpecs, refreshSpecificationsList())
+            return {...state, specifications: ackSpecs, specificationsNeedsRefresh: false}
         case GET_COMPANY_JOBSITES:
             return {
                 ...state,
