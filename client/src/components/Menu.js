@@ -2,7 +2,7 @@ import React from 'react'
 import SignOut from './SignOut'
 
 const Menu = (props) => {
-    const { firstName, email } = props.user
+    const { firstName, lastName, email } = props.user
 
     if (props.displayMenu) {
         return (
@@ -15,7 +15,7 @@ const Menu = (props) => {
                     </button>
                 </div>
                 <div>
-                    user: {firstName}
+                    user: {firstName + " " + lastName}
                 </div>
                 <div>
                     email: {email}
