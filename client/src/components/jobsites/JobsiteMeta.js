@@ -9,7 +9,8 @@ const JobsiteMeta = (props) => {
             {jobsite.city}, {jobsite.state} {jobsite.postal_code}<br />
             <br />
             Client: {jobsite.clientName}<br />
-            Supervisor: {`${jobsite.User.firstName} ${jobsite.User.lastName}`}
+            Supervisor: {`${jobsite.User.firstName} ${jobsite.User.lastName}`}<br />
+            Specifications: {jobsite.specifications.length}
         </div >
     )
 }
