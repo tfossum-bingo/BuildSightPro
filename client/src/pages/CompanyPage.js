@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 import {createCompany} from '../store/actions/CompanyActions'
 import TextInput from '../components/TextInput'
+import {NavLink} from "react-router-dom";
 
 const SignUpPage = (props) => {
     const [form, setForm] = useState({
@@ -52,6 +53,9 @@ const SignUpPage = (props) => {
                         </button>
                     </div>
                 </form>
+                <NavLink to='/register'>
+                    <p>Ready to create your user account?</p>
+                </NavLink>
             </div>
         </div>
     )
