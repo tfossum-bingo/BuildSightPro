@@ -27,7 +27,7 @@ const Router = (props) => {
     })
 
     const checkAuthenticated = () => {
-        if (luid !== null) {
+        if (luid !== null && props.userState.user !== null) {
             return true
         }
         return false

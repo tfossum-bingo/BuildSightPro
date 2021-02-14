@@ -1,26 +1,29 @@
 # Build Sight Pro
-This project provides a website when a construction company can create jobsites, attach design documents (e.g. blue prints) to the jobsite and track acknowledgement of the design documents by the construction staff. This minimizes confusion and increases accountability.
-
+BuildSightPro is a multi-tennat solution for construction companies to store design specifications. It was built for a friend who had been managing their design specifications using a simple file hosting service, but was struggling with tracking acknowledgement of the specs by their staff. 
 ## Use Cases
-Use cases can be viewed on this Trello board:
-https://trello.com/b/1ilE4sUM/buildsightpro
-1. Able to create a jobsite
-2. Able to attach design documents to a jobsite
-3. Able to track acknowledgement of design documents by jobsite workers.
+1. Each company can control their list of jobsites.
+2. Staff can be assigned to jobsites.
+3. Specifications can be uploaded to a jobsite.
+4. Staff assigned to a jobsite will receive email notifications when a new specification is uploaded to a jobsite.
+5. BuildSightPro can then track the acknowledgement of specifications by each jobsite staff member.
 
+## Technologies Used
+BuildSightPro is built using:
+* Node.js
+* React
+* MySQL
+* Hosted on AWS:
+    * EBS for application instance
+    * RDS for database
+    * S3 for specification storage
+    * SES for email notifications
+* Goggle API
+    * Addresses resolved using Google Locate API
+    * Map provided by Google Maps API
 
 ## Entity Relationships
 ![ER Diagram](./ER-Diagram.png)
 
-## Component Hierarchy
-![Component Hierarchy](./Component_Hierarchy.png)
-
-## Wireframes
+## [Incredibly] Low-Fidelity Wireframes
 ![List Page](./List_Page.png)
 ![Detail Page](./Detail_Page.png)
-![List Page Alert](./List_Page_Alert.png)
-
-## Other
-The hope is to host this project on AWS, or at least using an AWS/RDS hosted Postgres DB and an AWS S3 bucket for the design docs.
-
-Also, if the project progresses to the point of supporting notifications, use AWS SES for email notifications.
